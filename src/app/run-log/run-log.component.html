@@ -1,0 +1,11 @@
+<p>
+  run-log works!
+</p>
+
+<mat-list>
+  <mat-list-item *ngFor="let run of runs | async">
+    {{run.distance}} {{run.date | timestampDate}} {{run.type}}
+  </mat-list-item>
+</mat-list>
+
+<app-year [year]="2019" [runs]="runs | async"></app-year>

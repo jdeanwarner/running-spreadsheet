@@ -1,0 +1,5 @@
+{{ day.date | date }}
+<div>
+  <div *ngIf="day.run">{{ day.run?.distance }}</div>
+  <div *ngIf="day.run">{{ day.run?.type }}</div>
+</div>
