@@ -13,24 +13,28 @@ export class MonthComponent implements OnInit {
   @Input() year: number;
   @Input() set runs(runs: Run[]) {
     if (runs) {
+      this.total = 0;
       runs.forEach((run: Run) => {
         this.days[run.date.toDate().getDate() - 1].run = run;
+        this.total += run.distance;
       });
     }
   }
   days: Day[] = [];
-  date: Date;
+  initDate: Date;
+  total: number;
 
   constructor() { }
 
   ngOnInit() {
-    this.date = new Date(this.year, this.monthNum, 1);
-    while (this.date.getMonth() === this.monthNum) {
+    this.initDate = new Date(this.year, this.monthNum, 1);
+    const date = new Date(this.initDate);
+    while (date.getMonth() === this.monthNum) {
       this.days.push({
-        date: new Date(this.date),
+        date: new Date(date),
         run: null
       });
-      this.date.setDate(this.date.getDate() + 1);
+      date.setDate(date.getDate() + 1);
    }
   }
 

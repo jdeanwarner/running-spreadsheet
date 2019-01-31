@@ -1,5 +1,8 @@
-{{ day.date | date }}
-<div>
-  <div *ngIf="day.run">{{ day.run?.distance }}</div>
-  <div *ngIf="day.run">{{ day.run?.type }}</div>
-</div>
+<mat-divider></mat-divider>
+<h4 class="mat-h4" style="width: 195px;display: block;">
+    <span style="float: left">{{ day.date | date }}</span>
+    <div style="float: right">
+      <span *ngIf="day.run">{{ day.run?.distance }}</span>
+      <span *ngIf="day.run">{{ day.run?.type }}</span>
+    </div>
+</h4>

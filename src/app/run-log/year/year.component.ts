@@ -11,7 +11,6 @@ export class YearComponent implements OnInit {
   @Input() year: number;
   @Input() set runs(runs: Run[]) {
     if (runs) {
-      console.log(runs);
       this.janRuns = runs.filter(run => run.date.toDate().getMonth() === 0);
     }
   }
