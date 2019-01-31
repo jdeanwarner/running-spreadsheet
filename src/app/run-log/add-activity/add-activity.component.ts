@@ -24,10 +24,13 @@ export class AddActivityComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: { run: Run }) { }
 
   ngOnInit() {
-    if (this.data.run) {
+    this.formGroup.patchValue({
+      date: this.data.run.date.toDate(),
+    });
+
+    if (this.data.run && this.data.run.id) {
       this.formGroup.patchValue({
         id: this.data.run.id,
-        date: this.data.run.date.toDate(),
         distance: this.data.run.distance,
         type: this.data.run.type
       });

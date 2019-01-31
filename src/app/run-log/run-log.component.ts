@@ -55,6 +55,7 @@ export class RunLogComponent implements OnInit {
 
   daySelected(run: Run) {
     console.log('day Selected');
+    console.log(run);
     this.openActivity(run);
   }
 
@@ -75,8 +76,10 @@ export class RunLogComponent implements OnInit {
       if (result) {
         console.log(result);
         if (result.id) {
+          console.log('updating');
           this.db.collection('runs').doc(result.id).set(result);
         } else {
+          console.log('inserting');
           this.db.collection('runs').add(result);
         }
       }

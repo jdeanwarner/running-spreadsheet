@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Run } from 'src/app/shared/run';
 import { Day } from 'src/app/shared/day';
+import Timestamp = firestore.Timestamp;
+import { firestore } from 'firebase';
+import { defaultKeyValueDiffers } from '@angular/core/src/change_detection/change_detection';
 
 @Component({
   selector: 'app-month',
@@ -55,7 +58,11 @@ export class MonthComponent implements OnInit {
     }
   }
 
-  selected(run: Run) {
-    this.daySelected.emit(run);
+  selected(day: Day) {
+    if (!day.run) {
+      day.run = new Run();
+      day.run.date = Timestamp.fromDate(day.date);
+    }
+    this.daySelected.emit(day.run);
   }
 }

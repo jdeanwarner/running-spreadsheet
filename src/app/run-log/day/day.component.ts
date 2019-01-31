@@ -11,17 +11,10 @@ export class DayComponent implements OnInit {
 
   @Input() date: Date;
   @Input() day: Day;
-  @Output() selected: EventEmitter<Run> = new EventEmitter<Run>();
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  edit() {
-    if (this.day && this.day.run) {
-      this.selected.emit(this.day.run);
-    }
   }
 
 }

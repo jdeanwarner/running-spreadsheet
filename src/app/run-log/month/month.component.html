@@ -11,7 +11,7 @@
   <mat-card-content style="height: 1560px; position: relative;">
     <mat-list>
       <mat-list-item *ngFor="let day of days">
-        <app-day [day]="day" (selected)="selected($event)"></app-day>
+        <app-day [day]="day" (click)="selected(day)"></app-day>
       </mat-list-item>
     </mat-list>
     <div class="bottom">
