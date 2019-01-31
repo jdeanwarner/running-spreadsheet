@@ -3,6 +3,9 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Run } from '../shared/run';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AddActivityComponent } from './add-activity/add-activity.component';
+import { MatDialog } from '@angular/material';
+import { defineBase } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-run-log',
@@ -14,7 +17,7 @@ export class RunLogComponent implements OnInit {
   items: Observable<any[]>;
   runs: Observable<Run[]>;
   year: number;
-  constructor(private db: AngularFirestore, private route: ActivatedRoute, private router: Router) {
+  constructor(private db: AngularFirestore, private route: ActivatedRoute, private router: Router, public dialog: MatDialog) {
 
   }
 
@@ -37,6 +40,20 @@ export class RunLogComponent implements OnInit {
     this.router.navigate([''], {
       queryParams: {
         year: this.year += i
+      }
+    });
+  }
+
+  addActivity() {
+    const dialogRef = this.dialog.open(AddActivityComponent, {
+      minWidth: '20%',
+      maxWidth: '99%',
+      data : {}
+    });
+
+    dialogRef.afterClosed().subscribe((result: Run) => {
+      if (result) {
+        this.db.collection('runs').add(result);
       }
     });
   }
