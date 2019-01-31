@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Run } from 'src/app/shared/run';
 
 @Component({
@@ -27,6 +27,8 @@ export class YearComponent implements OnInit {
     }
   }
 
+  @Output() incrementYear: EventEmitter<number> = new EventEmitter<number>();
+
   janRuns: Run[];
   febRuns: Run[];
   marRuns: Run[];
@@ -50,8 +52,16 @@ export class YearComponent implements OnInit {
   }
 
   incrementMonth(i: number) {
-    this.mobileMonth += i;
-    this.mobileMonthToShow = this.getRunsByMonth(this.mobileMonth);
+    if (this.mobileMonth === 11 && i === 1) {
+      this.mobileMonth = 0;
+      this.incrementYear.emit(1);
+    } else if (this.mobileMonth === 0 && i === -1) {
+      this.mobileMonth = 11;
+      this.incrementYear.emit(-1);
+    } else {
+      this.mobileMonth += i;
+      this.mobileMonthToShow = this.getRunsByMonth(this.mobileMonth);
+    }
     console.log(this.mobileMonthToShow);
   }
 
