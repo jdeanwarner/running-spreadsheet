@@ -8,7 +8,9 @@
   </button>
 </div>
 
-<app-year [year]="year" [runs]="runs | async" (incrementYear)="incrementYear($event)"></app-year>
+<app-year [year]="year" [runs]="runs | async" 
+  (incrementYear)="incrementYear($event)" 
+  (daySelected)="daySelected($event)"></app-year>
 
 <button color="primary" mat-fab class="fab-bottom" (click)="addActivity()">
   <i class="material-icons">add</i>

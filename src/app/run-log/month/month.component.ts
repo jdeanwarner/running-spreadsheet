@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Run } from 'src/app/shared/run';
 import { Day } from 'src/app/shared/day';
 
@@ -26,6 +26,8 @@ export class MonthComponent implements OnInit {
       });
     }
   }
+  @Output() daySelected: EventEmitter<Run> = new EventEmitter<Run>();
+
   days: Day[];
   initYear: number;
   initMonth: number;
@@ -53,4 +55,7 @@ export class MonthComponent implements OnInit {
     }
   }
 
+  selected(run: Run) {
+    this.daySelected.emit(run);
+  }
 }

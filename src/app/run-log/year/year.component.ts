@@ -11,6 +11,7 @@ export class YearComponent implements OnInit {
   @Input() year: number;
   @Input() set runs(runs: Run[]) {
     if (runs) {
+      console.log(runs);
       this.janRuns = runs.filter(run => run.date.toDate().getMonth() === 0);
       this.febRuns = runs.filter(run => run.date.toDate().getMonth() === 1);
       this.marRuns = runs.filter(run => run.date.toDate().getMonth() === 2);
@@ -28,6 +29,7 @@ export class YearComponent implements OnInit {
   }
 
   @Output() incrementYear: EventEmitter<number> = new EventEmitter<number>();
+  @Output() daySelected: EventEmitter<Run> = new EventEmitter<Run>();
 
   janRuns: Run[];
   febRuns: Run[];
@@ -62,7 +64,6 @@ export class YearComponent implements OnInit {
       this.mobileMonth += i;
       this.mobileMonthToShow = this.getRunsByMonth(this.mobileMonth);
     }
-    console.log(this.mobileMonthToShow);
   }
 
   getDate(year: number, month: number): Date {
@@ -100,8 +101,10 @@ export class YearComponent implements OnInit {
     monthRuns[9] = this.octRuns;
     monthRuns[10] = this.novRuns;
     monthRuns[11] = this.decRuns;
-    console.log(monthRuns);
     return monthRuns[monthNum];
   }
 
+  selected(run: Run) {
+    this.daySelected.emit(run);
+  }
 }

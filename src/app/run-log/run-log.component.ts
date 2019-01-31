@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 import { Run } from '../shared/run';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AddActivityComponent } from './add-activity/add-activity.component';
 import { MatDialog } from '@angular/material';
-import { defineBase } from '@angular/core/src/render3';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-run-log',
@@ -32,7 +32,16 @@ export class RunLogComponent implements OnInit {
       this.runs = this.db.collection<Run>('runs', ref =>
         ref.where('date', '>=', new Date(this.year, 0, 1))
           .where('date', '<', new Date(this.year + 1, 0, 1))
-      ).valueChanges();
+      ).snapshotChanges()
+      .pipe(
+        map((actions: DocumentChangeAction<Run>[]) => {
+          return actions.map((a: DocumentChangeAction<Run>) => {
+            const data: Run = a.payload.doc.data();
+            data.id = a.payload.doc.id;
+            return data;
+          });
+        })
+      );
     });
   }
 
@@ -44,17 +53,35 @@ export class RunLogComponent implements OnInit {
     });
   }
 
+  daySelected(run: Run) {
+    console.log('day Selected');
+    this.openActivity(run);
+  }
+
   addActivity() {
+    this.openActivity(null);
+  }
+
+  openActivity(run: Run) {
     const dialogRef = this.dialog.open(AddActivityComponent, {
       minWidth: '20%',
       maxWidth: '99%',
-      data : {}
+      data : {
+        run: run
+      }
     });
 
     dialogRef.afterClosed().subscribe((result: Run) => {
       if (result) {
-        this.db.collection('runs').add(result);
+        console.log(result);
+        if (result.id) {
+          this.db.collection('runs').doc(result.id).set(result);
+        } else {
+          this.db.collection('runs').add(result);
+        }
       }
     });
   }
+
+
 }

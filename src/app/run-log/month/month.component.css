@@ -25,3 +25,8 @@ app-day {
 .padding-right-35 {
     padding-right: 35px;
 }
+
+::ng-deep.mat-list-item :hover {
+    cursor: pointer;
+    background-color: rgb(219, 215, 215);
+}
