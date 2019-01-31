@@ -23,6 +23,7 @@ export class YearComponent implements OnInit {
       this.octRuns = runs.filter(run => run.date.toDate().getMonth() === 9);
       this.novRuns = runs.filter(run => run.date.toDate().getMonth() === 10);
       this.decRuns = runs.filter(run => run.date.toDate().getMonth() === 11);
+      this.mobileMonthToShow = this.getRunsByMonth(this.mobileMonth);
     }
   }
 
@@ -39,10 +40,58 @@ export class YearComponent implements OnInit {
   novRuns: Run[];
   decRuns: Run[];
 
+  mobileMonth: number;
+  mobileMonthToShow: Run[];
+
   constructor() { }
 
   ngOnInit() {
+    this.mobileMonth = new Date().getMonth();
+  }
 
+  incrementMonth(i: number) {
+    this.mobileMonth += i;
+    this.mobileMonthToShow = this.getRunsByMonth(this.mobileMonth);
+    console.log(this.mobileMonthToShow);
+  }
+
+  getDate(year: number, month: number): Date {
+    return new Date(year, month, 1);
+  }
+
+  monthName(monthNum: number): String {
+    const month = new Array();
+    month[0] = 'January';
+    month[1] = 'February';
+    month[2] = 'March';
+    month[3] = 'April';
+    month[4] = 'May';
+    month[5] = 'June';
+    month[6] = 'July';
+    month[7] = 'August';
+    month[8] = 'September';
+    month[9] = 'October';
+    month[10] = 'November';
+    month[11] = 'December';
+    return month[monthNum];
+  }
+
+  getRunsByMonth(monthNum: number): Run[] {
+    const monthRuns: Run[][] = [];
+    monthRuns[0] = this.janRuns;
+    monthRuns[1] = this.febRuns;
+    monthRuns[2] = this.marRuns;
+    monthRuns[3] = this.aprRuns;
+    monthRuns[4] = this.mayRuns;
+    monthRuns[5] = this.junRuns;
+    monthRuns[6] = this.julyRuns;
+    monthRuns[7] = this.augRuns;
+    monthRuns[8] = this.sepRuns;
+    monthRuns[9] = this.octRuns;
+    monthRuns[10] = this.novRuns;
+    monthRuns[11] = this.decRuns;
+    console.log(monthRuns);
+    return monthRuns[monthNum];
   }
 
 }

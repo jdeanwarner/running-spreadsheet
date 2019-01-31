@@ -9,21 +9,16 @@ import { Day } from 'src/app/shared/day';
 })
 export class MonthComponent implements OnInit {
 
-  @Input() monthNum: number;
-  @Input() set year( year: number) {
-    this.days = [];
-    this.initDate = new Date(year, this.monthNum, 1);
-    const date = new Date(this.initDate);
-    while (date.getMonth() === this.monthNum) {
-      this.days.push({
-        date: new Date(date),
-        run: null
-      });
-      date.setDate(date.getDate() + 1);
-    }
+  @Input() set year(year: number) {
+    this.initYear = year;
+    this.initDays();
+  }
+  @Input() set monthNum(month: number) {
+    this.initMonth = month;
+    this.initDays();
   }
   @Input() set runs(runs: Run[]) {
-    if (runs) {
+    if (runs && this.days) {
       this.total = 0;
       runs.forEach((run: Run) => {
         this.days[run.date.toDate().getDate() - 1].run = run;
@@ -32,6 +27,8 @@ export class MonthComponent implements OnInit {
     }
   }
   days: Day[];
+  initYear: number;
+  initMonth: number;
   initDate: Date;
   total: number;
 
@@ -39,6 +36,21 @@ export class MonthComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  initDays() {
+    if (this.initYear && this.initMonth >= 0) {
+      this.days = [];
+      this.initDate = new Date(this.initYear, this.initMonth, 1);
+      const date = new Date(this.initDate);
+      while (date.getMonth() === this.initMonth) {
+        this.days.push({
+          date: new Date(date),
+          run: null
+        });
+        date.setDate(date.getDate() + 1);
+      }
+    }
   }
 
 }

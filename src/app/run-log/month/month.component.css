@@ -7,9 +7,21 @@
 
 .float-right {
     float: right;
-    padding-right: 20px;
+
 }
 
 .float-left {
     float: left;
+}
+
+app-day {
+    width: 100%;
+}
+
+::ng-deep .mat-card-header-text {
+    width: 100%;
+}
+
+.padding-right-35 {
+    padding-right: 35px;
 }

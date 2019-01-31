@@ -1,10 +1,10 @@
 <div style="height: 100%">
   <mat-card-header>
-    <mat-card-title>{{ initDate | date: 'MMMM' }}</mat-card-title>
-    <mat-card-subtitle >
-      <div style="width: 195px;display: block;">
-        <span style="float: left">Date</span>
-        <span style="float: right">Distance</span>
+    <mat-card-title *ngIf="initDate">{{ initDate | date: 'MMMM' }}</mat-card-title>
+    <mat-card-subtitle style="width: 100%;">
+      <div style="width: 100%;display: block;">
+        <span class="float-left">Date</span>
+        <span class="float-right">Distance</span>
       </div>
     </mat-card-subtitle>
   </mat-card-header>
@@ -17,7 +17,7 @@
     <div class="bottom" >
         <h3 class="mat-h3">
           <span class="float-left">Total:</span> 
-          <span class="float-right">{{total}}</span>
+          <span class="float-right padding-right-35">{{total}}</span>
         </h3>
     </div>
   </mat-card-content>
