@@ -1,11 +1,11 @@
-<p>
-  run-log works!
-</p>
+<div fxLayout="row wrap" fxLayoutAlign="end center" >
+  <button mat-icon-button (click)="incrementYear(-1)">
+    <i class="material-icons">keyboard_arrow_left</i>
+  </button>
+  <h2 class="mat-h2">{{ year }}</h2>
+  <button mat-icon-button (click)="incrementYear(1)">
+    <i class="material-icons">keyboard_arrow_right</i>
+  </button>
+</div>
 
-<mat-list>
-  <mat-list-item *ngFor="let run of runs | async">
-    {{run.distance}} {{run.date | timestampDate}} {{run.type}}
-  </mat-list-item>
-</mat-list>
-
-<app-year [year]="2019" [runs]="runs | async"></app-year>
+<app-year [year]="year" [runs]="runs | async"></app-year>

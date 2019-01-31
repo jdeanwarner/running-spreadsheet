@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { YearComponent } from './year/year.component';
 import { MonthComponent } from './month/month.component';
 import { DayComponent } from './day/day.component';
+import { RunLogRoutingModule } from './run-log-routing.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { DayComponent } from './day/day.component';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    RunLogRoutingModule
   ],
   exports: [
     RunLogComponent

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatListModule, MatCardModule, MatDividerModule } from '@angular/material';
+import { MatListModule, MatCardModule, MatDividerModule, MatButtonModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TimestampDatePipe } from './timestamp-date.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -15,7 +15,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
     MatListModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule
   ],
   providers: [
     TimestampDatePipe
@@ -26,7 +27,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     TimestampDatePipe,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule
   ]
 })
 export class SharedModule { }
