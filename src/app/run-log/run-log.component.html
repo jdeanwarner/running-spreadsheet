@@ -1,9 +1,4 @@
-<mat-card fxLayout="row wrap" fxLayoutAlign="space-between stretch">
-  <app-yearly-total [activities]="activities | async" fxFlex.gt-sm="50" fxFlex.sm="50" fxFlex.lt-sm="100"></app-yearly-total>
-  <app-run-type-total [activities]="activities | async" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-run-type-total>
-  <app-cross-training-total [activities]="activities | async" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-cross-training-total>
-</mat-card>
-<div fxLayout="row wrap" fxLayoutAlign="end end" >
+<div fxLayout="row wrap" fxLayoutAlign="end end" class="margin-top--10px">
   <button mat-icon-button (click)="incrementYear(-1)" fxFlexOffset="50">
     <i class="material-icons">keyboard_arrow_left</i>
   </button>
@@ -12,7 +7,11 @@
     <i class="material-icons">keyboard_arrow_right</i>
   </button>
 </div>
-
+<mat-card fxLayout="row wrap" fxLayoutAlign="space-between stretch" ngClass.gt-xs="margin-bottom-10px">
+  <app-yearly-total [activities]="activities | async" fxFlex.gt-sm="50" fxFlex.sm="50" fxFlex.lt-sm="100"></app-yearly-total>
+  <app-run-type-total [activities]="activities | async" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-run-type-total>
+  <app-cross-training-total [activities]="activities | async" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-cross-training-total>
+</mat-card>
 <app-year [year]="year" [activities]="activities | async" 
   (incrementYear)="incrementYear($event)" 
   (daySelected)="daySelected($event)"></app-year>

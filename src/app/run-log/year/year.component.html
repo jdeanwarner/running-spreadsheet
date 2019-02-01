@@ -67,7 +67,7 @@
   </div>
 </div>
 <div fxHide fxShow.lt-sm>
-  <div fxLayout="row wrap" fxLayoutAlign="end center" >
+  <div fxLayout="row wrap" fxLayoutAlign="end center" class="margin">
     <button mat-icon-button (click)="incrementMonth(-1)">
       <i class="material-icons">keyboard_arrow_left</i>
     </button>
@@ -76,7 +76,7 @@
       <i class="material-icons">keyboard_arrow_right</i>
     </button>
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-between none" class="padding-top-25">
+  <div fxLayout="row" fxLayoutAlign="space-between none">
     <mat-card fxFlex="100">
       <app-month [year]="year" [monthNum]="mobileMonth" [activities]="mobileMonthToShow" (selected)="selected($event)"></app-month>
     </mat-card>

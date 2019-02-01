@@ -47,7 +47,7 @@ export class RunLogComponent implements OnInit {
   }
 
   incrementYear(i: number) {
-    this.router.navigate([''], {
+    this.router.navigate(['/log'], {
       queryParams: {
         year: this.year += i
       }
