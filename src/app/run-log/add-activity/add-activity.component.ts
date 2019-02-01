@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { firestore } from 'firebase';
 import { Activity } from 'src/app/shared/activities/activity';
+import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
+import { RunType } from 'src/app/shared/activities/run-type.enum';
 
 @Component({
   selector: 'app-add-activity',
@@ -11,8 +13,8 @@ import { Activity } from 'src/app/shared/activities/activity';
 })
 export class AddActivityComponent implements OnInit {
 
-  runType: String[] = ['', 'Workout', 'Long Run', 'Race'];
-  activityType: String[] = ['RUN', 'BIKE', 'SWIM', 'YOGA', 'KETTLEBELL', 'GYM'];
+  runType: String[] = ['', ...Object.keys(RunType)];
+  activityType: String[] = Object.keys(ActivityType);
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
     activityType: new FormControl(Validators.required),
