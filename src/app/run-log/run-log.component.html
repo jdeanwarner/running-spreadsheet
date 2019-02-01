@@ -1,11 +1,5 @@
 <div fxLayout="row wrap" fxLayoutAlign="end end" class="margin-top--10px">
-  <button mat-icon-button (click)="incrementYear(-1)" fxFlexOffset="50">
-    <i class="material-icons">keyboard_arrow_left</i>
-  </button>
-  <h2 class="mat-h2">{{ year }}</h2>
-  <button mat-icon-button (click)="incrementYear(1)">
-    <i class="material-icons">keyboard_arrow_right</i>
-  </button>
+  <app-year-selector [year]="year" (change)="incrementYear($event)"></app-year-selector>
 </div>
 <mat-card fxLayout="row wrap" fxLayoutAlign="space-between stretch" ngClass.gt-xs="margin-bottom-10px">
   <app-yearly-total [activities]="activities | async" fxFlex.gt-sm="50" fxFlex.sm="50" fxFlex.lt-sm="100"></app-yearly-total>

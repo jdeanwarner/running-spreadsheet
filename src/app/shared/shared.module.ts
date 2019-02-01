@@ -8,10 +8,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TimestampDatePipe } from './timestamp-date.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { YearSelectorComponent } from './year-selector/year-selector.component';
 
 @NgModule({
   declarations: [
-    TimestampDatePipe
+    TimestampDatePipe,
+    YearSelectorComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -51,7 +53,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    YearSelectorComponent
   ]
 })
 export class SharedModule { }
