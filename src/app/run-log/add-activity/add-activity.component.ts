@@ -32,7 +32,7 @@ export class AddActivityComponent implements OnInit {
       this.formGroup.patchValue({
         id: this.data.run.id,
         distance: this.data.run.distance,
-        type: this.data.run.type
+        type: this.data.run.runType
       });
     }
   }
@@ -43,7 +43,7 @@ export class AddActivityComponent implements OnInit {
         id: this.formGroup.get('id').value,
         date: Timestamp.fromDate(<Date>this.formGroup.get('date').value),
         distance: this.formGroup.get('distance').value,
-        type: this.formGroup.get('type').value
+        runType: this.formGroup.get('type').value
       });
     }
   }

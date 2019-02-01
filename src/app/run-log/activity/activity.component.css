@@ -1,0 +1,13 @@
+mat-card {
+    background-color: rgb(212, 230, 236);
+    padding: 5px;
+}
+
+mat-card:hover {
+    cursor: pointer;
+    background-color: rgb(199, 200, 201);
+}
+
+.display-inline {
+    display: inline;
+}

@@ -3,7 +3,8 @@ import { Run } from 'src/app/shared/run';
 import { Day } from 'src/app/shared/day';
 import Timestamp = firestore.Timestamp;
 import { firestore } from 'firebase';
-import { defaultKeyValueDiffers } from '@angular/core/src/change_detection/change_detection';
+import { Activity } from 'src/app/shared/activity';
+import { ActivityType } from 'src/app/shared/activity-type.enum';
 
 @Component({
   selector: 'app-month',
@@ -20,16 +21,18 @@ export class MonthComponent implements OnInit {
     this.initMonth = month;
     this.initDays();
   }
-  @Input() set runs(runs: Run[]) {
-    if (runs && this.days) {
+  @Input() set activities(activities: Activity[]) {
+    if (activities && this.days) {
       this.total = 0;
-      runs.forEach((run: Run) => {
-        this.days[run.date.toDate().getDate() - 1].run = run;
-        this.total += run.distance;
+      activities.forEach((activity: Activity) => {
+        this.days[activity.date.toDate().getDate() - 1].activities.push(activity);
+        if (activity.activityType === ActivityType.RUN) {
+          this.total += (<Run>activity).distance;
+        }
       });
     }
   }
-  @Output() daySelected: EventEmitter<Run> = new EventEmitter<Run>();
+  @Output() daySelected: EventEmitter<Activity> = new EventEmitter<Activity>();
 
   days: Day[];
   initYear: number;
@@ -51,7 +54,7 @@ export class MonthComponent implements OnInit {
       while (date.getMonth() === this.initMonth) {
         this.days.push({
           date: new Date(date),
-          run: null
+          activities: []
         });
         date.setDate(date.getDate() + 1);
       }
@@ -59,10 +62,10 @@ export class MonthComponent implements OnInit {
   }
 
   selected(day: Day) {
-    if (!day.run) {
+    /*if (!day.run) {
       day.run = new Run();
       day.run.date = Timestamp.fromDate(day.date);
-    }
-    this.daySelected.emit(day.run);
+    }*/
+    this.daySelected.emit(day.activities[0]);
   }
 }

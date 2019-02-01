@@ -1,8 +1,7 @@
 <mat-divider></mat-divider>
 <h4 class="mat-h4">
-    <span class="float-left">{{ day.date | date }}</span>
-    <div class="float-right">
-      <span *ngIf="day.run">{{ day.run?.distance }}</span>
-      <span *ngIf="day.run">{{ day.run?.type }}</span>
+    <span>{{ day.date | date }}</span>
+    <div *ngFor="let activity of day.activities" class="margin-top">
+      <app-activity [activity]="activity" class="margin-top"></app-activity>
     </div>
 </h4>

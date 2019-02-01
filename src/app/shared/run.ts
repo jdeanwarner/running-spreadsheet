@@ -1,9 +1,7 @@
-import Timestamp = firestore.Timestamp;
-import { firestore } from 'firebase';
+import { Activity } from './activity';
+import { RunType } from './run-type.enum';
 
-export class Run {
-    id: string;
-    date: Timestamp;
+export class Run extends Activity {
     distance: number;
-    type: string;
+    runType: RunType;
 }

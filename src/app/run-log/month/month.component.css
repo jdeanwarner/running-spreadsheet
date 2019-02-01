@@ -18,15 +18,11 @@ app-day {
     width: 100%;
 }
 
-::ng-deep .mat-card-header-text {
-    width: 100%;
+::ng-deep.mat-card-header-text {
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 .padding-right-35 {
     padding-right: 35px;
-}
-
-::ng-deep.mat-list-item :hover {
-    cursor: pointer;
-    background-color: rgb(219, 215, 215);
 }

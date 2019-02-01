@@ -7,6 +7,8 @@ import { MonthComponent } from './month/month.component';
 import { DayComponent } from './day/day.component';
 import { RunLogRoutingModule } from './run-log-routing.module';
 import { AddActivityComponent } from './add-activity/add-activity.component';
+import { ActivityComponent } from './activity/activity.component';
+import { RunComponent } from './run/run.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { AddActivityComponent } from './add-activity/add-activity.component';
     YearComponent,
     MonthComponent,
     DayComponent,
-    AddActivityComponent
+    AddActivityComponent,
+    ActivityComponent,
+    RunComponent
   ],
   imports: [
     CommonModule,
