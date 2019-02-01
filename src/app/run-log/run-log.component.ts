@@ -30,14 +30,14 @@ export class RunLogComponent implements OnInit {
         this.year = new Date().getFullYear();
       }
 
-      this.activities = this.db.collection<Run>('runs', ref =>
+      this.activities = this.db.collection<Activity>('runs', ref =>
         ref.where('date', '>=', new Date(this.year, 0, 1))
           .where('date', '<', new Date(this.year + 1, 0, 1))
       ).snapshotChanges()
       .pipe(
-        map((actions: DocumentChangeAction<Run>[]) => {
-          return actions.map((a: DocumentChangeAction<Run>) => {
-            const data: Run = a.payload.doc.data();
+        map((actions: DocumentChangeAction<Activity>[]) => {
+          return actions.map((a: DocumentChangeAction<Activity>) => {
+            const data: Activity = a.payload.doc.data();
             data.id = a.payload.doc.id;
             return data;
           });
@@ -85,6 +85,4 @@ export class RunLogComponent implements OnInit {
       }
     });
   }
-
-
 }
