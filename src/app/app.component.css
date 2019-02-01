@@ -1,0 +1,15 @@
+.sidenav-container {
+    height: -moz-calc(100% - 65px);
+    height: -webkit-calc(100% - 65px);
+    height: calc(100% - 65px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #eee;
+    
+}
+
+mat-sidenav-content {
+    padding: 10px;
+}

@@ -1,2 +1,17 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<app-run-log></app-run-log>
+<app-toolbar fxlayout="row"></app-toolbar>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+        #drawer
+        class="sidenav"
+        fixedInViewport="true">
+           <div class="menu">
+            <mat-nav-list fxHide="false" fxHide.gt-sm>
+                <a class="header-item" mat-list-item routerLink="/log" routerLinkActive="active">Log</a>
+                <div class="section-devider"></div>
+            </mat-nav-list>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
