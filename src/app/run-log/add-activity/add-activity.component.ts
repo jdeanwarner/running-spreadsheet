@@ -1,9 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import Timestamp = firestore.Timestamp;
 import { firestore } from 'firebase';
-import { Run } from 'src/app/shared/activities/run';
+import { Activity } from 'src/app/shared/activities/activity';
 
 @Component({
   selector: 'app-add-activity',
@@ -13,26 +12,25 @@ import { Run } from 'src/app/shared/activities/run';
 export class AddActivityComponent implements OnInit {
 
   runType: String[] = ['Workout', 'Long Run', 'Race'];
+  activityType: String[] = ['RUN', 'BIKE', 'SWIM', 'YOGA', 'KETTLEBELL', 'GYM'];
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
+    activityType: new FormControl(Validators.required),
     date: new FormControl(Validators.required),
     distance: new FormControl(Validators.required),
     type: new FormControl()
   });
 
   constructor(private dialogRef: MatDialogRef<AddActivityComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: { run: Run }) { }
+    @Inject(MAT_DIALOG_DATA) private data: { activity: Activity }) { }
 
   ngOnInit() {
-    this.formGroup.patchValue({
-      date: this.data.run.date.toDate(),
-    });
-
-    if (this.data.run && this.data.run.id) {
+    if (this.data.activity) {
+      if (this.data.activity.id) {
+        this.formGroup.patchValue(this.data.activity);
+      }
       this.formGroup.patchValue({
-        id: this.data.run.id,
-        distance: this.data.run.distance,
-        type: this.data.run.runType
+        date: this.data.activity.date.toDate(),
       });
     }
   }
@@ -41,7 +39,8 @@ export class AddActivityComponent implements OnInit {
     if (this.formGroup.valid) {
       this.dialogRef.close({
         id: this.formGroup.get('id').value,
-        date: Timestamp.fromDate(<Date>this.formGroup.get('date').value),
+        activityType: this.formGroup.get('activityType').value,
+        date: firestore.Timestamp.fromDate(<Date>this.formGroup.get('date').value),
         distance: this.formGroup.get('distance').value,
         runType: this.formGroup.get('type').value
       });

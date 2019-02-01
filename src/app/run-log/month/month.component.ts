@@ -24,6 +24,7 @@ export class MonthComponent implements OnInit {
   @Input() set activities(activities: Activity[]) {
     if (activities && this.days) {
       this.total = 0;
+      this.clearActivities();
       activities.forEach((activity: Activity) => {
         this.days[activity.date.toDate().getDate() - 1].activities.push(activity);
         if (activity.activityType === ActivityType.RUN) {
@@ -44,6 +45,14 @@ export class MonthComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  clearActivities() {
+    if (this.days) {
+      this.days.forEach((day: Day) => {
+        day.activities = [];
+      });
+    }
   }
 
   initDays() {

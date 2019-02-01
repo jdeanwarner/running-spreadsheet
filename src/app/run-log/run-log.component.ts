@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AddActivityComponent } from './add-activity/add-activity.component';
 import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
+import { Activity } from '../shared/activities/activity';
 
 @Component({
   selector: 'app-run-log',
@@ -53,22 +54,22 @@ export class RunLogComponent implements OnInit {
     });
   }
 
-  daySelected(run: Run) {
+  daySelected(activity: Activity) {
     console.log('day Selected');
-    console.log(run);
-    this.openActivity(run);
+    console.log(activity);
+    this.openActivity(activity);
   }
 
   addActivity() {
     this.openActivity(null);
   }
 
-  openActivity(run: Run) {
+  openActivity(activity: Activity) {
     const dialogRef = this.dialog.open(AddActivityComponent, {
       minWidth: '20%',
       maxWidth: '99%',
       data : {
-        run: run
+        activity: activity
       }
     });
 
