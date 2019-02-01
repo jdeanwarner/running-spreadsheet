@@ -1,5 +1,11 @@
-<div fxLayout="row wrap" fxLayoutAlign="end center" >
-  <button mat-icon-button (click)="incrementYear(-1)">
+
+  <mat-card fxLayout="row wrap" fxLayoutAlign="space-between stretch">
+    <app-yearly-total fxFlex.gt-sm="50" fxFlex.sm="50" fxFlex.lt-sm="100"></app-yearly-total>
+    <app-run-type-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-run-type-total>
+    <app-cross-training-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-cross-training-total>
+  </mat-card>
+<div fxLayout="row wrap" fxLayoutAlign="end end" >
+  <button mat-icon-button (click)="incrementYear(-1)" fxFlexOffset="50">
     <i class="material-icons">keyboard_arrow_left</i>
   </button>
   <h2 class="mat-h2">{{ year }}</h2>
@@ -8,7 +14,7 @@
   </button>
 </div>
 
-<app-year [year]="year" [runs]="runs | async" 
+<app-year [year]="year" [activities]="activities | async" 
   (incrementYear)="incrementYear($event)" 
   (daySelected)="daySelected($event)"></app-year>
 

@@ -16,7 +16,7 @@ import { Activity } from '../shared/activities/activity';
 export class RunLogComponent implements OnInit {
 
   items: Observable<any[]>;
-  runs: Observable<Run[]>;
+  activities: Observable<Activity[]>;
   year: number;
   constructor(private db: AngularFirestore, private route: ActivatedRoute, private router: Router, public dialog: MatDialog) {
 
@@ -30,7 +30,7 @@ export class RunLogComponent implements OnInit {
         this.year = new Date().getFullYear();
       }
 
-      this.runs = this.db.collection<Run>('runs', ref =>
+      this.activities = this.db.collection<Run>('runs', ref =>
         ref.where('date', '>=', new Date(this.year, 0, 1))
           .where('date', '<', new Date(this.year + 1, 0, 1))
       ).snapshotChanges()

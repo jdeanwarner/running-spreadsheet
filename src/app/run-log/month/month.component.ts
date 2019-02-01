@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Run } from 'src/app/shared/activities/run';
 import { Day } from 'src/app/shared/day';
-import Timestamp = firestore.Timestamp;
 import { firestore } from 'firebase';
 import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
@@ -76,7 +75,7 @@ export class MonthComponent implements OnInit {
 
   daySelected(date: Date) {
     const activity = new Activity;
-    activity.date = Timestamp.fromDate(date);
+    activity.date = firestore.Timestamp.fromDate(date);
     this.selected.emit(activity);
   }
 }

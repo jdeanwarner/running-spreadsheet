@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Run } from 'src/app/shared/activities/run';
+import { Activity } from 'src/app/shared/activities/activity';
 
 @Component({
   selector: 'app-year',
@@ -9,21 +10,21 @@ import { Run } from 'src/app/shared/activities/run';
 export class YearComponent implements OnInit {
 
   @Input() year: number;
-  @Input() set runs(runs: Run[]) {
-    if (runs) {
-      console.log(runs);
-      this.janRuns = runs.filter(run => run.date.toDate().getMonth() === 0);
-      this.febRuns = runs.filter(run => run.date.toDate().getMonth() === 1);
-      this.marRuns = runs.filter(run => run.date.toDate().getMonth() === 2);
-      this.aprRuns = runs.filter(run => run.date.toDate().getMonth() === 3);
-      this.mayRuns = runs.filter(run => run.date.toDate().getMonth() === 4);
-      this.junRuns = runs.filter(run => run.date.toDate().getMonth() === 5);
-      this.julyRuns = runs.filter(run => run.date.toDate().getMonth() === 6);
-      this.augRuns = runs.filter(run => run.date.toDate().getMonth() === 7);
-      this.sepRuns = runs.filter(run => run.date.toDate().getMonth() === 8);
-      this.octRuns = runs.filter(run => run.date.toDate().getMonth() === 9);
-      this.novRuns = runs.filter(run => run.date.toDate().getMonth() === 10);
-      this.decRuns = runs.filter(run => run.date.toDate().getMonth() === 11);
+  @Input() set activities(activities: Activity[]) {
+    if (activities) {
+      console.log(activities);
+      this.janRuns = activities.filter(run => run.date.toDate().getMonth() === 0);
+      this.febRuns = activities.filter(run => run.date.toDate().getMonth() === 1);
+      this.marRuns = activities.filter(run => run.date.toDate().getMonth() === 2);
+      this.aprRuns = activities.filter(run => run.date.toDate().getMonth() === 3);
+      this.mayRuns = activities.filter(run => run.date.toDate().getMonth() === 4);
+      this.junRuns = activities.filter(run => run.date.toDate().getMonth() === 5);
+      this.julyRuns = activities.filter(run => run.date.toDate().getMonth() === 6);
+      this.augRuns = activities.filter(run => run.date.toDate().getMonth() === 7);
+      this.sepRuns = activities.filter(run => run.date.toDate().getMonth() === 8);
+      this.octRuns = activities.filter(run => run.date.toDate().getMonth() === 9);
+      this.novRuns = activities.filter(run => run.date.toDate().getMonth() === 10);
+      this.decRuns = activities.filter(run => run.date.toDate().getMonth() === 11);
       this.mobileMonthToShow = this.getRunsByMonth(this.mobileMonth);
     }
   }
@@ -31,21 +32,21 @@ export class YearComponent implements OnInit {
   @Output() incrementYear: EventEmitter<number> = new EventEmitter<number>();
   @Output() daySelected: EventEmitter<Run> = new EventEmitter<Run>();
 
-  janRuns: Run[];
-  febRuns: Run[];
-  marRuns: Run[];
-  aprRuns: Run[];
-  mayRuns: Run[];
-  junRuns: Run[];
-  julyRuns: Run[];
-  augRuns: Run[];
-  sepRuns: Run[];
-  octRuns: Run[];
-  novRuns: Run[];
-  decRuns: Run[];
+  janRuns: Activity[];
+  febRuns: Activity[];
+  marRuns: Activity[];
+  aprRuns: Activity[];
+  mayRuns: Activity[];
+  junRuns: Activity[];
+  julyRuns: Activity[];
+  augRuns: Activity[];
+  sepRuns: Activity[];
+  octRuns: Activity[];
+  novRuns: Activity[];
+  decRuns: Activity[];
 
   mobileMonth: number;
-  mobileMonthToShow: Run[];
+  mobileMonthToShow: Activity[];
 
   constructor() { }
 
@@ -87,8 +88,8 @@ export class YearComponent implements OnInit {
     return month[monthNum];
   }
 
-  getRunsByMonth(monthNum: number): Run[] {
-    const monthRuns: Run[][] = [];
+  getRunsByMonth(monthNum: number): Activity[] {
+    const monthRuns: Activity[][] = [];
     monthRuns[0] = this.janRuns;
     monthRuns[1] = this.febRuns;
     monthRuns[2] = this.marRuns;

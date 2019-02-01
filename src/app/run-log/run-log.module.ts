@@ -9,6 +9,9 @@ import { RunLogRoutingModule } from './run-log-routing.module';
 import { AddActivityComponent } from './add-activity/add-activity.component';
 import { ActivityComponent } from './activity/activity.component';
 import { RunComponent } from './run/run.component';
+import { YearlyTotalComponent } from './yearly-total/yearly-total.component';
+import { RunTypeTotalComponent } from './run-type-total/run-type-total.component';
+import { CrossTrainingTotalComponent } from './cross-training-total/cross-training-total.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { RunComponent } from './run/run.component';
     DayComponent,
     AddActivityComponent,
     ActivityComponent,
-    RunComponent
+    RunComponent,
+    YearlyTotalComponent,
+    RunTypeTotalComponent,
+    CrossTrainingTotalComponent
   ],
   imports: [
     CommonModule,
