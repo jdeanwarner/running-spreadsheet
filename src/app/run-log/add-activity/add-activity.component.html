@@ -1,4 +1,9 @@
-<h2 mat-dialog-title class="mat-h2">Add Activity</h2>
+<h2 mat-dialog-title class="mat-h2">
+  Add Activity
+  <button mat-icon-button style="float: right" (click)="delete()">
+    <i class="material-icons">delete_forever</i>
+  </button>
+</h2>
 
 <mat-dialog-content>
   <form [formGroup]="formGroup">

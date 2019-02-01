@@ -55,8 +55,6 @@ export class RunLogComponent implements OnInit {
   }
 
   daySelected(activity: Activity) {
-    console.log('day Selected');
-    console.log(activity);
     this.openActivity(activity);
   }
 
@@ -73,15 +71,16 @@ export class RunLogComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((result: Run) => {
+    dialogRef.afterClosed().subscribe((result: Activity | string) => {
       if (result) {
-        console.log(result);
-        if (result.id) {
-          console.log('updating');
-          this.db.collection('runs').doc(result.id).set(result);
-        } else {
-          console.log('inserting');
-          this.db.collection('runs').add(result);
+        if (typeof result === 'string') {
+          this.db.collection('runs').doc(result).delete();
+        } else if (result.activityType) {
+          if (result.id) {
+            this.db.collection('runs').doc(result.id).set(result);
+          } else {
+            this.db.collection('runs').add(result);
+          }
         }
       }
     });

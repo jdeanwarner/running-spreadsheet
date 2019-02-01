@@ -47,6 +47,10 @@ export class AddActivityComponent implements OnInit {
     }
   }
 
+  delete() {
+    this.dialogRef.close(this.formGroup.get('id').value);
+  }
+
   close(): void {
     this.dialogRef.close();
   }
