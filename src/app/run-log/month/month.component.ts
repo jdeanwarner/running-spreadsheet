@@ -32,7 +32,7 @@ export class MonthComponent implements OnInit {
       });
     }
   }
-  @Output() daySelected: EventEmitter<Activity> = new EventEmitter<Activity>();
+  @Output() selected: EventEmitter<Activity> = new EventEmitter<Activity>();
 
   days: Day[];
   initYear: number;
@@ -61,11 +61,13 @@ export class MonthComponent implements OnInit {
     }
   }
 
-  selected(day: Day) {
-    /*if (!day.run) {
-      day.run = new Run();
-      day.run.date = Timestamp.fromDate(day.date);
-    }*/
-    this.daySelected.emit(day.activities[0]);
+  activitySelected(activity: Activity) {
+    this.selected.emit(activity);
+  }
+
+  daySelected(date: Date) {
+    const activity = new Activity;
+    activity.date = Timestamp.fromDate(date);
+    this.selected.emit(activity);
   }
 }
