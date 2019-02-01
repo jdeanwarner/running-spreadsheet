@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Run } from 'src/app/shared/run';
+import { Run } from 'src/app/shared/activities/run';
 import { Day } from 'src/app/shared/day';
 import Timestamp = firestore.Timestamp;
 import { firestore } from 'firebase';
-import { Activity } from 'src/app/shared/activity';
-import { ActivityType } from 'src/app/shared/activity-type.enum';
+import { Activity } from 'src/app/shared/activities/activity';
+import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
 
 @Component({
   selector: 'app-month',

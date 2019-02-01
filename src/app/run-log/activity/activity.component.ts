@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Activity } from 'src/app/shared/activity';
-import { ActivityType } from 'src/app/shared/activity-type.enum';
+import { Activity } from 'src/app/shared/activities/activity';
+import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
 
 @Component({
   selector: 'app-activity',

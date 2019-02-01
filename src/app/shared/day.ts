@@ -1,5 +1,5 @@
-import { Run } from './run';
-import { Activity } from './activity';
+import { Run } from './activities/run';
+import { Activity } from './activities/activity';
 
 export class Day {
     date: Date;

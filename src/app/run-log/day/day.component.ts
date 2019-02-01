@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Day } from 'src/app/shared/day';
-import { Run } from 'src/app/shared/run';
+import { Run } from 'src/app/shared/activities/run';
 
 @Component({
   selector: 'app-day',

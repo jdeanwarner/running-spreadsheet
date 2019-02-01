@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Timestamp = firestore.Timestamp;
 import { firestore } from 'firebase';
-import { Run } from 'src/app/shared/run';
+import { Run } from 'src/app/shared/activities/run';
 
 @Component({
   selector: 'app-add-activity',

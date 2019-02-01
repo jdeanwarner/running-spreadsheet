@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Run } from 'src/app/shared/run';
+import { Run } from 'src/app/shared/activities/run';
 
 @Component({
   selector: 'app-run',
