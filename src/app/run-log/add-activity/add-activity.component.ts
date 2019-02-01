@@ -11,14 +11,14 @@ import { Activity } from 'src/app/shared/activities/activity';
 })
 export class AddActivityComponent implements OnInit {
 
-  runType: String[] = ['Workout', 'Long Run', 'Race'];
+  runType: String[] = ['', 'Workout', 'Long Run', 'Race'];
   activityType: String[] = ['RUN', 'BIKE', 'SWIM', 'YOGA', 'KETTLEBELL', 'GYM'];
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
     activityType: new FormControl(Validators.required),
     date: new FormControl(Validators.required),
     distance: new FormControl(Validators.required),
-    type: new FormControl()
+    runType: new FormControl()
   });
 
   constructor(private dialogRef: MatDialogRef<AddActivityComponent>,
@@ -42,7 +42,7 @@ export class AddActivityComponent implements OnInit {
         activityType: this.formGroup.get('activityType').value,
         date: firestore.Timestamp.fromDate(<Date>this.formGroup.get('date').value),
         distance: this.formGroup.get('distance').value,
-        runType: this.formGroup.get('type').value
+        runType: this.formGroup.get('runType').value
       });
     }
   }
