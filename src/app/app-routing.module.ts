@@ -4,8 +4,12 @@ import { RunLogComponent } from './run-log/run-log.component';
 
 const appRoutes: Routes = [
     {
-      path: 'log',
-      component: RunLogComponent
+        path: 'goals',
+        loadChildren: './goals/goals.module#GoalsModule'
+    },
+    {
+        path: 'log',
+        component: RunLogComponent
     },
     { path: '',
       redirectTo : '/log',

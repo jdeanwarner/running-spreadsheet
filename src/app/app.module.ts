@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
     ToolbarComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     SharedModule,
     AppRoutingModule,
     FlexLayoutModule,
