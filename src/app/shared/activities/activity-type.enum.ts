@@ -1,4 +1,4 @@
-export enum ActivityType {
+export enum ActivityTypeEnum {
     RUN = 'RUN',
     BIKE = 'BIKE',
     SWIM = 'SWIM',

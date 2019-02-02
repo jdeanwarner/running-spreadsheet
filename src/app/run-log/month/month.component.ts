@@ -3,7 +3,8 @@ import { Run } from 'src/app/shared/activities/run';
 import { Day } from 'src/app/shared/day';
 import { firestore } from 'firebase';
 import { Activity } from 'src/app/shared/activities/activity';
-import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
+import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
+import { ActivityType } from 'src/app/shared/activities/activity-type';
 
 @Component({
   selector: 'app-month',
@@ -12,6 +13,7 @@ import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
 })
 export class MonthComponent implements OnInit {
 
+  @Input() activityTypes: ActivityType[];
   @Input() set year(year: number) {
     this.initYear = year;
     this.initDays();
@@ -26,7 +28,7 @@ export class MonthComponent implements OnInit {
       this.clearActivities();
       activities.forEach((activity: Activity) => {
         this.days[activity.date.toDate().getDate() - 1].activities.push(activity);
-        if (activity.activityType === ActivityType.RUN) {
+        if (activity.activityType === ActivityTypeEnum.RUN) {
           this.total += (<Run>activity).distance;
         }
       });

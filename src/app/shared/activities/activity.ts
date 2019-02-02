@@ -1,8 +1,8 @@
-import { ActivityType } from './activity-type.enum';
+import { ActivityTypeEnum } from './activity-type.enum';
 import { firestore } from 'firebase';
 
 export class Activity {
     id: string;
-    activityType: ActivityType;
+    activityType: ActivityTypeEnum;
     date: firestore.Timestamp;
 }

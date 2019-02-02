@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Activity } from 'src/app/shared/activities/activity';
-import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
+import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 import { Run } from 'src/app/shared/activities/run';
 
 @Component({
@@ -17,7 +17,7 @@ export class YearlyTotalComponent implements OnInit {
       this.crossTraining = 0;
 
       activities.forEach((activity: Activity) => {
-        if (activity.activityType === ActivityType.RUN) {
+        if (activity.activityType === ActivityTypeEnum.RUN) {
           this.runningMiles += (<Run>activity).distance;
           if ((<Run>activity).runType) {
             this.highEffortRuns++;

@@ -9,11 +9,13 @@ import { TimestampDatePipe } from './timestamp-date.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YearSelectorComponent } from './year-selector/year-selector.component';
+import { ActivityTypePipe } from './activities/activity-type.pipe';
 
 @NgModule({
   declarations: [
     TimestampDatePipe,
-    YearSelectorComponent
+    YearSelectorComponent,
+    ActivityTypePipe
   ],
   imports: [
     FlexLayoutModule,
@@ -34,7 +36,8 @@ import { YearSelectorComponent } from './year-selector/year-selector.component';
   ],
   providers: [
     TimestampDatePipe,
-    MatDatepickerModule
+    MatDatepickerModule,
+    ActivityTypePipe
   ],
   exports: [
     FlexLayoutModule,
@@ -52,7 +55,8 @@ import { YearSelectorComponent } from './year-selector/year-selector.component';
     ReactiveFormsModule,
     MatToolbarModule,
     MatSidenavModule,
-    YearSelectorComponent
+    YearSelectorComponent,
+    ActivityTypePipe
   ]
 })
 export class SharedModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Activity } from 'src/app/shared/activities/activity';
-import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
+import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
+import { ActivityType } from 'src/app/shared/activities/activity-type';
 
 @Component({
   selector: 'app-activity',
@@ -10,8 +11,9 @@ import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
 export class ActivityComponent implements OnInit {
 
   @Input() activity: Activity;
+  @Input() activityTypes: ActivityType[];
 
-  activityType = ActivityType;
+  activityTypeEnum = ActivityTypeEnum;
 
   constructor() { }
 

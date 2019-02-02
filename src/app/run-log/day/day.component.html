@@ -2,6 +2,6 @@
 <h4 class="mat-h4">
     <span (click)="dateClicked(day.date)">{{ day.date | date }}</span>
     <div *ngFor="let activity of day.activities" class="margin-top">
-      <app-activity [activity]="activity" class="margin-top" (click)="selected(activity)"></app-activity>
+      <app-activity [activity]="activity" [activityTypes]="activityTypes" class="margin-top" (click)="selected(activity)"></app-activity>
     </div>
 </h4>

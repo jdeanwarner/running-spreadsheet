@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Activity } from 'src/app/shared/activities/activity';
-import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
+import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 import { Run } from 'src/app/shared/activities/run';
 import { RunType } from 'src/app/shared/activities/run-type.enum';
 
@@ -18,7 +18,7 @@ export class RunTypeTotalComponent implements OnInit {
       this.race = 0;
 
       activities.forEach((activity: Activity) => {
-        if (activity.activityType === ActivityType.RUN) {
+        if (activity.activityType === ActivityTypeEnum.RUN) {
           if ((<Run>activity).runType === RunType.WORKOUT) {
             this.workout++;
           } else if ((<Run>activity).runType === RunType.LONG_RUN) {

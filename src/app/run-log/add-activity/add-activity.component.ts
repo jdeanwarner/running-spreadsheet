@@ -3,8 +3,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { firestore } from 'firebase';
 import { Activity } from 'src/app/shared/activities/activity';
-import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
+import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 import { RunType } from 'src/app/shared/activities/run-type.enum';
+import { ActivityType } from 'src/app/shared/activities/activity-type';
 
 @Component({
   selector: 'app-add-activity',
@@ -14,7 +15,7 @@ import { RunType } from 'src/app/shared/activities/run-type.enum';
 export class AddActivityComponent implements OnInit {
 
   runType: String[] = ['', ...Object.keys(RunType)];
-  activityType: String[] = Object.keys(ActivityType);
+  activityType: ActivityType[];
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
     activityType: new FormControl(Validators.required),
@@ -24,7 +25,7 @@ export class AddActivityComponent implements OnInit {
   });
 
   constructor(private dialogRef: MatDialogRef<AddActivityComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: { activity: Activity }) { }
+    @Inject(MAT_DIALOG_DATA) private data: { activity: Activity, activityTypes: ActivityType[] }) { }
 
   ngOnInit() {
     if (this.data.activity) {
@@ -35,6 +36,8 @@ export class AddActivityComponent implements OnInit {
         date: this.data.activity.date.toDate(),
       });
     }
+
+    this.activityType = this.data.activityTypes;
   }
 
   save() {

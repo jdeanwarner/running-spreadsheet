@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Activity } from 'src/app/shared/activities/activity';
-import { ActivityType } from 'src/app/shared/activities/activity-type.enum';
+import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 
 @Component({
   selector: 'app-cross-training-total',
@@ -18,16 +18,16 @@ export class CrossTrainingTotalComponent implements OnInit {
 
       activities.forEach((activity: Activity) => {
         switch (activity.activityType) {
-          case ActivityType.YOGA:
+          case ActivityTypeEnum.YOGA:
             this.yoga++;
             break;
-          case ActivityType.BIKE:
+          case ActivityTypeEnum.BIKE:
             this.bike++;
             break;
-          case ActivityType.GYM:
+          case ActivityTypeEnum.GYM:
             this.gym++;
             break;
-          case ActivityType.KETTLEBELL:
+          case ActivityTypeEnum.KETTLEBELL:
             this.kettlebell++;
             break;
         }
