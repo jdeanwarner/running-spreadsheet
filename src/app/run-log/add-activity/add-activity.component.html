@@ -23,20 +23,8 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center" >
-      <mat-form-field fxFlex="100">
-        <input type="number" matInput placeholder="Distance" formControlName="distance">
-      </mat-form-field>
-    </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center" >
-      <mat-form-field fxFlex="100">
-        <mat-select placeholder="Type" formControlName="runType">
-          <mat-option *ngFor="let type of runType" [value]="type.id">
-            {{type.description}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+    <app-add-run *ngIf="formGroup.get('activityType').value === activityTypeEnum.RUN" [run]="activity" [formGroup]="runGroup" [runTypes]="runType"></app-add-run>
+    <app-add-kettlebell *ngIf="formGroup.get('activityType').value === activityTypeEnum.KETTLEBELL" [kettlebell]="activity" [formGroup]="kettlebellGroup"></app-add-kettlebell>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row wrap" fxLayoutAlign="end center">

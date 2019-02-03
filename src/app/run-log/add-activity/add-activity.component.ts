@@ -17,40 +17,53 @@ export class AddActivityComponent implements OnInit {
 
   runType: RunType[];
   activityType: ActivityType[];
+  activityTypeEnum = ActivityTypeEnum;
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
     activityType: new FormControl(Validators.required),
-    date: new FormControl(Validators.required),
-    distance: new FormControl(Validators.required),
-    runType: new FormControl()
+    date: new FormControl(Validators.required)
   });
+
+  runGroup: FormGroup = new FormGroup({});
+  kettlebellGroup: FormGroup = new FormGroup({});
+  activity: Activity;
 
   constructor(private dialogRef: MatDialogRef<AddActivityComponent>,
     @Inject(MAT_DIALOG_DATA) private data: { activity: Activity, activityTypes: ActivityType[], runTypes: RunType[] }) { }
 
   ngOnInit() {
     if (this.data.activity) {
+      this.activity = this.data.activity;
       if (this.data.activity.id) {
-        this.formGroup.patchValue(this.data.activity);
+        this.formGroup.patchValue(this.activity);
       }
       this.formGroup.patchValue({
-        date: this.data.activity.date.toDate(),
+        date: this.activity.date.toDate(),
       });
     }
 
     this.activityType = this.data.activityTypes;
-    this.runType = this.data.runTypes;
+    this.runType = [ { id: '', description: ''}, ...this.data.runTypes];
   }
 
   save() {
     if (this.formGroup.valid) {
-      this.dialogRef.close({
+      let saveActivity: Activity = {
         id: this.formGroup.get('id').value,
         activityType: this.formGroup.get('activityType').value,
-        date: firestore.Timestamp.fromDate(<Date>this.formGroup.get('date').value),
-        distance: this.formGroup.get('distance').value,
-        runType: this.formGroup.get('runType').value
-      });
+        date: firestore.Timestamp.fromDate(<Date>this.formGroup.get('date').value)
+      };
+
+      switch (this.formGroup.get('activityType').value) {
+        case ActivityTypeEnum.RUN:
+          saveActivity = { ...saveActivity, ...this.runGroup.value };
+          break;
+        case ActivityTypeEnum.KETTLEBELL:
+          saveActivity = { ...saveActivity, ...this.kettlebellGroup.value };
+          break;
+      }
+
+      this.dialogRef.close(saveActivity);
     }
   }
 
