@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Activity } from '../shared/activities/activity';
 import { ActivityType } from '../shared/activities/activity-type';
+import { RunType } from '../shared/activities/run-type';
 
 @Component({
   selector: 'app-run-log',
@@ -19,6 +20,7 @@ export class RunLogComponent implements OnInit {
   items: Observable<any[]>;
   activities: Observable<Activity[]>;
   activityTypes: ActivityType[];
+  runTypes: RunType[];
   year: number;
   constructor(private db: AngularFirestore, private route: ActivatedRoute, private router: Router, public dialog: MatDialog) {
 
@@ -50,6 +52,10 @@ export class RunLogComponent implements OnInit {
     this.db.collection<ActivityType>('activityType').valueChanges().subscribe((activityTypes: ActivityType[]) => {
       this.activityTypes = activityTypes;
     });
+
+    this.db.collection<ActivityType>('runType').valueChanges().subscribe((runTypes: RunType[]) => {
+      this.runTypes = runTypes;
+    });
   }
 
   incrementYear(i: number) {
@@ -74,7 +80,8 @@ export class RunLogComponent implements OnInit {
       maxWidth: '99%',
       data : {
         activity: activity,
-        activityTypes: this.activityTypes
+        activityTypes: this.activityTypes,
+        runTypes: this.runTypes
       }
     });
 

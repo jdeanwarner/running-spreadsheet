@@ -3,6 +3,7 @@ import { Day } from 'src/app/shared/day';
 import { Run } from 'src/app/shared/activities/run';
 import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
+import { RunType } from 'src/app/shared/activities/run-type';
 
 @Component({
   selector: 'app-day',
@@ -13,6 +14,7 @@ export class DayComponent implements OnInit {
 
   @Input() day: Day;
   @Input() activityTypes: ActivityType[];
+  @Input() runTypes: RunType[];
   @Output() activitySelected: EventEmitter<Activity> = new EventEmitter<Activity>();
   @Output() daySelected: EventEmitter<Date> = new EventEmitter<Date>();
 

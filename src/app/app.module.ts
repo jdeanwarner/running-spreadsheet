@@ -27,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFirestoreModule,
     RunLogModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

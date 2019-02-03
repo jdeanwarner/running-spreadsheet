@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 import { Run } from 'src/app/shared/activities/run';
-import { RunType } from 'src/app/shared/activities/run-type.enum';
+import { RunTypeEnum } from 'src/app/shared/activities/run-type.enum';
 
 @Component({
   selector: 'app-run-type-total',
@@ -19,11 +19,11 @@ export class RunTypeTotalComponent implements OnInit {
 
       activities.forEach((activity: Activity) => {
         if (activity.activityType === ActivityTypeEnum.RUN) {
-          if ((<Run>activity).runType === RunType.WORKOUT) {
+          if ((<Run>activity).runType === RunTypeEnum.WORKOUT) {
             this.workout++;
-          } else if ((<Run>activity).runType === RunType.LONG_RUN) {
+          } else if ((<Run>activity).runType === RunTypeEnum.LONG_RUN) {
             this.longRun++;
-          } else if ((<Run>activity).runType === RunType.RACE) {
+          } else if ((<Run>activity).runType === RunTypeEnum.RACE) {
             this.race++;
           }
         }

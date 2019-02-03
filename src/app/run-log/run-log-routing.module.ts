@@ -7,7 +7,7 @@ const appRoutes: Routes = [
   {
     path: 'log',
     component: RunLogComponent,
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange'
   },
   { path: '',
     redirectTo : 'log',

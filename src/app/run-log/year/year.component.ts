@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Run } from 'src/app/shared/activities/run';
 import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
+import { RunType } from 'src/app/shared/activities/run-type';
 
 @Component({
   selector: 'app-year',
@@ -11,6 +12,7 @@ import { ActivityType } from 'src/app/shared/activities/activity-type';
 export class YearComponent implements OnInit {
 
   @Input() activityTypes: ActivityType[];
+  @Input() runTypes: RunType[];
   @Input() year: number;
   @Input() set activities(activities: Activity[]) {
     if (activities) {

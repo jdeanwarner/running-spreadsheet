@@ -1,4 +1,4 @@
 <mat-card>
   {{ activity.activityType | activityType: activityTypes }}
-  <app-run class="display-inline" *ngIf="activity.activityType === activityTypeEnum.RUN" [run]="activity"></app-run>
+  <app-run class="display-inline" *ngIf="activity.activityType === activityTypeEnum.RUN" [run]="activity" [runTypes]="runTypes"></app-run>
 </mat-card>

@@ -5,6 +5,7 @@ import { firestore } from 'firebase';
 import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
+import { RunType } from 'src/app/shared/activities/run-type';
 
 @Component({
   selector: 'app-month',
@@ -14,6 +15,7 @@ import { ActivityType } from 'src/app/shared/activities/activity-type';
 export class MonthComponent implements OnInit {
 
   @Input() activityTypes: ActivityType[];
+  @Input() runTypes: RunType[];
   @Input() set year(year: number) {
     this.initYear = year;
     this.initDays();

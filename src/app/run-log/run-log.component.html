@@ -8,6 +8,7 @@
 </mat-card>
 <app-year [year]="year" [activities]="activities | async" 
   [activityTypes]="activityTypes"
+  [runTypes]="runTypes"
   (incrementYear)="incrementYear($event)" 
   (daySelected)="daySelected($event)"></app-year>
 

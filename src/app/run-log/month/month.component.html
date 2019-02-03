@@ -4,7 +4,8 @@
   </mat-card-header>
   <mat-card-content>
     <div *ngFor="let day of days">
-      <app-day [day]="day" [activityTypes]="activityTypes" (daySelected)="daySelected($event)" (activitySelected)="activitySelected($event)"></app-day>
+      <app-day [day]="day" [activityTypes]="activityTypes" [runTypes]="runTypes" 
+        (daySelected)="daySelected($event)" (activitySelected)="activitySelected($event)"></app-day>
     </div>
     <div class="bottom">
         <h3 class="mat-h3">

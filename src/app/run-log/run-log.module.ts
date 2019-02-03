@@ -12,7 +12,6 @@ import { RunComponent } from './run/run.component';
 import { YearlyTotalComponent } from './yearly-total/yearly-total.component';
 import { RunTypeTotalComponent } from './run-type-total/run-type-total.component';
 import { CrossTrainingTotalComponent } from './cross-training-total/cross-training-total.component';
-
 @NgModule({
   declarations: [
     RunLogComponent,
