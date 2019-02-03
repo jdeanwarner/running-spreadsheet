@@ -14,6 +14,7 @@ import { RunTypeTotalComponent } from './run-type-total/run-type-total.component
 import { CrossTrainingTotalComponent } from './cross-training-total/cross-training-total.component';
 import { AddRunComponent } from './add-run/add-run.component';
 import { AddKettlebellComponent } from './add-kettlebell/add-kettlebell.component';
+import { KettlebellComponent } from './kettlebell/kettlebell.component';
 @NgModule({
   declarations: [
     RunLogComponent,
@@ -27,7 +28,8 @@ import { AddKettlebellComponent } from './add-kettlebell/add-kettlebell.componen
     RunTypeTotalComponent,
     CrossTrainingTotalComponent,
     AddRunComponent,
-    AddKettlebellComponent
+    AddKettlebellComponent,
+    KettlebellComponent
   ],
   imports: [
     CommonModule,
