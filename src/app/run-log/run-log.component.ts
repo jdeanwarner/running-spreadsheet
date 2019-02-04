@@ -23,7 +23,7 @@ export class RunLogComponent implements OnInit {
   activityTypes: ActivityType[];
   runTypes: RunType[];
   year: number;
-  constructor(private db: AngularFirestore, private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
+  constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
     private activityService: ActivityService) {
 
   }
@@ -35,7 +35,6 @@ export class RunLogComponent implements OnInit {
       } else {
         this.year = new Date().getFullYear();
       }
-
       this.activityService.getActivitiesByYear(this.year).subscribe((activities: Activity[]) => this.activities = activities );
     });
 
@@ -56,7 +55,7 @@ export class RunLogComponent implements OnInit {
   }
 
   addActivity() {
-    this.openActivity(null);
+    this.openActivity(new Activity());
   }
 
   openActivity(activity: Activity) {

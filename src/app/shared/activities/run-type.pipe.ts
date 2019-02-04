@@ -6,13 +6,15 @@ import { RunType } from './run-type';
 })
 export class RunTypePipe implements PipeTransform {
 
-  transform(type: string, activityTypes: RunType[]): any {
+  transform(type: string, runTypes: RunType[]): any {
     let displayValue: String = '';
-    activityTypes.forEach((activityType: RunType) => {
-      if (activityType.id === type) {
-        displayValue = activityType.description;
-      }
-    });
+    if (type && runTypes) {
+      runTypes.forEach((activityType: RunType) => {
+        if (activityType.id === type) {
+          displayValue = activityType.description;
+        }
+      });
+    }
     return displayValue;
   }
 

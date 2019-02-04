@@ -8,11 +8,13 @@ export class ActivityTypePipe implements PipeTransform {
 
   transform(type: string, activityTypes: ActivityType[]): any {
     let displayValue: String = '';
-    activityTypes.forEach((activityType: ActivityType) => {
-      if (activityType.id === type) {
-        displayValue = activityType.description;
-      }
-    });
+    if (type && activityTypes) {
+      activityTypes.forEach((activityType: ActivityType) => {
+        if (activityType.id === type) {
+          displayValue = activityType.description;
+        }
+      });
+    }
     return displayValue;
   }
 
