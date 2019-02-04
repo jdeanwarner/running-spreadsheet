@@ -5,9 +5,9 @@ export class Race {
     id: string;
     name: string;
     date: firestore.Timestamp;
-    raceWebsite: string;
     distance: number;
     result: number;
+    raceUrl: string;
     resultUrl: string;
     status: RaceStatus;
 }

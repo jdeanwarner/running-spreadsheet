@@ -35,7 +35,16 @@
       <div fxLayout="row wrap" fxLayoutAlign="start center" >
         <app-result-setter formControlName="result"></app-result-setter>
       </div>
-      
+      <div fxLayout="row wrap" fxLayoutAlign="start center" >
+        <mat-form-field fxFlex="100">
+          <input matInput placeholder="Race Website" formControlName="raceUrl">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="start center" >
+        <mat-form-field fxFlex="100">
+          <input matInput placeholder="Results Website" formControlName="resultUrl">
+        </mat-form-field>
+      </div>
     </form>
   </mat-dialog-content>
   <mat-dialog-actions fxLayout="row wrap" fxLayoutAlign="end center">

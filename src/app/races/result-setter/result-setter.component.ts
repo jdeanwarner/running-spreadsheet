@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ValueAccessorService } from 'src/app/shared/value-accessor/value-accessor.service';
-import { AbstractValueAccessor } from 'src/app/shared/value-accessor/abstract-value-accessor';
 import { FormGroup, FormControl, ControlValueAccessor } from '@angular/forms';
 
 @Component({
@@ -25,9 +24,12 @@ export class ResultSetterComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value: number): void {
-    this.formGroup.get('hours').setValue(Math.floor(value / 60 / 60 ));
-    this.formGroup.get('minutes').setValue((value / 60) % 60);
-    this.formGroup.get('seconds').setValue(value % 60);
+    const hours   = Math.floor(value / 3600);
+    const minutes = Math.floor((value - (hours * 3600)) / 60);
+    const seconds = value - (hours * 3600) - (minutes * 60);
+    this.formGroup.get('hours').setValue(hours);
+    this.formGroup.get('minutes').setValue(minutes);
+    this.formGroup.get('seconds').setValue(seconds);
   }
   registerOnChange(fn: any ): void {
     this.onChange = fn;

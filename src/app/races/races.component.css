@@ -6,3 +6,9 @@ table {
     cursor: pointer;
     background-color: #eeeeea;
 }
+
+.fab-bottom {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+}

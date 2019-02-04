@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material';
 })
 export class RacesComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'date', 'distance', 'result'];
+  displayedColumns: string[] = ['name', 'date', 'distance', 'result', 'raceUrl', 'resultUrl'];
   dataSource: Race[];
 
   constructor(private activityService: ActivityService, private dialog: MatDialog) { }
@@ -42,6 +42,14 @@ export class RacesComponent implements OnInit {
         }
       }
     });
+  }
+
+  addRace() {
+    this.openRace(new Race());
+  }
+
+  goTo(url: string) {
+    window.location.href = url;
   }
 
 }
