@@ -70,4 +70,8 @@ export class ActivityService {
   insertRace(race: Race): void {
     this.db.collection('races').add(race);
   }
+
+  deleteRace(id: string): void {
+    this.db.collection('races').doc(id).delete();
+  }
 }

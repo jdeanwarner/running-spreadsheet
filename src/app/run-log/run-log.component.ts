@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
-import { Run } from '../shared/activities/run';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AddActivityComponent } from './add-activity/add-activity.component';
 import { MatDialog } from '@angular/material';
-import { map } from 'rxjs/operators';
 import { Activity } from '../shared/activities/activity';
 import { ActivityType } from '../shared/activities/activity-type';
 import { RunType } from '../shared/activities/run-type';

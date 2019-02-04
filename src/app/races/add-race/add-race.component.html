@@ -1,0 +1,41 @@
+<h2 mat-dialog-title class="mat-h2">
+    Add Race
+    <button mat-icon-button style="float: right" (click)="delete()">
+      <i class="material-icons">delete_forever</i>
+    </button>
+  </h2>
+  <mat-dialog-content>
+    <form [formGroup]="formGroup">
+      <div fxLayout="row wrap" fxLayoutAlign="start center" >
+        <mat-form-field fxFlex="100">
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="start center" >
+        <mat-form-field fxFlex="100">
+          <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="start center" >
+        <mat-form-field fxFlex="100">
+          <input type="number" matInput placeholder="Distance" formControlName="distance">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="start center" >
+        <mat-form-field fxFlex="100">
+          <mat-select placeholder="Status" formControlName="status">
+            <mat-option *ngFor="let status of raceStatus" [value]="status">
+              {{status}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout="row wrap" fxLayoutAlign="end center">
+    <button mat-dialog-close class="padding-top-10px align-right" mat-button color="primary" (click)="save()">Save</button>
+    <button mat-dialog-close class="padding-top-10px align-right" mat-button color="primary" (click)="close()">Close</button>
+  </mat-dialog-actions>
