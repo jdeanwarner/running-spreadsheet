@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material';
 })
 export class RacesComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'date', 'distance', 'result', 'raceUrl', 'resultUrl'];
+  displayedColumns: string[] = ['name', 'date', 'distance', 'result', 'raceUrl', 'resultUrl', 'status'];
   dataSource: Race[];
 
   constructor(private activityService: ActivityService, private dialog: MatDialog) { }

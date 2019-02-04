@@ -13,7 +13,10 @@
   </ng-container>
   <ng-container matColumnDef="result">
     <th mat-header-cell *matHeaderCellDef> Result </th>
-    <td mat-cell *matCellDef="let element"> {{element.result | resultTime}} </td>
+    <td mat-cell *matCellDef="let element"> 
+      <span *ngIf="element.status === 'COMPLETE'">{{element.result | resultTime}}</span>
+      <span *ngIf="element.status !== 'COMPLETE'">--</span>
+    </td>
   </ng-container>
   <ng-container matColumnDef="raceUrl">
     <th mat-header-cell *matHeaderCellDef> Race Website </th>
@@ -26,10 +29,16 @@
   <ng-container matColumnDef="resultUrl">
     <th mat-header-cell *matHeaderCellDef> Results Website </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" (click)="goTo(element.resultUrl);$event.stopPropagation();">
-        <i class="material-icons">open_in_new</i>
-      </button>
+      <button *ngIf="element.status === 'COMPLETE'" mat-icon-button color="primary" 
+        (click)="goTo(element.resultUrl);$event.stopPropagation();">
+          <i class="material-icons">open_in_new</i>
+        </button>
+      <span *ngIf="element.status !== 'COMPLETE'">--</span>
     </td>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openRace(row)"></tr>
