@@ -13,7 +13,6 @@ import { ActivityTypePipe } from './activities/activity-type.pipe';
 import { RunTypePipe } from './activities/run-type.pipe';
 import { ActivityService } from './activity.service';
 import { ResultTimePipe } from './result-time.pipe';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     YearSelectorComponent,
     ActivityTypePipe,
     RunTypePipe,
-    ResultTimePipe,
-    ToolbarComponent
+    ResultTimePipe
   ],
   imports: [
     FlexLayoutModule,
@@ -70,8 +68,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     ActivityTypePipe,
     RunTypePipe,
     MatTableModule,
-    ResultTimePipe,
-    ToolbarComponent
+    ResultTimePipe
   ]
 })
 export class SharedModule { }
