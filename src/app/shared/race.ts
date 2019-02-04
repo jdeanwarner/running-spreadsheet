@@ -1,4 +1,5 @@
 import { firestore } from 'firebase';
+import { RaceStatus } from './race-status.enum';
 
 export class Race {
     id: string;
@@ -8,4 +9,5 @@ export class Race {
     distance: number;
     result: number;
     resultUrl: string;
+    status: RaceStatus;
 }

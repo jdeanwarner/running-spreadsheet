@@ -64,10 +64,10 @@ export class ActivityService {
   }
 
   updateRace(race: Race): void {
-    this.db.collection('runs').doc(race.id).set(race);
+    this.db.collection('races').doc(race.id).set(race);
   }
 
   insertRace(race: Race): void {
-    this.db.collection('runs').add(race);
+    this.db.collection('races').add(race);
   }
 }
