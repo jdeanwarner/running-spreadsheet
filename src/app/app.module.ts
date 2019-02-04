@@ -8,14 +8,12 @@ import { environment } from '../environments/environment';
 import { RunLogModule } from './run-log/run-log.module';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from '@angular/cdk/layout';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ToolbarComponent
+    AppComponent
   ],
   imports: [
     BrowserAnimationsModule,
