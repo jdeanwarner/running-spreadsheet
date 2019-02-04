@@ -8,6 +8,10 @@ const appRoutes: Routes = [
         loadChildren: './goals/goals.module#GoalsModule'
     },
     {
+      path: 'races',
+      loadChildren: './races/races.module#RacesModule'
+    },
+    {
         path: 'log',
         component: RunLogComponent
     },

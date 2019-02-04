@@ -5,6 +5,7 @@ import { Activity } from './activities/activity';
 import { map } from 'rxjs/operators';
 import { ActivityType } from './activities/activity-type';
 import { RunType } from './activities/run-type';
+import { Race } from './race';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +48,26 @@ export class ActivityService {
 
   insertActivity(activity: Activity): void {
     this.db.collection('runs').add(activity);
+  }
+
+  getRaces(): Observable<Race[]> {
+    return this.db.collection<Race>('races').snapshotChanges()
+    .pipe(
+      map((actions: DocumentChangeAction<Race>[]) => {
+        return actions.map((a: DocumentChangeAction<Race>) => {
+          const data: Race = a.payload.doc.data();
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      })
+    );
+  }
+
+  updateRace(race: Race): void {
+    this.db.collection('runs').doc(race.id).set(race);
+  }
+
+  insertRace(race: Race): void {
+    this.db.collection('runs').add(race);
   }
 }
