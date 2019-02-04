@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YearSelectorComponent } from './year-selector/year-selector.component';
 import { ActivityTypePipe } from './activities/activity-type.pipe';
 import { RunTypePipe } from './activities/run-type.pipe';
+import { ActivityService } from './activity.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RunTypePipe } from './activities/run-type.pipe';
     TimestampDatePipe,
     MatDatepickerModule,
     ActivityTypePipe,
-    RunTypePipe
+    RunTypePipe,
+    ActivityService
   ],
   exports: [
     FlexLayoutModule,

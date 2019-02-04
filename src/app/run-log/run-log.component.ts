@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { Activity } from '../shared/activities/activity';
 import { ActivityType } from '../shared/activities/activity-type';
 import { RunType } from '../shared/activities/run-type';
+import { ActivityService } from '../shared/activity.service';
 
 @Component({
   selector: 'app-run-log',
@@ -18,11 +19,12 @@ import { RunType } from '../shared/activities/run-type';
 export class RunLogComponent implements OnInit {
 
   items: Observable<any[]>;
-  activities: Observable<Activity[]>;
+  activities: Activity[];
   activityTypes: ActivityType[];
   runTypes: RunType[];
   year: number;
-  constructor(private db: AngularFirestore, private route: ActivatedRoute, private router: Router, public dialog: MatDialog) {
+  constructor(private db: AngularFirestore, private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
+    private activityService: ActivityService) {
 
   }
 
@@ -34,28 +36,11 @@ export class RunLogComponent implements OnInit {
         this.year = new Date().getFullYear();
       }
 
-      this.activities = this.db.collection<Activity>('runs', ref =>
-        ref.where('date', '>=', new Date(this.year, 0, 1))
-          .where('date', '<', new Date(this.year + 1, 0, 1))
-      ).snapshotChanges()
-      .pipe(
-        map((actions: DocumentChangeAction<Activity>[]) => {
-          return actions.map((a: DocumentChangeAction<Activity>) => {
-            const data: Activity = a.payload.doc.data();
-            data.id = a.payload.doc.id;
-            return data;
-          });
-        })
-      );
+      this.activityService.getActivitiesByYear(this.year).subscribe((activities: Activity[]) => this.activities = activities );
     });
 
-    this.db.collection<ActivityType>('activityType').valueChanges().subscribe((activityTypes: ActivityType[]) => {
-      this.activityTypes = activityTypes;
-    });
-
-    this.db.collection<ActivityType>('runType').valueChanges().subscribe((runTypes: RunType[]) => {
-      this.runTypes = runTypes;
-    });
+    this.activityService.getActivityTypes().subscribe((activityTypes: ActivityType[]) =>  this.activityTypes = activityTypes );
+    this.activityService.getRunTypes().subscribe((runTypes: RunType[]) => this.runTypes = runTypes );
   }
 
   incrementYear(i: number) {
@@ -88,12 +73,12 @@ export class RunLogComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: Activity | string) => {
       if (result) {
         if (typeof result === 'string') {
-          this.db.collection('runs').doc(result).delete();
+          this.activityService.deleteActivity(result);
         } else if (result.activityType) {
           if (result.id) {
-            this.db.collection('runs').doc(result.id).set(result);
+            this.activityService.updateActivity(result);
           } else {
-            this.db.collection('runs').add(result);
+            this.activityService.insertActivity(result);
           }
         }
       }
