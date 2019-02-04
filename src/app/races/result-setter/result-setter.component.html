@@ -1,0 +1,11 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between center" [formGroup]="formGroup">
+  <mat-form-field fxFlex="30">
+    <input type="number" matInput placeholder="Hours" formControlName="hours" (change)="change()">
+  </mat-form-field>
+  <mat-form-field fxFlex="30">
+    <input type="number" matInput placeholder="Minutes" formControlName="minutes" (change)="change()">
+  </mat-form-field>
+  <mat-form-field fxFlex="30">
+    <input type="number" matInput placeholder="Seconds" formControlName="seconds" (change)="change()">
+  </mat-form-field>
+</div>

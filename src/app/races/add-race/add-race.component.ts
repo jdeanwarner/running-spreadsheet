@@ -16,7 +16,8 @@ export class AddRaceComponent implements OnInit {
     name: new FormControl(null, Validators.required),
     date: new FormControl(null, Validators.required),
     distance: new FormControl(),
-    status: new FormControl()
+    status: new FormControl(),
+    result: new FormControl()
   });
 
   raceStatus: string[] = Object.keys(RaceStatus);
@@ -34,11 +35,11 @@ export class AddRaceComponent implements OnInit {
   }
 
   delete() {
-
+    this.dialogRef.close(this.data.race.id);
   }
 
   save() {
-
+    console.log(this.formGroup.value);
   }
 
   close() {
