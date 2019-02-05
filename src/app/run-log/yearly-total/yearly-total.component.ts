@@ -26,6 +26,8 @@ export class YearlyTotalComponent implements OnInit {
           this.crossTraining ++;
         }
       });
+
+      this.runningMiles = Math.round(this.runningMiles * 100) / 100;
     }
   }
 

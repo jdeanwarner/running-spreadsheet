@@ -34,6 +34,7 @@ export class MonthComponent implements OnInit {
           this.total += (<Run>activity).distance;
         }
       });
+      this.total = Math.round(this.total * 100) / 100;
     }
   }
   @Output() selected: EventEmitter<Activity> = new EventEmitter<Activity>();
