@@ -52,7 +52,7 @@ export class ActivityService {
 
   getRaces(): Observable<Race[]> {
     return this.db.collection<Race>('races', ref =>
-      ref.orderBy('date')).snapshotChanges()
+      ref.orderBy('date', 'desc')).snapshotChanges()
     .pipe(
       map((actions: DocumentChangeAction<Race>[]) => {
         return actions.map((a: DocumentChangeAction<Race>) => {

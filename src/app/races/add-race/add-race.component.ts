@@ -29,9 +29,11 @@ export class AddRaceComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: { race: Race }) { }
 
   ngOnInit() {
-    if (this.data) {
+    if (this.data.race) {
       this.formGroup.patchValue(this.data.race);
-      this.formGroup.get('date').setValue(this.data.race.date.toDate());
+      if (this.data.race.date) {
+        this.formGroup.get('date').setValue(this.data.race.date.toDate());
+      }
     }
   }
 

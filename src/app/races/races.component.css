@@ -12,3 +12,7 @@ table {
     right: 25px;
     bottom: 25px;
 }
+
+table { 
+    margin-bottom: 25px;
+}

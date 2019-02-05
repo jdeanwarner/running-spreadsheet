@@ -3,6 +3,9 @@ import { ActivityService } from '../shared/activity.service';
 import { Race } from '../shared/race';
 import { AddRaceComponent } from './add-race/add-race.component';
 import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-races',
@@ -11,13 +14,31 @@ import { MatDialog } from '@angular/material';
 })
 export class RacesComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'date', 'distance', 'result', 'raceUrl', 'resultUrl', 'status'];
-  dataSource: Race[];
+  displayedColumnsMap = [
+    { def: 'name', showMobile: true },
+    { def: 'date', showMobile: true },
+    { def: 'distance', showMobile: false },
+    { def: 'result', showMobile: true },
+    { def: 'raceUrl', showMobile: false },
+    { def: 'resultUrl', showMobile: false },
+    { def: 'status', showMobile: false }];
 
-  constructor(private activityService: ActivityService, private dialog: MatDialog) { }
+  displayedColumns: string[];
+
+  dataSource: Race[];
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Large)
+    .pipe(
+      map(result => result.matches)
+    );
+
+  constructor(private breakpointObserver: BreakpointObserver, private activityService: ActivityService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.activityService.getRaces().subscribe((result: Race[]) => this.dataSource = result);
+
+    this.isHandset$.subscribe((isHandset: boolean) => {
+      this.getDisplayedColumns(isHandset);
+    });
   }
 
   openRace(race: Race) {
@@ -49,7 +70,15 @@ export class RacesComponent implements OnInit {
   }
 
   goTo(url: string) {
-    window.location.href = url;
+    window.open(url);
+  }
+
+  getDisplayedColumns(isHandset: boolean) {
+    console.log('getting columns');
+    this.displayedColumns = this.displayedColumnsMap
+      .filter(cd => isHandset || cd.showMobile)
+      .map(cd => cd.def);
+    console.log(this.displayedColumns);
   }
 
 }
