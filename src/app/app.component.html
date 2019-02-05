@@ -1,12 +1,28 @@
-<app-toolbar fxlayout="row"></app-toolbar>
+<mat-toolbar color="primary" class="app-bar">
+    <div fxHide="false" fxHide.gt-sm>
+        <button
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawer.toggle()">
+            <i class="material-icons">menu</i>
+        </button>
+    </div>
+    <span>Jordan's Workouts</span>
+    <div fxShow="false" fxShow.gt-sm class="margin-left-10px">
+        <button mat-button routerLink="/log" routerLinkActive="active">Log</button>
+        <button mat-button routerLink="/races" routerLinkActive="active">Races</button>
+    </div>
+</mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav
         #drawer
         class="sidenav"
         fixedInViewport="true">
-           <div class="menu">
+        <div class="menu">
             <mat-nav-list fxHide="false" fxHide.gt-sm>
                 <a class="header-item" mat-list-item routerLink="/log" routerLinkActive="active">Log</a>
+                <a class="header-item" mat-list-item routerLink="/races" routerLinkActive="active">Races</a>
                 <div class="section-devider"></div>
             </mat-nav-list>
         </div>

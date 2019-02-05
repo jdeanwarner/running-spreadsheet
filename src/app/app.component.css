@@ -13,3 +13,15 @@
 mat-sidenav-content {
     padding: 10px;
 }
+
+.app-bar {
+    height: 65px;
+}
+
+.active {
+    font-weight: 600;
+}
+
+.sidenav {
+    width: 150px;
+}

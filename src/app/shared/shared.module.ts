@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   MatListModule, MatCardModule, MatDividerModule, MatButtonModule,
   MatDialogModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-  MatSelectModule, MatToolbarModule, MatSidenavModule, MatTableModule } from '@angular/material';
+  MatSelectModule, MatToolbarModule, MatSidenavModule, MatTableModule, MatIconModule } from '@angular/material';
 
 import { TimestampDatePipe } from './timestamp-date.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -38,7 +38,8 @@ import { ResultTimePipe } from './result-time.pipe';
     ReactiveFormsModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule
   ],
   providers: [
     TimestampDatePipe,
@@ -46,7 +47,8 @@ import { ResultTimePipe } from './result-time.pipe';
     ActivityTypePipe,
     RunTypePipe,
     ActivityService,
-    ResultTimePipe
+    ResultTimePipe,
+    MatIconModule
   ],
   exports: [
     FlexLayoutModule,

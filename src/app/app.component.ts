@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,15 @@ export class AppComponent implements OnInit {
 
   title = 'app';
   items: Observable<any[]>;
-  constructor(private db: AngularFirestore) {
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches)
+    );
+  constructor(private breakpointObserver: BreakpointObserver) {
 
   }
 
   ngOnInit(): void {
-    this.items = this.db.collection('runs').valueChanges();
+
   }
 }

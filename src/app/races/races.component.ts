@@ -26,7 +26,7 @@ export class RacesComponent implements OnInit {
   displayedColumns: string[];
 
   dataSource: Race[];
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Large)
+  isLarge$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Large)
     .pipe(
       map(result => result.matches)
     );
@@ -36,8 +36,8 @@ export class RacesComponent implements OnInit {
   ngOnInit() {
     this.activityService.getRaces().subscribe((result: Race[]) => this.dataSource = result);
 
-    this.isHandset$.subscribe((isHandset: boolean) => {
-      this.getDisplayedColumns(isHandset);
+    this.isLarge$.subscribe((isLarge: boolean) => {
+      this.getDisplayedColumns(isLarge);
     });
   }
 
@@ -73,12 +73,10 @@ export class RacesComponent implements OnInit {
     window.open(url);
   }
 
-  getDisplayedColumns(isHandset: boolean) {
-    console.log('getting columns');
+  getDisplayedColumns(isLarge: boolean) {
     this.displayedColumns = this.displayedColumnsMap
-      .filter(cd => isHandset || cd.showMobile)
+      .filter(cd => isLarge || cd.showMobile)
       .map(cd => cd.def);
-    console.log(this.displayedColumns);
   }
 
 }
