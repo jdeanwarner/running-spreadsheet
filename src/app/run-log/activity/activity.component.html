@@ -1,4 +1,5 @@
-<mat-card>
+<mat-card [ngClass]="{'run' : activity.activityType === activityTypeEnum.RUN,
+  'kettlebell': activity.activityType === activityTypeEnum.KETTLEBELL }">
   {{ activity.activityType | activityType: activityTypes }}
   <app-run class="display-inline" *ngIf="activity.activityType === activityTypeEnum.RUN" [run]="activity" [runTypes]="runTypes"></app-run>
   <app-kettlebell class="display-inline" *ngIf="activity.activityType === activityTypeEnum.KETTLEBELL" [kettlebell]="activity"></app-kettlebell>

@@ -1,5 +1,4 @@
 mat-card {
-    background-color: rgb(212, 230, 236);
     padding: 5px;
 }
 
@@ -10,4 +9,12 @@ mat-card:hover {
 
 .display-inline {
     display: inline;
+}
+
+.run {
+    background-color: rgb(212, 230, 236);
+}
+
+.kettlebell {
+    background-color: rgb(171, 233, 204);
 }
