@@ -9,13 +9,8 @@ table {
 
 .fab-bottom {
     position: fixed;
-    right: 35px;
-    bottom: 45px;
-}
-
-.example-container {
-    height: 90vh;
-    overflow: auto;
+    right: 25px;
+    bottom: 25px;
 }
 
 table {
