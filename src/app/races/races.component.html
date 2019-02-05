@@ -1,48 +1,51 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Date </th>
-    <td mat-cell *matCellDef="let element"> {{element.date | timestampDate: 'mediumDate'}} </td>
-  </ng-container>
-  <ng-container matColumnDef="distance">
-    <th mat-header-cell *matHeaderCellDef> Distance </th>
-    <td mat-cell *matCellDef="let element"> {{element.distance}} </td>
-  </ng-container>
-  <ng-container matColumnDef="result">
-    <th mat-header-cell *matHeaderCellDef> Result </th>
-    <td mat-cell *matCellDef="let element"> 
-      <span *ngIf="element.status === 'COMPLETE'">{{element.result | resultTime}}</span>
-      <span *ngIf="element.status !== 'COMPLETE'">--</span>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="raceUrl">
-    <th mat-header-cell *matHeaderCellDef> Race Website </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" (click)="goTo(element.raceUrl);$event.stopPropagation();">
-        <i class="material-icons">open_in_new</i>
-      </button>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="resultUrl">
-    <th mat-header-cell *matHeaderCellDef> Results Website </th>
-    <td mat-cell *matCellDef="let element">
-      <button *ngIf="element.status === 'COMPLETE'" mat-icon-button color="primary" 
-        (click)="goTo(element.resultUrl);$event.stopPropagation();">
+<div *ngIf="displayedColumns && displayedColumns.length > 0" class="example-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date | timestampDate: 'mediumDate'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="distance">
+      <th mat-header-cell *matHeaderCellDef> Distance </th>
+      <td mat-cell *matCellDef="let element"> {{element.distance}} </td>
+    </ng-container>
+    <ng-container matColumnDef="result">
+      <th mat-header-cell *matHeaderCellDef> Result </th>
+      <td mat-cell *matCellDef="let element"> 
+        <span *ngIf="element.status === 'COMPLETE'">{{element.result | resultTime}}</span>
+        <span *ngIf="element.status !== 'COMPLETE'">--</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="raceUrl">
+      <th mat-header-cell *matHeaderCellDef> Race Website </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="goTo(element.raceUrl);$event.stopPropagation();">
           <i class="material-icons">open_in_new</i>
         </button>
-      <span *ngIf="element.status !== 'COMPLETE'">--</span>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> Status </th>
-    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openRace(row)"></tr>
-</table>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="resultUrl">
+      <th mat-header-cell *matHeaderCellDef> Results Website </th>
+      <td mat-cell *matCellDef="let element">
+        <button *ngIf="element.status === 'COMPLETE'" mat-icon-button color="primary" 
+          (click)="goTo(element.resultUrl);$event.stopPropagation();">
+            <i class="material-icons">open_in_new</i>
+          </button>
+        <span *ngIf="element.status !== 'COMPLETE'">--</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openRace(row)"></tr>
+  </table>
+</div>
+
 <button color="primary" mat-fab class="fab-bottom" (click)="addRace()">
   <i class="material-icons">add</i>
 </button>

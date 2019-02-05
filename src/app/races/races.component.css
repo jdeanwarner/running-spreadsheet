@@ -9,10 +9,15 @@ table {
 
 .fab-bottom {
     position: fixed;
-    right: 25px;
-    bottom: 25px;
+    right: 35px;
+    bottom: 45px;
 }
 
-table { 
-    margin-bottom: 25px;
+.example-container {
+    height: 90vh;
+    overflow: auto;
+}
+
+table {
+    margin-bottom: 15px;
 }
