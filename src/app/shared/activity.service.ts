@@ -75,4 +75,12 @@ export class ActivityService {
   deleteRace(id: string): void {
     this.db.collection('races').doc(id).delete();
   }
+
+  getScheduledActivities() {
+    return this.db.collection<RunType>('scheduledActivity').valueChanges();
+  }
+
+  getSeasons() {
+    return this.db.collection<any>('season').valueChanges();
+  }
 }

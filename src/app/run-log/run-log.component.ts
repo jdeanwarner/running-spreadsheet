@@ -37,6 +37,7 @@ export class RunLogComponent implements OnInit {
 
     this.activityService.getActivityTypes().subscribe((activityTypes: ActivityType[]) =>  this.activityTypes = activityTypes );
     this.activityService.getRunTypes().subscribe((runTypes: RunType[]) => this.runTypes = runTypes );
+    this.activityService.getScheduledActivities().subscribe(result => console.log(result));
   }
 
   incrementYear(i: number) {

@@ -1,0 +1,11 @@
+<div class="season-list">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="season-header">
+    <h2 class="mat-h2">Seasons</h2>
+    <button mat-icon-button color="primary">
+      <i class="material-icons" (click)="add()">add</i>
+    </button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between start" *ngFor="let season of seasons">
+    <button mat-button color="primary">{{ season.description }}</button>
+  </div>
+</div>

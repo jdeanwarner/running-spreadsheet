@@ -1,0 +1,13 @@
+.mat-h2 {
+    display: inline;
+    margin-right: 15px;
+}
+
+.season-header {
+    border-bottom: 1px solid lightgray;
+}
+
+.season-list {
+    padding: 15px;
+    border-left: 1px solid lightgray;
+}

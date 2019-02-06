@@ -8,6 +8,10 @@ const appRoutes: Routes = [
         loadChildren: './goals/goals.module#GoalsModule'
     },
     {
+      path: 'schedule',
+      loadChildren: './schedule/schedule.module#ScheduleModule'
+    },
+    {
       path: 'races',
       loadChildren: './races/races.module#RacesModule'
     },
