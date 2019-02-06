@@ -1,6 +1,6 @@
 .mat-h2 {
-    display: inline;
     margin-right: 15px;
+    margin-bottom: 0px;
 }
 
 .season-header {
@@ -9,5 +9,5 @@
 
 .season-list {
     padding: 15px;
-    border-left: 1px solid lightgray;
+    background-color: white;
 }

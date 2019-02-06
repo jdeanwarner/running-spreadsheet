@@ -1,3 +1,12 @@
-<p>
-  season works!
-</p>
+<div *ngIf="season" class="season">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+    <h2 class="mat-h2">{{season.description}}</h2>
+    <button mat-button color="primary">Add Training Block</button>
+  </div>
+  <div *ngFor="let trainingBlock of season.trainingBlocks">
+    <app-training-block 
+      [trainingBlock]="trainingBlock" 
+      [scheduledActivities]="getScheduleForTrainingBlock(trainingBlock)">
+    </app-training-block>
+  </div>
+</div>

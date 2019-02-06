@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Activity } from 'src/app/shared/activities/activity';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-week',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./week.component.css']
 })
 export class WeekComponent implements OnInit {
+
+  @Input() startDate: Date;
+  @Input() scheduledActivities: Activity[];
 
   constructor() { }
 

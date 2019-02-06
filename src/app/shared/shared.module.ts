@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {
   MatListModule, MatCardModule, MatDividerModule, MatButtonModule,
   MatDialogModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-  MatSelectModule, MatToolbarModule, MatSidenavModule, MatTableModule, MatIconModule } from '@angular/material';
+  MatSelectModule, MatToolbarModule, MatSidenavModule, MatTableModule, MatIconModule, MatMenuModule } from '@angular/material';
 
 import { TimestampDatePipe } from './timestamp-date.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -39,7 +39,8 @@ import { ResultTimePipe } from './result-time.pipe';
     MatToolbarModule,
     MatSidenavModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [
     TimestampDatePipe,
@@ -70,7 +71,8 @@ import { ResultTimePipe } from './result-time.pipe';
     ActivityTypePipe,
     RunTypePipe,
     MatTableModule,
-    ResultTimePipe
+    ResultTimePipe,
+    MatMenuModule
   ]
 })
 export class SharedModule { }

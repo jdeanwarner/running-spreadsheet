@@ -1,6 +1,6 @@
-<div fxLayout="row">
-  <div fxFlex="70">
-    <app-season></app-season>
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <div fxFlex="74">
+    <app-season [season]="activeSeason"></app-season>
   </div>
   <div fxFlex="25">
     <app-list [seasons]="seasons"></app-list>

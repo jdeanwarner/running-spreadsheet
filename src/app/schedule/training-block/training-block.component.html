@@ -1,3 +1,18 @@
-<p>
-  training-block works!
-</p>
+<div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+    <h3 class="mat-h3">
+      {{ _trainingBlock.description }}
+    </h3>
+    <div>
+      <button mat-button [matMenuTriggerFor]="menu" color="primary">Add Week</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="addWeekStart()">Start</button>
+        <button mat-menu-item (click)="addWeekEnd()">End</button>
+      </mat-menu>
+    </div>
+
+  </div>
+  <div *ngFor="let week of weeks">
+    <app-week [startDate]="week" [scheduledActivities]="getActivitiesForWeek(week)"></app-week>
+  </div>
+</div>

@@ -11,3 +11,8 @@
 .margin-bottom-10px {
     margin-bottom: 10px;
 }
+
+.mat-body-1 {
+    padding: 15px;
+    background-color: white;
+}

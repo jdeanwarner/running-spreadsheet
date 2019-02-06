@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { ActivityType } from './activities/activity-type';
 import { RunType } from './activities/run-type';
 import { Race } from './race';
+import { Season } from './season';
 
 @Injectable({
   providedIn: 'root'
@@ -76,11 +77,19 @@ export class ActivityService {
     this.db.collection('races').doc(id).delete();
   }
 
-  getScheduledActivities() {
-    return this.db.collection<RunType>('scheduledActivity').valueChanges();
+  getSeasons(): Observable<Season[]> {
+    return this.db.collection<Season>('season').snapshotChanges().pipe(
+      map((actions: DocumentChangeAction<Season>[]) => {
+        return actions.map((a: DocumentChangeAction<Season>) => {
+          const data: Season = a.payload.doc.data();
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      })
+    );
   }
 
-  getSeasons() {
-    return this.db.collection<any>('season').valueChanges();
+  getScheduledActivities(seasonId: string): Observable<Activity[]> {
+    return this.db.collection('season').doc(seasonId).collection<Activity>('scheduledActivity').valueChanges();
   }
 }
