@@ -20,7 +20,9 @@ export class ListComponent implements OnInit {
   }
 
   add() {
-    const dialogRef = this.dialog.open(AddSeasonComponent);
+    const dialogRef = this.dialog.open(AddSeasonComponent, {
+      minWidth: '60%',
+    });
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result) {
         const season = new Season();

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 
 @Component({
@@ -10,7 +10,9 @@ import { MatDialogRef } from '@angular/material';
 export class AddSeasonComponent implements OnInit {
 
   formGroup: FormGroup = new FormGroup({
-    description: new FormControl(null, Validators.required)
+    id: new FormControl(),
+    description: new FormControl(null, Validators.required),
+    trainingBlocks: new FormArray([])
   });
 
   constructor(private dialogRef: MatDialogRef<AddSeasonComponent>) { }
@@ -20,8 +22,24 @@ export class AddSeasonComponent implements OnInit {
 
   save() {
     if (this.formGroup.valid) {
-      this.dialogRef.close(this.formGroup.get('description').value);
+      this.dialogRef.close(this.formGroup.value);
     }
+  }
+
+  addTrainingBlock() {
+    (<FormArray>this.formGroup.get('trainingBlocks')).push(new FormGroup({
+      description: new FormControl(null, Validators.required),
+      startDate: new FormControl(null, Validators.required),
+      endDate: new FormControl(null, Validators.required)
+    }));
+  }
+
+  deleteTrainingBlock(i: number) {
+    (<FormArray>this.formGroup.get('trainingBlocks')).removeAt(i);
+  }
+
+  deleteSeason() {
+    this.dialogRef.close(this.formGroup.get('id').value);
   }
 
   close() {

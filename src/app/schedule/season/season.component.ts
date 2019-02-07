@@ -1,7 +1,8 @@
 import { Activity } from 'src/app/shared/activities/activity';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Season } from 'src/app/shared/season';
 import { TrainingBlock } from 'src/app/shared/training-block';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-season',
@@ -12,10 +13,11 @@ export class SeasonComponent implements OnInit {
 
   @Input() season: Season;
   @Input() scheduledActivities: Activity[];
+  @Output() addTrainingBlock: EventEmitter<TrainingBlock> = new EventEmitter<TrainingBlock>();
 
   week: Date[] = [];
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -28,5 +30,9 @@ export class SeasonComponent implements OnInit {
         }
       });
     }
+  }
+
+  addBlock() {
+    this.addTrainingBlock.emit();
   }
 }

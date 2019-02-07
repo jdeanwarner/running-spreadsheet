@@ -10,7 +10,14 @@ import { SharedModule } from '../shared/shared.module';
 import { AddSeasonComponent } from './add-season/add-season.component';
 
 @NgModule({
-  declarations: [ScheduleComponent, ListComponent, TrainingBlockComponent, WeekComponent, SeasonComponent, AddSeasonComponent],
+  declarations: [
+    ScheduleComponent,
+    ListComponent,
+    TrainingBlockComponent,
+    WeekComponent,
+    SeasonComponent,
+    AddSeasonComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
