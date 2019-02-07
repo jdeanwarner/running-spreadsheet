@@ -8,6 +8,10 @@ import { WeekComponent } from './week/week.component';
 import { SeasonComponent } from './season/season.component';
 import { SharedModule } from '../shared/shared.module';
 import { AddSeasonComponent } from './add-season/add-season.component';
+import { WeeklyTotalComponent } from './weekly-total/weekly-total.component';
+import { ScheduledActivitiesComponent } from './scheduled-activities/scheduled-activities.component';
+import { ActualActivitiesComponent } from './actual-activities/actual-activities.component';
+import { EditWeekScheduleComponent } from './edit-week-schedule/edit-week-schedule.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { AddSeasonComponent } from './add-season/add-season.component';
     TrainingBlockComponent,
     WeekComponent,
     SeasonComponent,
-    AddSeasonComponent
+    AddSeasonComponent,
+    WeeklyTotalComponent,
+    ScheduledActivitiesComponent,
+    ActualActivitiesComponent,
+    EditWeekScheduleComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +32,8 @@ import { AddSeasonComponent } from './add-season/add-season.component';
     ScheduleRoutingModule
   ],
   entryComponents: [
-    AddSeasonComponent
+    AddSeasonComponent,
+    EditWeekScheduleComponent
   ]
 })
 export class ScheduleModule { }
