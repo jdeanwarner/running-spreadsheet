@@ -36,8 +36,9 @@ export class TrainingBlockComponent implements OnInit {
   }
 
   addDays(date: Date, days: number): Date {
-    console.log(date.getDate());
-    return new Date(new Date().setDate(date.getDate() + days));
+    const newDate: Date = new Date(date);
+    newDate.setDate(date.getDate() + days);
+    return newDate;
   }
 
   getActivitiesForWeek(startDate: Date): Activity[] {
@@ -51,13 +52,10 @@ export class TrainingBlockComponent implements OnInit {
   }
 
   addWeekStart() {
-    console.log(this.addDays(this.weeks[0], -7));
     this.weeks = [this.addDays(this.weeks[0], -7), ...this.weeks];
-    console.log(this.weeks);
   }
 
   addWeekEnd() {
     this.weeks.push(this.addDays(this.weeks[this.weeks.length - 1], 7));
-    console.log(this.weeks);
   }
 }
