@@ -3,6 +3,6 @@
     <app-season [season]="activeSeason" (update)="update($event)" (delete)="delete($event)"></app-season>
   </div>
   <div fxFlex="25">
-    <app-list [seasons]="seasons" (addSeason)="addSeason($event)" (selected)="changeSeason($event)"></app-list>
+    <app-list [seasons]="seasons" (addSeason)="addSeason($event)" (selected)="changeSeason($event)" class="list"></app-list>
   </div>
 </div>
