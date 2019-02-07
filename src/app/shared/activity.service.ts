@@ -89,6 +89,10 @@ export class ActivityService {
     );
   }
 
+  insertSeason(season: Season): void {
+    this.db.collection('season').add({ ...season});
+  }
+
   getScheduledActivities(seasonId: string): Observable<Activity[]> {
     return this.db.collection('season').doc(seasonId).collection<Activity>('scheduledActivity').valueChanges();
   }

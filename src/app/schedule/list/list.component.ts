@@ -12,6 +12,7 @@ export class ListComponent implements OnInit {
 
   @Input() seasons: Season[];
   @Output() addSeason: EventEmitter<Season> = new EventEmitter<Season>();
+  @Output() selected: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(public dialog: MatDialog) { }
 
@@ -20,9 +21,17 @@ export class ListComponent implements OnInit {
 
   add() {
     const dialogRef = this.dialog.open(AddSeasonComponent);
-    dialogRef.afterClosed().subscribe((result: Season) => {
-      console.log(result);
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result) {
+        const season = new Season();
+        season.description = result;
+        this.addSeason.emit(season);
+      }
     });
+  }
+
+  clicked(id: string) {
+    this.selected.emit(id);
   }
 
 }

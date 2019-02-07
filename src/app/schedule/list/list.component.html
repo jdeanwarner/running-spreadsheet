@@ -6,6 +6,6 @@
     </button>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between start" *ngFor="let season of seasons">
-    <button mat-button color="primary">{{ season.description }}</button>
+    <button mat-button color="primary" (click)="clicked(season.id)">{{ season.description }}</button>
   </div>
 </div>

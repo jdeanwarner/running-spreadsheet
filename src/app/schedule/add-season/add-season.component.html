@@ -1,3 +1,17 @@
-<p>
-  add-season works!
-</p>
+<h2 mat-dialog-title class="mat-h2">
+  Add Season
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <div fxLayout="row wrap" fxLayoutAlign="start center" >
+      <mat-form-field fxFlex="100">
+        <input matInput placeholder="Description" formControlName="description">
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row wrap" fxLayoutAlign="end center">
+  <button mat-dialog-close class="padding-top-10px align-right" mat-button color="primary" (click)="save()">Save</button>
+  <button mat-dialog-close class="padding-top-10px align-right" mat-button color="primary" (click)="close()">Close</button>
+</mat-dialog-actions>

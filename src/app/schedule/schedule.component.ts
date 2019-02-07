@@ -21,15 +21,25 @@ export class ScheduleComponent implements OnInit {
       this.seasons = seasons;
 
       this.route.queryParams.subscribe((params: {seasonId: string}) => {
-        console.log(this.seasons);
         if (params.seasonId) {
           this.activeSeason = this.seasons.filter((season: Season) => season.id === params.seasonId)[0];
         } else {
           this.activeSeason = this.seasons[0];
         }
         this.activityService.getScheduledActivities(this.activeSeason.id).subscribe(result => console.log(result));
-        console.log(this.activeSeason);
       });
+    });
+  }
+
+  addSeason(season: Season): void {
+    this.activityService.insertSeason(season);
+  }
+
+  changeSeason(seasonId: string) {
+    this.router.navigate(['/schedule'], {
+      queryParams: {
+        seasonId: seasonId
+      }
     });
   }
 
