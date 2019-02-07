@@ -41,10 +41,12 @@ export class ScheduleComponent implements OnInit {
 
     if (!activeSeason) {
       activeSeason = seasons.sort((season1: Season, season2: Season) => {
-        if (Math.abs(this.getStartDate(season1) - new Date().getTime()) > Math.abs(this.getStartDate(season2) - new Date().getTime())) {
+        if (Math.abs(this.getStartDate(season1) - new Date().getTime()) >
+          Math.abs(this.getStartDate(season2) - new Date().getTime())) {
           return -1;
         }
-        if (Math.abs(this.getStartDate(season1) - new Date().getTime()) < Math.abs(this.getStartDate(season2) - new Date().getTime())) {
+        if (Math.abs(this.getStartDate(season1) - new Date().getTime()) <
+          Math.abs(this.getStartDate(season2) - new Date().getTime())) {
           return 1;
         }
         return 0;

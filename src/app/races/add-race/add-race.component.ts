@@ -30,7 +30,6 @@ export class AddRaceComponent implements OnInit {
 
   ngOnInit() {
     if (this.data.race) {
-      console.log(this.data);
       this.formGroup.patchValue(this.data.race);
     }
   }
