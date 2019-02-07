@@ -3,6 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Season } from 'src/app/shared/season';
 import { TrainingBlock } from 'src/app/shared/training-block';
 import { MatDialog } from '@angular/material';
+import { AddSeasonComponent } from '../add-season/add-season.component';
 
 @Component({
   selector: 'app-season',
@@ -13,7 +14,8 @@ export class SeasonComponent implements OnInit {
 
   @Input() season: Season;
   @Input() scheduledActivities: Activity[];
-  @Output() addTrainingBlock: EventEmitter<TrainingBlock> = new EventEmitter<TrainingBlock>();
+  @Output() update: EventEmitter<Season> = new EventEmitter<Season>();
+  @Output() delete: EventEmitter<string> = new EventEmitter<string>();
 
   week: Date[] = [];
 
@@ -32,7 +34,19 @@ export class SeasonComponent implements OnInit {
     }
   }
 
-  addBlock() {
-    this.addTrainingBlock.emit();
+  edit() {
+    const dialogRef = this.dialog.open(AddSeasonComponent, {
+      data: {
+        season: this.season
+      },
+      minWidth: '60%',
+    });
+    dialogRef.afterClosed().subscribe((result: string | Season) => {
+      if (typeof result === 'string') {
+        this.delete.emit(result);
+      } else if (result.id) {
+        this.update.emit(result);
+      }
+    });
   }
 }

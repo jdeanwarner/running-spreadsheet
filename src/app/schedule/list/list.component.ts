@@ -1,3 +1,4 @@
+import { Activity } from 'src/app/shared/activities/activity';
 import { AddSeasonComponent } from './../add-season/add-season.component';
 import { Season } from './../../shared/season';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -47,11 +48,9 @@ export class ListComponent implements OnInit {
     const dialogRef = this.dialog.open(AddSeasonComponent, {
       minWidth: '60%',
     });
-    dialogRef.afterClosed().subscribe((result: string) => {
+    dialogRef.afterClosed().subscribe((result: Season) => {
       if (result) {
-        const season = new Season();
-        season.description = result;
-        this.addSeason.emit(season);
+        this.addSeason.emit(result);
       }
     });
   }

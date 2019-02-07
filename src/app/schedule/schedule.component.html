@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
   <div fxFlex="74">
-    <app-season [season]="activeSeason"></app-season>
+    <app-season [season]="activeSeason" (update)="update($event)" (delete)="delete($event)"></app-season>
   </div>
   <div fxFlex="25">
     <app-list [seasons]="seasons" (addSeason)="addSeason($event)" (selected)="changeSeason($event)"></app-list>

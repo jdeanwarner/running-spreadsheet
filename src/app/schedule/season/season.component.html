@@ -1,7 +1,7 @@
 <div *ngIf="season" class="season">
   <div fxLayout="row" fxLayoutAlign="space-between center" class="header">
     <h2 class="mat-h2">{{season.description}}</h2>
-    <button mat-button color="primary">Edit</button>
+    <button mat-button color="primary" (click)="edit()">Edit</button>
   </div>
   <div *ngFor="let trainingBlock of season.trainingBlocks">
     <app-training-block 

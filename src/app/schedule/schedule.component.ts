@@ -84,4 +84,13 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
+  update(season: Season) {
+    this.activityService.updateSeason(season);
+  }
+
+  delete(id: string) {
+    this.activityService.deleteSeason(id);
+    this.changeSeason(null);
+  }
+
 }
