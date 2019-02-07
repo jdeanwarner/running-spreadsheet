@@ -12,11 +12,7 @@
         </mat-form-field>
       </div>
       <div fxLayout="row wrap" fxLayoutAlign="start center" >
-        <mat-form-field fxFlex="100">
-          <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+        <app-timestamp-date-picker fxFlex="100" placeholder="Date" formControlName="date"></app-timestamp-date-picker>
       </div>
       <div fxLayout="row wrap" fxLayoutAlign="start center" >
         <mat-form-field fxFlex="100">

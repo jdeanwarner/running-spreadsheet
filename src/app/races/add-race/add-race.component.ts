@@ -30,10 +30,8 @@ export class AddRaceComponent implements OnInit {
 
   ngOnInit() {
     if (this.data.race) {
+      console.log(this.data);
       this.formGroup.patchValue(this.data.race);
-      if (this.data.race.date) {
-        this.formGroup.get('date').setValue(this.data.race.date.toDate());
-      }
     }
   }
 
@@ -44,7 +42,6 @@ export class AddRaceComponent implements OnInit {
   save() {
     if (this.formGroup.valid) {
       const saveRace: Race = this.formGroup.value;
-      saveRace.date = firestore.Timestamp.fromDate(<Date>this.formGroup.get('date').value);
       this.dialogRef.close(saveRace);
     }
   }
