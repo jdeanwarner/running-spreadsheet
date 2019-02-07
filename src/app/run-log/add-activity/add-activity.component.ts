@@ -38,7 +38,7 @@ export class AddActivityComponent implements OnInit {
         this.formGroup.patchValue(this.activity);
       }
       this.formGroup.patchValue({
-        date: this.activity.date.toDate(),
+        date: this.activity.date,
       });
     }
 
@@ -48,11 +48,7 @@ export class AddActivityComponent implements OnInit {
 
   save() {
     if (this.formGroup.valid) {
-      let saveActivity: Activity = {
-        id: this.formGroup.get('id').value,
-        activityType: this.formGroup.get('activityType').value,
-        date: firestore.Timestamp.fromDate(<Date>this.formGroup.get('date').value)
-      };
+      let saveActivity: Activity = this.formGroup.value;
 
       switch (this.formGroup.get('activityType').value) {
         case ActivityTypeEnum.RUN:
