@@ -50,12 +50,4 @@ export class TrainingBlockComponent implements OnInit {
       });
     }
   }
-
-  addWeekStart() {
-    this.weeks = [this.addDays(this.weeks[0], -7), ...this.weeks];
-  }
-
-  addWeekEnd() {
-    this.weeks.push(this.addDays(this.weeks[this.weeks.length - 1], 7));
-  }
 }
