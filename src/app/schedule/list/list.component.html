@@ -5,7 +5,7 @@
       <i class="material-icons" (click)="add()">add</i>
     </button>
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-between start" *ngFor="let season of seasons">
+  <div fxLayout="row" fxLayoutAlign="space-between start" *ngFor="let season of _seasons">
     <button mat-button color="primary" (click)="clicked(season.id)">{{ season.description }}</button>
   </div>
 </div>
