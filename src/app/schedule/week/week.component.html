@@ -1,4 +1,15 @@
-<p>
-  week works!
-  {{ startDate }}
-</p>
+<div fxLayout="row" fxLayoutAlign="start center" class="row">
+  <div fxFlex="100">
+      {{ startDate | date: 'mediumDate'}}
+  </div >
+</div>
+<div fxLayout="row" fxLayoutAlign="start center" class="row data-row schedule-row">
+    <div fxFlex="30" fxFlexOffset="3">
+        Schduled:
+    </div >
+</div>
+<div fxLayout="row" fxLayoutAlign="start center" class="row data-row">
+    <div fxFlex="30" fxFlexOffset="3">
+        Actual:
+    </div >
+</div>

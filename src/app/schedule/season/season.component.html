@@ -3,6 +3,16 @@
     <h2 class="mat-h2">{{season.description}}</h2>
     <button mat-button color="primary" (click)="edit()">Edit</button>
   </div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h3 class="mat-h3" fxFlexOffset="15" fxFlex="10">Mon</h3>
+    <h3 class="mat-h3" fxFlex="10">Tues</h3>
+    <h3 class="mat-h3" fxFlex="10">Wed</h3>
+    <h3 class="mat-h3" fxFlex="10">Thurs</h3>
+    <h3 class="mat-h3" fxFlex="10">Fri</h3>
+    <h3 class="mat-h3" fxFlex="10">Sat</h3>
+    <h3 class="mat-h3" fxFlex="10">Sun</h3>
+    <h3 class="mat-h3" fxFlex="15">Total</h3>
+  </div>
   <div *ngFor="let trainingBlock of season.trainingBlocks">
     <app-training-block 
       [trainingBlock]="trainingBlock" 
