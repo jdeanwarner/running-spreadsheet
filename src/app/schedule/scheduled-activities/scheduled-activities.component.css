@@ -1,0 +1,11 @@
+.row {
+    padding: 5px;
+}
+
+.data-row:hover {
+    background-color: lightgray;
+}
+
+.schedule-row:hover {
+    cursor: pointer;
+}

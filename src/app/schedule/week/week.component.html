@@ -1,15 +1,13 @@
-<div fxLayout="row" fxLayoutAlign="start center" class="row">
-  <div fxFlex="100">
-      {{ startDate | date: 'mediumDate'}}
-  </div >
-</div>
-<div fxLayout="row" fxLayoutAlign="start center" class="row data-row schedule-row">
-    <div fxFlex="30" fxFlexOffset="3">
-        Schduled:
+<div fxFlex="83">
+    <div fxLayout="row" fxLayoutAlign="start center" class="row">
+    <div fxFlex="100">
+        {{ startDate | date: 'mediumDate'}}
     </div >
+    </div>
+    <app-scheduled-activities></app-scheduled-activities>
+    <app-actual-activities></app-actual-activities>
 </div>
-<div fxLayout="row" fxLayoutAlign="start center" class="row data-row">
-    <div fxFlex="30" fxFlexOffset="3">
-        Actual:
-    </div >
+<div fxFlex="15">
+    <app-weekly-total></app-weekly-total>
 </div>
+
