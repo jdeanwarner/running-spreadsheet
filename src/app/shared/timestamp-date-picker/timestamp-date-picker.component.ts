@@ -21,7 +21,9 @@ export class TimestampDatePickerComponent implements OnInit, ControlValueAccesso
   }
 
   writeValue(value: firestore.Timestamp): void {
-    this.formControl.setValue(value.toDate());
+    if (value && value instanceof firestore.Timestamp) {
+      this.formControl.setValue(value.toDate());
+    }
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;

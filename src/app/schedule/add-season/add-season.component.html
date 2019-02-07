@@ -21,16 +21,8 @@
       <mat-form-field fxFlex="30">
         <input matInput placeholder="Description" formControlName="description">
       </mat-form-field>
-      <mat-form-field fxFlex="30">
-        <input matInput [matDatepicker]="startDate" placeholder="Start Date" formControlName="startDate">
-        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-        <mat-datepicker #startDate></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field fxFlex="30">
-        <input matInput [matDatepicker]="endDate" placeholder="End Date" formControlName="endDate">
-        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-        <mat-datepicker #endDate></mat-datepicker>
-      </mat-form-field>
+      <app-timestamp-date-picker fxFlex="30" placeholder="Start Date" formControlName="startDate"></app-timestamp-date-picker>
+      <app-timestamp-date-picker fxFlex="30" placeholder="End Date" formControlName="endDate"></app-timestamp-date-picker>
       <div>
         <button mat-icon-button (click)="deleteTrainingBlock(i)">
           <i class="material-icons">delete_forever</i>
