@@ -1,5 +1,7 @@
 import { Activity } from 'src/app/shared/activities/activity';
 import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { EditWeekScheduleComponent } from '../edit-week-schedule/edit-week-schedule.component';
 
 @Component({
   selector: 'app-week',
@@ -10,10 +12,24 @@ export class WeekComponent implements OnInit {
 
   @Input() startDate: Date;
   @Input() scheduledActivities: Activity[];
+  @Input() actualActivities: Activity[];
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  editWeek() {
+    const dialogRef = this.dialog.open(EditWeekScheduleComponent, {
+      data: {
+        startDate: this.startDate,
+        scheduledActivities: this.scheduledActivities
+      },
+      minWidth: '60%',
+    });
+    dialogRef.afterClosed().subscribe((scheduledActivities: Activity[]) => {
+
+    });
   }
 
 }

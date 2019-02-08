@@ -4,7 +4,7 @@
         {{ startDate | date: 'mediumDate'}}
     </div >
     </div>
-    <app-scheduled-activities></app-scheduled-activities>
+    <app-scheduled-activities (click)="editWeek()"></app-scheduled-activities>
     <app-actual-activities></app-actual-activities>
 </div>
 <div fxFlex="15">
