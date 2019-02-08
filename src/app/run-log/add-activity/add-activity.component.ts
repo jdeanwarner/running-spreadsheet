@@ -26,6 +26,7 @@ export class AddActivityComponent implements OnInit {
 
   runGroup: FormGroup = new FormGroup({});
   kettlebellGroup: FormGroup = new FormGroup({});
+  yogaGroup: FormGroup = new FormGroup({});
   activity: Activity;
 
   constructor(private dialogRef: MatDialogRef<AddActivityComponent>,

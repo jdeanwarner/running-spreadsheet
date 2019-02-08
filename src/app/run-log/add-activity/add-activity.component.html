@@ -21,6 +21,7 @@
     </div>
     <app-add-run *ngIf="formGroup.get('activityType').value === activityTypeEnum.RUN" [run]="activity" [formGroup]="runGroup" [runTypes]="runType"></app-add-run>
     <app-add-kettlebell *ngIf="formGroup.get('activityType').value === activityTypeEnum.KETTLEBELL" [kettlebell]="activity" [formGroup]="kettlebellGroup"></app-add-kettlebell>
+    <app-add-yoga *ngIf="formGroup.get('activityType').value === activityTypeEnum.YOGA" [yoga]="activity" [formGroup]="yogaGroup"></app-add-yoga>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row wrap" fxLayoutAlign="end center">
