@@ -1,15 +1,14 @@
 <div fxLayout="row wrap" fxLayoutAlign="end end" class="margin-top--10px">
-  <app-year-selector [year]="year" (change)="incrementYear($event)"></app-year-selector>
+  <app-year-selector></app-year-selector>
 </div>
 <div class="mat-body-1" fxLayout="row wrap" fxLayoutAlign=" stretch" ngClass.gt-xs="margin-bottom-10px">
   <app-yearly-total [activities]="activities" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-yearly-total>
   <app-run-type-total [activities]="activities" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-run-type-total>
   <app-cross-training-total [activities]="activities" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-cross-training-total>
 </div>
-<app-year [year]="year" [activities]="activities" 
+<app-year [activities]="activities" 
   [activityTypes]="activityTypes"
   [runTypes]="runTypes"
-  (incrementYear)="incrementYear($event)" 
   (daySelected)="daySelected($event)"></app-year>
 
 <button color="primary" mat-fab class="fab-bottom" (click)="addActivity()">

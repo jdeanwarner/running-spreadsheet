@@ -7,6 +7,8 @@ import { Activity } from '../shared/activities/activity';
 import { ActivityType } from '../shared/activities/activity-type';
 import { RunType } from '../shared/activities/run-type';
 import { ActivityService } from '../shared/activity.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app.state';
 
 @Component({
   selector: 'app-run-log',
@@ -16,35 +18,23 @@ import { ActivityService } from '../shared/activity.service';
 export class RunLogComponent implements OnInit {
 
   items: Observable<any[]>;
+  year: Observable<number>;
   activities: Activity[];
   activityTypes: ActivityType[];
   runTypes: RunType[];
-  year: number;
-  constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
-    private activityService: ActivityService) {
 
+  constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
+    private activityService: ActivityService, private store: Store<AppState>) {
+      this.year = store.select('year');
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params: {year: number}) => {
-      if (params.year) {
-        this.year = +params.year;
-      } else {
-        this.year = new Date().getFullYear();
-      }
-      this.activityService.getActivitiesByYear(this.year).subscribe((activities: Activity[]) => this.activities = activities );
+    this.year.subscribe(result => {
+      this.activityService.getActivitiesByYear(result).subscribe((activities: Activity[]) => this.activities = activities );
     });
 
     this.activityService.getActivityTypes().subscribe((activityTypes: ActivityType[]) =>  this.activityTypes = activityTypes );
     this.activityService.getRunTypes().subscribe((runTypes: RunType[]) => this.runTypes = runTypes );
-  }
-
-  incrementYear(i: number) {
-    this.router.navigate(['/log'], {
-      queryParams: {
-        year: this.year += i
-      }
-    });
   }
 
   daySelected(activity: Activity) {

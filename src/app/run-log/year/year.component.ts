@@ -1,8 +1,12 @@
+import { AppState } from './../../app.state';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Run } from 'src/app/shared/activities/run';
 import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
 import { RunType } from 'src/app/shared/activities/run-type';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as YearActions from './../../actions/year.actions';
 
 @Component({
   selector: 'app-year',
@@ -13,7 +17,6 @@ export class YearComponent implements OnInit {
 
   @Input() activityTypes: ActivityType[];
   @Input() runTypes: RunType[];
-  @Input() year: number;
   @Input() set activities(activities: Activity[]) {
     if (activities) {
       this.janRuns = activities.filter(run => run.date.toDate().getMonth() === 0);
@@ -32,7 +35,6 @@ export class YearComponent implements OnInit {
     }
   }
 
-  @Output() incrementYear: EventEmitter<number> = new EventEmitter<number>();
   @Output() daySelected: EventEmitter<Run> = new EventEmitter<Run>();
 
   janRuns: Activity[];
@@ -51,7 +53,7 @@ export class YearComponent implements OnInit {
   mobileMonth: number;
   mobileMonthToShow: Activity[];
 
-  constructor() { }
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
     this.mobileMonth = new Date().getMonth();
@@ -60,10 +62,10 @@ export class YearComponent implements OnInit {
   incrementMonth(i: number) {
     if (this.mobileMonth === 11 && i === 1) {
       this.mobileMonth = 0;
-      this.incrementYear.emit(1);
+      this.store.dispatch(new YearActions.ChangeYear(1));
     } else if (this.mobileMonth === 0 && i === -1) {
       this.mobileMonth = 11;
-      this.incrementYear.emit(-1);
+      this.store.dispatch(new YearActions.ChangeYear(-1));
     } else {
       this.mobileMonth += i;
       this.mobileMonthToShow = this.getRunsByMonth(this.mobileMonth);

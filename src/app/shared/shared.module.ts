@@ -14,6 +14,8 @@ import { RunTypePipe } from './activities/run-type.pipe';
 import { ActivityService } from './activity.service';
 import { ResultTimePipe } from './result-time.pipe';
 import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-date-picker.component';
+import { StoreModule } from '@ngrx/store';
+import { yearReducer } from './../reducers/year.reducer';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,10 @@ import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-
     MatSidenavModule,
     MatTableModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    StoreModule.forRoot({
+      year: yearReducer
+    })
   ],
   providers: [
     TimestampDatePipe,
