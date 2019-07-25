@@ -20,6 +20,7 @@ import { YogaComponent } from './yoga/yoga.component';
 import { AddYogaComponent } from './add-yoga/add-yoga.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, effects } from './store';
+import { YearSelectorComponent } from './components/year-selector/year-selector.component';
 @NgModule({
   declarations: [
     RunLogComponent,
@@ -36,7 +37,8 @@ import { reducers, effects } from './store';
     AddKettlebellComponent,
     KettlebellComponent,
     YogaComponent,
-    AddYogaComponent
+    AddYogaComponent,
+    YearSelectorComponent
   ],
   imports: [
     CommonModule,

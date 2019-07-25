@@ -13,6 +13,7 @@ export function yearReducer(state: YearState = initialYear, action: YearActions.
     switch (action.type) {
         case YearActions.CHANGE_YEAR:
             state.data += action.playload;
+            console.log(state.data);
             return state;
         default:
             return state;

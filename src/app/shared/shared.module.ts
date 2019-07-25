@@ -8,7 +8,6 @@ import {
 import { TimestampDatePipe } from './timestamp-date.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { YearSelectorComponent } from './year-selector/year-selector.component';
 import { ActivityTypePipe } from './activities/activity-type.pipe';
 import { RunTypePipe } from './activities/run-type.pipe';
 import { ActivityService } from './activity.service';
@@ -18,7 +17,6 @@ import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-
 @NgModule({
   declarations: [
     TimestampDatePipe,
-    YearSelectorComponent,
     ActivityTypePipe,
     RunTypePipe,
     ResultTimePipe,
@@ -69,7 +67,6 @@ import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-
     ReactiveFormsModule,
     MatToolbarModule,
     MatSidenavModule,
-    YearSelectorComponent,
     ActivityTypePipe,
     RunTypePipe,
     MatTableModule,

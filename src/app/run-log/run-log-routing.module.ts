@@ -5,7 +5,7 @@ import { RunLogComponent } from './run-log.component';
 
 const appRoutes: Routes = [
   {
-    path: 'log',
+    path: '',
     component: RunLogComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange'
   },
