@@ -17,7 +17,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'log',
-        component: RunLogComponent
+        loadChildren: './run-log/run-log.module#RunLogModule'
     },
     { path: '',
       redirectTo : '/log',

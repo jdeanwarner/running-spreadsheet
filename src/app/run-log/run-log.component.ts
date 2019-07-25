@@ -1,3 +1,4 @@
+import { ActivityState } from './../models/activity-state.model';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,6 +10,7 @@ import { RunType } from '../shared/activities/run-type';
 import { ActivityService } from '../shared/activity.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
+import * as fromStore from './store';
 
 @Component({
   selector: 'app-run-log',
@@ -18,23 +20,32 @@ import { AppState } from '../app.state';
 export class RunLogComponent implements OnInit {
 
   items: Observable<any[]>;
-  year: Observable<number>;
+  year$: Observable<number>;
   activities: Activity[];
-  activityTypes: ActivityType[];
+  activityTypes$: Observable<ActivityType[]>;
   runTypes: RunType[];
 
   constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
-    private activityService: ActivityService, private store: Store<AppState>) {
-      this.year = store.select('year');
+    // private activityService: ActivityService,
+    private store: Store<fromStore.LogState>) {
+    // this.year = store.select('year');
+    this.activityTypes$ = store.select(fromStore.getActivityTypes);
+    this.year$ = store.select(fromStore.getYear);
   }
 
   ngOnInit(): void {
-    this.year.subscribe(result => {
+    /*this.year.subscribe(result => {
       this.activityService.getActivitiesByYear(result).subscribe((activities: Activity[]) => this.activities = activities );
-    });
+    });*/
+    // this.store.dispatch(new fromStore.LoadType());
+    // this.activityService.getActivityTypes().subscribe((activityTypes: ActivityType[]) =>  this.activityTypes = activityTypes );
+    // this.activityService.getRunTypes().subscribe((runTypes: RunType[]) => this.runTypes = runTypes );
 
-    this.activityService.getActivityTypes().subscribe((activityTypes: ActivityType[]) =>  this.activityTypes = activityTypes );
-    this.activityService.getRunTypes().subscribe((runTypes: RunType[]) => this.runTypes = runTypes );
+    this.store.dispatch(new fromStore.LoadType());
+
+    this.activityTypes$.subscribe(result => console.log(result));
+    this.year$.subscribe(result => console.log(result));
+
   }
 
   daySelected(activity: Activity) {
@@ -51,7 +62,7 @@ export class RunLogComponent implements OnInit {
       maxWidth: '99%',
       data : {
         activity: activity,
-        activityTypes: this.activityTypes,
+        // activityTypes: this.activityTypes,
         runTypes: this.runTypes
       }
     });
@@ -59,12 +70,12 @@ export class RunLogComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: Activity | string) => {
       if (result) {
         if (typeof result === 'string') {
-          this.activityService.deleteActivity(result);
+          // this.activityService.deleteActivity(result);
         } else if (result.activityType) {
           if (result.id) {
-            this.activityService.updateActivity(result);
+            // this.activityService.updateActivity(result);
           } else {
-            this.activityService.insertActivity(result);
+            // this.activityService.insertActivity(result);
           }
         }
       }

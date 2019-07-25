@@ -1,3 +1,4 @@
+import { EffectsModule } from '@ngrx/effects';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RunLogComponent } from './run-log.component';
@@ -17,6 +18,8 @@ import { AddKettlebellComponent } from './add-kettlebell/add-kettlebell.componen
 import { KettlebellComponent } from './kettlebell/kettlebell.component';
 import { YogaComponent } from './yoga/yoga.component';
 import { AddYogaComponent } from './add-yoga/add-yoga.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, effects } from './store';
 @NgModule({
   declarations: [
     RunLogComponent,
@@ -38,7 +41,11 @@ import { AddYogaComponent } from './add-yoga/add-yoga.component';
   imports: [
     CommonModule,
     SharedModule,
-    RunLogRoutingModule
+    RunLogRoutingModule,
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('log', reducers),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature(effects)
   ],
   exports: [
     RunLogComponent

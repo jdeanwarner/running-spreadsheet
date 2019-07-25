@@ -22,8 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FlexLayoutModule,
     LayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    RunLogModule
+    AngularFirestoreModule
   ],
   providers: [
   ],
