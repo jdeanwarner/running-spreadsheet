@@ -1,13 +1,9 @@
 import { ActivityType } from 'src/app/shared/activities/activity-type';
 import { Action } from '@ngrx/store';
 
-
-export const LOAD_ACTIVITIES = '[Activity] Load';
-export const LOAD_ACTIVITIES_SUCCESS = '[Activity] Load Success';
-export const LOAD_ACTIVITIES_FAIL = '[Activity] Load Fail';
-export const LOAD_ACTIVITY_TYPES = '[Activity] Load Types';
-export const LOAD_ACTIVITY_TYPES_SUCCESS = '[Activity] Load Types Fail';
-export const LOAD_ACTIVITY_TYPES_FAIL = '[Activity] Load Types Success';
+export const LOAD_ACTIVITY_TYPES = '[Log] Load Activity Types';
+export const LOAD_ACTIVITY_TYPES_SUCCESS = '[Log] Load Activity Types Fail';
+export const LOAD_ACTIVITY_TYPES_FAIL = '[Log] Load Activity Types Success';
 
 
 export class LoadType implements Action {

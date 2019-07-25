@@ -6,7 +6,7 @@ import { ActivityType } from 'src/app/shared/activities/activity-type';
 import { RunType } from 'src/app/shared/activities/run-type';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as YearActions from '../store/actions/year.actions';
+import * as YearActions from '../store/actions/year.action';
 
 @Component({
   selector: 'app-year',

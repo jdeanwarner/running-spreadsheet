@@ -6,8 +6,8 @@ import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
-import { LoadTypeSuccess } from '../actions/activity-type.actions';
-import * as activityActions from '../actions/activity-type.actions';
+import { LoadTypeSuccess } from '../actions/activity-type.action';
+import * as activityActions from '../actions/activity-type.action';
 
 @Injectable()
 export class ActivityTypeEffects {

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import * as YearActions from './../actions/year.actions';
+import * as YearActions from '../actions/year.action';
 
 export interface YearState {
     data: number;

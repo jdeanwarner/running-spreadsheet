@@ -1,5 +1,5 @@
 import { ActivityType } from '../../../shared/activities/activity-type';
-import * as fromActivities from '../actions/activity-type.actions';
+import * as fromActivities from '../actions/activity-type.action';
 
 export interface ActivityTypeState {
     data: ActivityType[];

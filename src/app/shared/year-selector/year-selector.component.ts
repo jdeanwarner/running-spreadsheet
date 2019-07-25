@@ -2,7 +2,7 @@ import { AppState } from './../../app.state';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as YearActions from '../../run-log/store/actions/year.actions';
+import * as YearActions from '../../run-log/store/actions/year.action';
 
 @Component({
   selector: 'app-year-selector',

@@ -1,2 +1,3 @@
-export * from './activity-type.actions';
-export * from './year.actions';
+export * from './activity-type.action';
+export * from './year.action';
+export * from './run-type.action';

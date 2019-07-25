@@ -1,4 +1,3 @@
-import { ActivityState } from './../models/activity-state.model';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -23,13 +22,14 @@ export class RunLogComponent implements OnInit {
   year$: Observable<number>;
   activities: Activity[];
   activityTypes$: Observable<ActivityType[]>;
-  runTypes: RunType[];
+  runTypes$: Observable<RunType[]>;
 
   constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
     // private activityService: ActivityService,
     private store: Store<fromStore.LogState>) {
     // this.year = store.select('year');
     this.activityTypes$ = store.select(fromStore.getActivityTypes);
+    this.runTypes$ = store.select(fromStore.getRunTypes);
     this.year$ = store.select(fromStore.getYear);
   }
 
@@ -42,8 +42,10 @@ export class RunLogComponent implements OnInit {
     // this.activityService.getRunTypes().subscribe((runTypes: RunType[]) => this.runTypes = runTypes );
 
     this.store.dispatch(new fromStore.LoadType());
+    this.store.dispatch(new fromStore.LoadRunType());
 
     this.activityTypes$.subscribe(result => console.log(result));
+    this.runTypes$.subscribe(result => console.log(result));
     this.year$.subscribe(result => console.log(result));
 
   }
@@ -63,7 +65,7 @@ export class RunLogComponent implements OnInit {
       data : {
         activity: activity,
         // activityTypes: this.activityTypes,
-        runTypes: this.runTypes
+        // runTypes: this.runTypes
       }
     });
 
