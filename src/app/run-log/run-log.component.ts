@@ -6,9 +6,7 @@ import { MatDialog } from '@angular/material';
 import { Activity } from '../shared/activities/activity';
 import { ActivityType } from '../shared/activities/activity-type';
 import { RunType } from '../shared/activities/run-type';
-import { ActivityService } from '../shared/activity.service';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.state';
 import * as fromStore from './store';
 
 @Component({
@@ -20,14 +18,13 @@ export class RunLogComponent implements OnInit {
 
   items: Observable<any[]>;
   year$: Observable<number>;
-  activities: Activity[];
+  activities$: Observable<Activity[]>;
   activityTypes$: Observable<ActivityType[]>;
   runTypes$: Observable<RunType[]>;
 
   constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
-    // private activityService: ActivityService,
     private store: Store<fromStore.LogState>) {
-    // this.year = store.select('year');
+    this.activities$ = store.select(fromStore.getActivities);
     this.activityTypes$ = store.select(fromStore.getActivityTypes);
     this.runTypes$ = store.select(fromStore.getRunTypes);
     this.year$ = store.select(fromStore.getYear);
@@ -37,17 +34,15 @@ export class RunLogComponent implements OnInit {
     /*this.year.subscribe(result => {
       this.activityService.getActivitiesByYear(result).subscribe((activities: Activity[]) => this.activities = activities );
     });*/
-    // this.store.dispatch(new fromStore.LoadType());
-    // this.activityService.getActivityTypes().subscribe((activityTypes: ActivityType[]) =>  this.activityTypes = activityTypes );
-    // this.activityService.getRunTypes().subscribe((runTypes: RunType[]) => this.runTypes = runTypes );
 
+    this.store.dispatch(new fromStore.LoadActivities());
     this.store.dispatch(new fromStore.LoadType());
     this.store.dispatch(new fromStore.LoadRunType());
 
+    this.activities$.subscribe(result => console.log(result));
     this.activityTypes$.subscribe(result => console.log(result));
     this.runTypes$.subscribe(result => console.log(result));
     this.year$.subscribe(result => console.log(result));
-
   }
 
   daySelected(activity: Activity) {

@@ -1,22 +1,35 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
+import * as fromActivity from './activity.reducer';
 import * as fromActivityType from './activity-type.reducer';
 import * as fromRunType from './run-type.reducer';
 import * as fromYear from './year.reducer';
 
 export interface LogState {
+    activity: fromActivity.ActivityState;
     activityType: fromActivityType.ActivityTypeState;
     runType: fromRunType.RunTypeState;
     year: fromYear.YearState;
 }
 
 export const reducers: ActionReducerMap<LogState> = {
+    activity: fromActivity.activityReducer,
     activityType: fromActivityType.activityTypeReducer,
     runType: fromRunType.runTypeReducer,
     year: fromYear.yearReducer
 };
 
 export const getLogState = createFeatureSelector<LogState>('log');
+
+// activity state
+export const getActivityState = createSelector(
+    getLogState,
+    (state: LogState) => state.activity
+);
+
+export const getActivities = createSelector(getActivityState, fromActivity.getActivities);
+export const getActivitiesLoading = createSelector(getActivityState, fromActivity.getActivitiesLoading);
+export const getActivitiesLoaded = createSelector(getActivityState, fromActivity.getActivitiesLoaded);
 
 // activity type state
 export const getActivityTypeState = createSelector(
