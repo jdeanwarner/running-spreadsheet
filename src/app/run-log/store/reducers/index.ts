@@ -24,7 +24,15 @@ export const getActivityState = createSelector(
     (state: LogState) => state.activity
 );
 
-export const getActivities = createSelector(getActivityState, fromActivity.getActivities);
+export const getActivitiesEntites = createSelector(getActivityState, fromActivity.getActivitiesEntites);
+
+export const getAllActivities = createSelector(
+    getActivitiesEntites,
+    (entities) => {
+        return Object.keys(entities).map(id => entities[id]);
+    }
+);
+
 export const getActivitiesLoading = createSelector(getActivityState, fromActivity.getActivitiesLoading);
 export const getActivitiesLoaded = createSelector(getActivityState, fromActivity.getActivitiesLoaded);
 

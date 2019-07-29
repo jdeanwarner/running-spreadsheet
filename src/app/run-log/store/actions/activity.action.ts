@@ -3,12 +3,12 @@ import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
 
 export const LOAD_ACTIVITY = '[Log] Load Activity';
-export const LOAD_ACTIVITY_SUCCESS = '[Log] Load Activity Fail';
-export const LOAD_ACTIVITY_FAIL = '[Log] Load Activity Success';
+export const LOAD_ACTIVITY_SUCCESS = '[Log] Load Activity Success';
+export const LOAD_ACTIVITY_FAIL = '[Log] Load Activity Fail';
 
 export const LOAD_ACTIVITY_TYPES = '[Log] Load Activity Types';
-export const LOAD_ACTIVITY_TYPES_SUCCESS = '[Log] Load Activity Types Fail';
-export const LOAD_ACTIVITY_TYPES_FAIL = '[Log] Load Activity Types Success';
+export const LOAD_ACTIVITY_TYPES_SUCCESS = '[Log] Load Activity Types Success';
+export const LOAD_ACTIVITY_TYPES_FAIL = '[Log] Load Activity Types Fail';
 
 
 export class LoadActivities implements Action {

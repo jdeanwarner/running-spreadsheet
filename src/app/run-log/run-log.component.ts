@@ -24,7 +24,7 @@ export class RunLogComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
     private store: Store<fromStore.LogState>) {
-    this.activities$ = store.select(fromStore.getActivities);
+    this.activities$ = store.select(fromStore.getAllActivities);
     this.activityTypes$ = store.select(fromStore.getActivityTypes);
     this.runTypes$ = store.select(fromStore.getRunTypes);
     this.year$ = store.select(fromStore.getYear);
@@ -39,8 +39,8 @@ export class RunLogComponent implements OnInit {
     this.store.dispatch(new fromStore.LoadType());
     this.store.dispatch(new fromStore.LoadRunType());
 
-    this.activities$.subscribe(result => console.log(result));
-    this.activityTypes$.subscribe(result => console.log(result));
+    // this.activities$.subscribe(result => console.log(result));
+    // this.activityTypes$.subscribe(result => console.log(result));
     this.runTypes$.subscribe(result => console.log(result));
     this.year$.subscribe(result => console.log(result));
   }

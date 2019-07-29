@@ -9,7 +9,7 @@ export interface ActivityState {
         loading: boolean;
     };
     activities: {
-        data: Activity[];
+        entities: { [id: number]: Activity };
         loaded: boolean;
         loading: boolean;
     };
@@ -22,7 +22,7 @@ export const initialState: ActivityState = {
         loading: false
     },
     activities: {
-        data: [],
+        entities: {},
         loaded: false,
         loading: false
     }
@@ -36,13 +36,22 @@ export function activityReducer(state: ActivityState = initialState, action: fro
             return state;
         }
         case fromActivities.LOAD_ACTIVITY_SUCCESS: {
-            const data = action.playload;
+            const activities = action.playload;
+            const entities = activities.reduce(
+                (activity: { [id: number]: Activity }, list) => {
+                    return {
+                        ... activity,
+                        [list.id]: list
+                    };
+                }, {
+                ...state.activities.entities
+            });
             return {
                 ... state,
                 activities: {
                     loading: false,
                     loaded: true,
-                    data: data
+                    entities
                 }
             };
         }
@@ -78,7 +87,7 @@ export function activityReducer(state: ActivityState = initialState, action: fro
 
 export const getActivitiesLoading = (state: ActivityState) => state.activities.loading;
 export const getActivitiesLoaded = (state: ActivityState) => state.activities.loaded;
-export const getActivities = (state: ActivityState) => state.activities.data;
+export const getActivitiesEntites = (state: ActivityState) => state.activities.entities;
 
 export const getActivityTypesLoading = (state: ActivityState) => state.types.loading;
 export const getActivityTypesLoaded = (state: ActivityState) => state.types.loaded;

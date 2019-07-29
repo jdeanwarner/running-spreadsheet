@@ -44,7 +44,6 @@ import { YearSelectorComponent } from './components/year-selector/year-selector.
     CommonModule,
     SharedModule,
     RunLogRoutingModule,
-    StoreModule.forRoot({}),
     StoreModule.forFeature('log', reducers),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature(effects)

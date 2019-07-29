@@ -2,8 +2,8 @@ import { Action } from '@ngrx/store';
 import { RunType } from 'src/app/shared/activities/run-type';
 
 export const LOAD_RUN_TYPES = '[Log] Load Run Types';
-export const LOAD_RUN_TYPES_SUCCESS = '[Log] Load Run Types Fail';
-export const LOAD_RUN_TYPES_FAIL = '[Log] Load Run Types Success';
+export const LOAD_RUN_TYPES_SUCCESS = '[Log] Load Run Types Success';
+export const LOAD_RUN_TYPES_FAIL = '[Log] Load Run Types Fail';
 
 
 export class LoadRunType implements Action {
