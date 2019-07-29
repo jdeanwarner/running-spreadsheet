@@ -5,13 +5,14 @@ import { RunLogComponent } from './run-log.component';
 
 const appRoutes: Routes = [
   {
-    path: '',
+    path: ':year',
     component: RunLogComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange'
   },
   { path: '',
-    redirectTo : 'log',
-    pathMatch : 'full'}
+    redirectTo : '',
+    pathMatch : 'full'
+  }
 ];
 
 @NgModule({

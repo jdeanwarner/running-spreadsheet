@@ -5,8 +5,10 @@ import { Observable, of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
 import * as activityActions from '../actions/activity.action';
+import * as yearActions from '../actions/year.action';
 import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
+import { YearState } from '../reducers/year.reducer';
 
 @Injectable()
 export class ActivityEffects {
@@ -25,16 +27,16 @@ export class ActivityEffects {
             catchError(error => of(new activityActions.LoadActivitiesFail(error)))
           )
         )
-      );
+  );
 
-    @Effect()
-    loadActivityTypes$: Observable<Action> =  this.actions$.pipe(
-      ofType(activityActions.LOAD_ACTIVITY_TYPES),
-      mergeMap(() => this.activityService.getActivityTypes()
-          .pipe(
-            map((activityTypes: ActivityType[]) => (new activityActions.LoadTypeSuccess(activityTypes))),
-            catchError(error => of(new activityActions.LoadTypeFail(error)))
-          )
+  @Effect()
+  loadActivityTypes$: Observable<Action> =  this.actions$.pipe(
+    ofType(activityActions.LOAD_ACTIVITY_TYPES),
+    mergeMap(() => this.activityService.getActivityTypes()
+        .pipe(
+          map((activityTypes: ActivityType[]) => (new activityActions.LoadTypeSuccess(activityTypes))),
+          catchError(error => of(new activityActions.LoadTypeFail(error)))
         )
-      );
+      )
+  );
 }

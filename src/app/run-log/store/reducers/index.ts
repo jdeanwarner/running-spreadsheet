@@ -18,28 +18,6 @@ export const reducers: ActionReducerMap<LogState> = {
 
 export const getLogState = createFeatureSelector<LogState>('log');
 
-// activity state
-export const getActivityState = createSelector(
-    getLogState,
-    (state: LogState) => state.activity
-);
-
-export const getActivitiesEntites = createSelector(getActivityState, fromActivity.getActivitiesEntites);
-
-export const getAllActivities = createSelector(
-    getActivitiesEntites,
-    (entities) => {
-        return Object.keys(entities).map(id => entities[id]);
-    }
-);
-
-export const getActivitiesLoading = createSelector(getActivityState, fromActivity.getActivitiesLoading);
-export const getActivitiesLoaded = createSelector(getActivityState, fromActivity.getActivitiesLoaded);
-
-export const getActivityTypes = createSelector(getActivityState, fromActivity.getActivityTypes);
-export const getActivityTypesLoading = createSelector(getActivityState, fromActivity.getActivityTypesLoading);
-export const getActivityTypesLoaded = createSelector(getActivityState, fromActivity.getActivityTypesLoaded);
-
 // year state
 export const getYearState = createSelector(
     getLogState,
