@@ -9,7 +9,7 @@ export const initialYear = {
     data : new Date().getFullYear()
 };
 
-export function yearReducer(state: YearState = initialYear, action: YearActions.Actions): YearState {
+export function reducer(state: YearState = initialYear, action: YearActions.Actions): YearState {
     switch (action.type) {
         case YearActions.CHANGE_YEAR:
             state.data += action.playload;

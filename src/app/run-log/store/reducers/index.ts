@@ -11,9 +11,9 @@ export interface LogState {
 }
 
 export const reducers: ActionReducerMap<LogState> = {
-    activity: fromActivity.activityReducer,
-    runType: fromRunType.runTypeReducer,
-    year: fromYear.yearReducer
+    activity: fromActivity.reducer,
+    runType: fromRunType.reducer,
+    year: fromYear.reducer
 };
 
 export const getLogState = createFeatureSelector<LogState>('log');
@@ -32,6 +32,14 @@ export const getRunTypeState = createSelector(
     (state: LogState) => state.runType
 );
 
-export const getRunTypes = createSelector(getRunTypeState, fromRunType.getRunTypes);
+export const getRunTypesEntities = createSelector(getRunTypeState, fromRunType.getRunTypesEntities);
+
+export const getRunTypes = createSelector(
+    getRunTypesEntities,
+    (entities) => {
+        return Object.keys(entities).map(id => entities[id]);
+    }
+);
+
 export const getRunTypesLoading = createSelector(getRunTypeState, fromRunType.getRunTypesLoading);
 export const getRunTypesLoaded = createSelector(getRunTypeState, fromRunType.getRunTypesLoaded);

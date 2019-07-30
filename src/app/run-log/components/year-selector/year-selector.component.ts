@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as YearActions from '../../store/actions/year.action';
-import * as fromStore from '../../store';
+
 
 @Component({
   selector: 'app-year-selector',
@@ -11,17 +9,18 @@ import * as fromStore from '../../store';
 })
 export class YearSelectorComponent implements OnInit {
 
-  year$: Observable<number>;
+  @Input() year: string;
+  @Output() change: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private store: Store<fromStore.LogState>) {
-    this.year$ = store.select(fromStore.getYear);
+  constructor() {
+
   }
 
   ngOnInit() {
   }
 
   incrementYear(i: number) {
-    this.store.dispatch(new YearActions.ChangeYear(i));
+    this.change.emit(parseInt(this.year, 10) + i);
   }
 
 }

@@ -28,7 +28,7 @@ export const initialState: ActivityState = {
     }
 };
 
-export function activityReducer(state: ActivityState = initialState, action: fromActivities.ActivityActions):
+export function reducer(state: ActivityState = initialState, action: fromActivities.ActivityActions):
     ActivityState {
     switch (action.type) {
         case fromActivities.LOAD_ACTIVITY: {

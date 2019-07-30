@@ -8,6 +8,8 @@ import { ActivityType } from '../shared/activities/activity-type';
 import { RunType } from '../shared/activities/run-type';
 import { Store } from '@ngrx/store';
 import * as fromStore from './store';
+import * as fromRoot from './../store';
+import { RouterReducerState } from '@ngrx/router-store';
 
 @Component({
   selector: 'app-run-log',
@@ -16,33 +18,28 @@ import * as fromStore from './store';
 })
 export class RunLogComponent implements OnInit {
 
-  items: Observable<any[]>;
-  year$: Observable<number>;
+  params$: Observable<RouterReducerState<fromRoot.RouterStateUrl>>;
   activities$: Observable<Activity[]>;
   activityTypes$: Observable<ActivityType[]>;
   runTypes$: Observable<RunType[]>;
 
-  constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
-    private store: Store<fromStore.LogState>) {
+  constructor(public dialog: MatDialog, private store: Store<fromStore.LogState>,
+    private rootStore: Store<fromRoot.State>, private router: Router) {
     this.activities$ = store.select(fromStore.getAllActivities);
     this.activityTypes$ = store.select(fromStore.getActivityTypes);
     this.runTypes$ = store.select(fromStore.getRunTypes);
-    this.year$ = store.select(fromStore.getYear);
+    this.params$ = rootStore.select(fromRoot.getRouterState);
   }
 
   ngOnInit(): void {
-    /*this.year.subscribe(result => {
-      this.activityService.getActivitiesByYear(result).subscribe((activities: Activity[]) => this.activities = activities );
-    });*/
-
     this.store.dispatch(new fromStore.LoadActivities());
     this.store.dispatch(new fromStore.LoadType());
     this.store.dispatch(new fromStore.LoadRunType());
+  }
 
-    // this.activities$.subscribe(result => console.log(result));
-    // this.activityTypes$.subscribe(result => console.log(result));
-    this.runTypes$.subscribe(result => console.log(result));
-    this.year$.subscribe(result => console.log(result));
+  changeYear(year) {
+    this.router.navigate([`/log/${year}` ])
+      .then(() => this.store.dispatch(new fromStore.LoadActivities()));
   }
 
   daySelected(activity: Activity) {

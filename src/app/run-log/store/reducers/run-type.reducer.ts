@@ -2,18 +2,18 @@ import * as fromRunTypes from '../actions/run-type.action';
 import { RunType } from 'src/app/shared/activities/run-type';
 
 export interface RunTypeState {
-    data: RunType[];
+    entities: { [id: number]: RunType };
     loaded: boolean;
     loading: boolean;
 }
 
 export const initialState: RunTypeState = {
-    data: [],
+    entities: {},
     loaded: false,
     loading: false
 };
 
-export function runTypeReducer(state: RunTypeState = initialState, action: fromRunTypes.RunTypeActions):
+export function reducer(state: RunTypeState = initialState, action: fromRunTypes.RunTypeActions):
     RunTypeState {
     switch (action.type) {
         case fromRunTypes.LOAD_RUN_TYPES: {
@@ -23,12 +23,22 @@ export function runTypeReducer(state: RunTypeState = initialState, action: fromR
             };
         }
         case fromRunTypes.LOAD_RUN_TYPES_SUCCESS: {
-            const data = action.playload;
+            const runType = action.playload;
+
+            const entities = runType.reduce(
+                (activity: { [id: number]: RunType }, list) => {
+                    return {
+                        ... activity,
+                        [list.id]: list
+                    };
+                }, {
+                ...state.entities
+            });
             return {
                 ... state,
                 loading: false,
                 loaded: true,
-                data: data
+                entities: entities
             };
         }
         case fromRunTypes.LOAD_RUN_TYPES_FAIL: {
@@ -47,4 +57,4 @@ export function runTypeReducer(state: RunTypeState = initialState, action: fromR
 
 export const getRunTypesLoading = (state: RunTypeState) => state.loading;
 export const getRunTypesLoaded = (state: RunTypeState) => state.loaded;
-export const getRunTypes = (state: RunTypeState) => state.data;
+export const getRunTypesEntities = (state: RunTypeState) => state.entities;
