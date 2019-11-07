@@ -7,6 +7,7 @@ import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 import { RunTypeEnum } from 'src/app/shared/activities/run-type.enum';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
 import { RunType } from 'src/app/shared/activities/run-type';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-activity',
@@ -15,8 +16,8 @@ import { RunType } from 'src/app/shared/activities/run-type';
 })
 export class AddActivityComponent implements OnInit {
 
-  runType: RunType[];
-  activityType: ActivityType[];
+  runTypes$: Observable<RunType[]>;
+  activityTypes$: Observable<ActivityType[]>;
   activityTypeEnum = ActivityTypeEnum;
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
@@ -30,7 +31,11 @@ export class AddActivityComponent implements OnInit {
   activity: Activity;
 
   constructor(private dialogRef: MatDialogRef<AddActivityComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: { activity: Activity, activityTypes: ActivityType[], runTypes: RunType[] }) { }
+    @Inject(MAT_DIALOG_DATA) private data: {
+      activity: Activity,
+      activityTypes: Observable<ActivityType[]>,
+      runTypes: Observable<RunType[]>
+    }) { }
 
   ngOnInit() {
     if (this.data.activity) {
@@ -43,8 +48,8 @@ export class AddActivityComponent implements OnInit {
       });
     }
 
-    this.activityType = this.data.activityTypes;
-    this.runType = [ { id: '', description: ''}, ...this.data.runTypes];
+    this.activityTypes$ = this.data.activityTypes;
+    this.runTypes$ = this.data.runTypes;
   }
 
   save() {

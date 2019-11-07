@@ -54,8 +54,8 @@ export class RunLogComponent implements OnInit {
       maxWidth: '99%',
       data : {
         activity: activity,
-        // activityTypes: this.activityTypes,
-        // runTypes: this.runTypes
+        activityTypes: this.activityTypes$,
+        runTypes: this.runTypes$
       }
     });
 

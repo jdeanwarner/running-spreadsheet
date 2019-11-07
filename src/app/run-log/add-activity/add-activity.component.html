@@ -10,7 +10,7 @@
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
       <mat-form-field fxFlex="100">
         <mat-select placeholder="Activity Type" formControlName="activityType">
-          <mat-option *ngFor="let type of activityType" [value]="type.id">
+          <mat-option *ngFor="let type of (activityTypes$ | async)" [value]="type.id">
             {{type.description}}
           </mat-option>
         </mat-select>
@@ -19,9 +19,11 @@
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
       <app-timestamp-date-picker placeholder="Date" formControlName="date" fxFlex="100"></app-timestamp-date-picker>
     </div>
-    <app-add-run *ngIf="formGroup.get('activityType').value === activityTypeEnum.RUN" [run]="activity" [formGroup]="runGroup" [runTypes]="runType"></app-add-run>
-    <app-add-kettlebell *ngIf="formGroup.get('activityType').value === activityTypeEnum.KETTLEBELL" [kettlebell]="activity" [formGroup]="kettlebellGroup"></app-add-kettlebell>
-    <app-add-yoga *ngIf="formGroup.get('activityType').value === activityTypeEnum.YOGA" [yoga]="activity" [formGroup]="yogaGroup"></app-add-yoga>
+    <div [ngSwitch]="formGroup.get('activityType').value">
+      <app-add-run *ngSwitchCase="activityTypeEnum.RUN" [run]="activity" [formGroup]="runGroup" [runTypes]="runTypes$ | async"></app-add-run>
+      <app-add-kettlebell *ngSwitchCase="activityTypeEnum.KETTLEBELL" [kettlebell]="activity" [formGroup]="kettlebellGroup"></app-add-kettlebell>
+      <app-add-yoga *ngSwitchCase="activityTypeEnum.YOGA" [yoga]="activity" [formGroup]="yogaGroup"></app-add-yoga>
+    </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row wrap" fxLayoutAlign="end center">
