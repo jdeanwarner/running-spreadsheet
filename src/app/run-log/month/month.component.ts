@@ -19,34 +19,26 @@ export class MonthComponent implements OnInit {
 
   @Input() activityTypes: ActivityType[];
   @Input() runTypes: RunType[];
-  @Input() set monthNum(month: number) {
-    this.initMonth = month;
+  @Input() set year(year: number) {
+    this.yearNum = year;
+    this.initDays();
+  }
+  @Input() set monthNum (month: number) {
+    this.month = month;
     this.initDays();
   }
   @Input() set activities(activities: Activity[]) {
-    if (activities && this.days) {
-      this.total = 0;
-      this.clearActivities();
-      activities.forEach((activity: Activity) => {
-        this.days[activity.date.toDate().getDate() - 1].activities.push(activity);
-        if (activity.activityType === ActivityTypeEnum.RUN) {
-          this.total += (<Run>activity).distance;
-        }
-      });
-      this.total = Math.round(this.total * 100) / 100;
-    }
+    this.getMilageTotal(activities);
   }
   @Output() selected: EventEmitter<Activity> = new EventEmitter<Activity>();
 
+  yearNum: number;
+  month: number;
   days: Day[];
-  initMonth: number;
   initDate: Date;
   total: number;
-  year: Observable<number>;
 
-  constructor(private store: Store<AppState>) {
-    this.year = store.select('year');
-  }
+  constructor() {}
 
   ngOnInit() {
 
@@ -61,20 +53,32 @@ export class MonthComponent implements OnInit {
   }
 
   initDays() {
-    this.year.subscribe(initYear => {
-      if (initYear && this.initMonth >= 0) {
-        this.days = [];
-        this.initDate = new Date(initYear, this.initMonth, 1);
-        const date = new Date(this.initDate);
-        while (date.getMonth() === this.initMonth) {
-          this.days.push({
-            date: new Date(date),
-            activities: []
-          });
-          date.setDate(date.getDate() + 1);
-        }
+    if (this.yearNum && this.month >= 0) {
+      this.days = [];
+      this.initDate = new Date(this.yearNum, this.month, 1);
+      const date = new Date(this.initDate);
+      while (date.getMonth() === this.month) {
+        this.days.push({
+          date: new Date(date),
+          activities: []
+        });
+        date.setDate(date.getDate() + 1);
       }
-    });
+    }
+  }
+
+  getMilageTotal(activities: Activity[]) {
+    if (activities && this.days) {
+      this.total = 0;
+      this.clearActivities();
+      activities.forEach((activity: Activity) => {
+        this.days[activity.date.toDate().getDate() - 1].activities.push(activity);
+        if (activity.activityType === ActivityTypeEnum.RUN) {
+          this.total += (<Run>activity).distance;
+        }
+      });
+      this.total = Math.round(this.total * 100) / 100;
+    }
   }
 
   activitySelected(activity: Activity) {

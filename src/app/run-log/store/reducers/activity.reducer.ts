@@ -38,20 +38,21 @@ export function reducer(state: ActivityState = initialState, action: fromActivit
         case fromActivities.LOAD_ACTIVITY_SUCCESS: {
             const activities = action.playload;
             const entities = activities.reduce(
-                (activity: { [id: number]: Activity }, list) => {
+                (map: { [id: number]: Activity }, activity) => {
+                    // console.log(map);
+                    // console.log(activity);
                     return {
-                        ... activity,
-                        [list.id]: list
+                        ... map,
+                        [activity.id]: activity
                     };
-                }, {
-                ...state.activities.entities
-            });
+                }, {});
+                console.log(Object.keys(entities).length);
             return {
                 ... state,
                 activities: {
                     loading: false,
                     loaded: true,
-                    entities
+                    entities : entities
                 }
             };
         }

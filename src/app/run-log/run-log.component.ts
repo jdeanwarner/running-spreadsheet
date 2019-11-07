@@ -32,14 +32,12 @@ export class RunLogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new fromStore.LoadActivities());
     this.store.dispatch(new fromStore.LoadType());
     this.store.dispatch(new fromStore.LoadRunType());
   }
 
   changeYear(year) {
-    this.router.navigate([`/log/${year}` ])
-      .then(() => this.store.dispatch(new fromStore.LoadActivities()));
+    this.router.navigate([`/log/${year}` ]);
   }
 
   daySelected(activity: Activity) {

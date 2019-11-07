@@ -6,7 +6,9 @@
   <app-run-type-total [activities]="activities$ | async" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-run-type-total>
   <app-cross-training-total [activities]="activities$ | async" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-cross-training-total>
 </div>
-<app-year [activities]="activities$ | async" 
+<app-year 
+  [year]="(params$ | async).state.params['year']"
+  [activities]="activities$ | async" 
   [activityTypes]="activityTypes$ | async"
   [runTypes]="runTypes$ | async"
   (daySelected)="daySelected($event)"></app-year>
