@@ -47,14 +47,11 @@ export function reducer(state: ActivityState = initialState, action: fromActivit
             const activities = action.playload;
             const entities = activities.reduce(
                 (map: { [id: number]: Activity }, activity) => {
-                    // console.log(map);
-                    // console.log(activity);
                     return {
                         ... map,
                         [activity.id]: activity
                     };
                 }, {});
-                console.log(Object.keys(entities).length);
             return {
                 ... state,
                 activities: {
