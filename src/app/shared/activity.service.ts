@@ -43,8 +43,8 @@ export class ActivityService {
     this.db.collection('runs').doc(id).delete();
   }
 
-  updateActivity(activity: Activity): void {
-    this.db.collection('runs').doc(activity.id).set(activity);
+  updateActivity(activity: Activity): Promise<void> {
+    return this.db.collection('runs').doc(activity.id).set(activity);
   }
 
   insertActivity(activity: Activity): Promise<DocumentReference> {

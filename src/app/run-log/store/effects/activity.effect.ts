@@ -81,4 +81,13 @@ export class ActivityEffects {
         .catch((error) => new activityActions.InsertActivityFail(error))
     )
   );
+
+  @Effect()
+  updateActivity$: Observable<Action> =  this.actions$.pipe(
+    ofType(activityActions.UPDATE_ACTIVITY),
+    mergeMap((activity: activityActions.UpdateActivity) => this.activityService.updateActivity(activity.playload)
+        .then( () => new activityActions.UpdateActivitySuccess())
+        .catch((error) => new activityActions.UpdateActivityFail(error))
+    )
+  );
 }

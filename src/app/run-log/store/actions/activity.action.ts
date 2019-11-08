@@ -69,7 +69,7 @@ export class InsertActivityFail implements Action {
 export class UpdateActivity implements Action {
     readonly type = UPDATE_ACTIVITY;
 
-    constructor(public playload: Activity[]) {}
+    constructor(public playload: Activity) {}
 }
 
 export class UpdateActivitySuccess implements Action {
