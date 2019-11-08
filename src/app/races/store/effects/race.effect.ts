@@ -8,6 +8,7 @@ import { Action, Store } from '@ngrx/store';
 import * as raceActions from '../actions/race.actions';
 import * as fromRoot from '../../../store';
 import { ROUTER_NAVIGATION, RouterNavigationAction } from '@ngrx/router-store';
+import { DocumentReference } from '@angular/fire/firestore';
 
 @Injectable()
 export class RaceEffects {
@@ -30,6 +31,24 @@ export class RaceEffects {
           );
         }
       )
+  );
+
+  @Effect()
+  addRace$: Observable<Action> = this.actions$.pipe(
+      ofType(raceActions.ADD_RACE),
+      mergeMap((activity: raceActions.AddRace) => this.activityService.insertRace(activity.playload)
+        .then((ref: DocumentReference) => new raceActions.AddRaceSuccess(ref))
+        .catch((error) => new raceActions.AddRaceFail(error))
+    )
+  );
+
+  @Effect()
+  updateRace$: Observable<Action> = this.actions$.pipe(
+      ofType(raceActions.UPDATE_RACE),
+      mergeMap((activity: raceActions.UpdateRace) => this.activityService.updateRace(activity.playload)
+        .then(() => new raceActions.UpdateRaceSuccess())
+        .catch((error) => new raceActions.UpdateRaceFail(error))
+    )
   );
 
 }

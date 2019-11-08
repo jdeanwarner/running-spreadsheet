@@ -47,6 +47,36 @@ export function reducer(state: RaceState = initialState, action: fromRace.RaceAc
             state.races.loaded = false;
             return state;
         }
+        case fromRace.ADD_RACE: {
+            state.races.loading = true;
+            state.races.loaded = false;
+            return state;
+        }
+        case fromRace.ADD_RACE_SUCCESS: {
+            state.races.loading = false;
+            state.races.loaded = true;
+            return state;
+        }
+        case fromRace.ADD_RACE_FAIL: {
+            state.races.loading = false;
+            state.races.loaded = false;
+            return state;
+        }
+        case fromRace.UPDATE_RACE: {
+            state.races.loading = true;
+            state.races.loaded = false;
+            return state;
+        }
+        case fromRace.UPDATE_RACE_SUCCESS: {
+            state.races.loading = false;
+            state.races.loaded = true;
+            return state;
+        }
+        case fromRace.UPDATE_RACE_FAIL: {
+            state.races.loading = false;
+            state.races.loaded = false;
+            return state;
+        }
         default:
             return state;
     }

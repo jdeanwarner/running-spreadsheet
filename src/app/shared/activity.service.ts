@@ -65,16 +65,16 @@ export class ActivityService {
     );
   }
 
-  updateRace(race: Race): void {
-    this.db.collection('races').doc(race.id).set(race);
+  updateRace(race: Race): Promise<void> {
+    return this.db.collection('races').doc(race.id).set(race);
   }
 
-  insertRace(race: Race): void {
-    this.db.collection('races').add(race);
+  insertRace(race: Race): Promise<DocumentReference> {
+    return this.db.collection('races').add(race);
   }
 
-  deleteRace(id: string): void {
-    this.db.collection('races').doc(id).delete();
+  deleteRace(id: string): Promise<void> {
+    return this.db.collection('races').doc(id).delete();
   }
 
   getSeasons(): Observable<Season[]> {
