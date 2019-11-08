@@ -13,6 +13,10 @@ export interface ActivityState {
         loaded: boolean;
         loading: boolean;
     };
+    activity: {
+        loaded: boolean;
+        loading: boolean;
+    };
 }
 
 export const initialState: ActivityState = {
@@ -23,6 +27,10 @@ export const initialState: ActivityState = {
     },
     activities: {
         entities: {},
+        loaded: false,
+        loading: false
+    },
+    activity: {
         loaded: false,
         loading: false
     }
@@ -79,6 +87,24 @@ export function reducer(state: ActivityState = initialState, action: fromActivit
         case fromActivities.LOAD_ACTIVITY_TYPES_FAIL: {
             state.types.loading = false;
             state.types.loaded = false;
+            return state;
+        }
+        case fromActivities.INSERT_ACTIVITY : {
+            return state;
+        }
+        case fromActivities.UPDATE_ACTIVITY : {
+            state.activity.loading = true;
+            state.activity.loaded = false;
+            return state;
+        }
+        case fromActivities.UPDATE_ACTIVITY_SUCCESS : {
+            state.activity.loading = false;
+            state.activity.loaded = true;
+            return state;
+        }
+        case fromActivities.UPDATE_ACTIVITY_FAIL : {
+            state.activity.loading = false;
+            state.activity.loaded = false;
             return state;
         }
         default:

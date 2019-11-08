@@ -67,6 +67,8 @@ export class RunLogComponent implements OnInit {
           if (result.id) {
             // this.activityService.updateActivity(result);
           } else {
+            console.log(result);
+            this.store.dispatch(new fromStore.InsertActivity(result));
             // this.activityService.insertActivity(result);
           }
         }

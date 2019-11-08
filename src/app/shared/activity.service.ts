@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Activity } from './activities/activity';
 import { map } from 'rxjs/operators';
@@ -47,8 +47,8 @@ export class ActivityService {
     this.db.collection('runs').doc(activity.id).set(activity);
   }
 
-  insertActivity(activity: Activity): void {
-    this.db.collection('runs').add(activity);
+  insertActivity(activity: Activity): Promise<DocumentReference> {
+    return this.db.collection('runs').add(activity);
   }
 
   getRaces(): Observable<Race[]> {
