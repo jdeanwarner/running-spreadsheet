@@ -39,8 +39,8 @@ export class ActivityService {
     return this.db.collection<RunType>('runType').valueChanges();
   }
 
-  deleteActivity(id: string): void {
-    this.db.collection('runs').doc(id).delete();
+  deleteActivity(id: string): Promise<void> {
+    return this.db.collection('runs').doc(id).delete();
   }
 
   updateActivity(activity: Activity): Promise<void> {

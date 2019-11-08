@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
+import { DocumentReference } from '@angular/fire/firestore';
 
 export const LOAD_ACTIVITY = '[Log] Load Activity';
 export const LOAD_ACTIVITY_SUCCESS = '[Log] Load Activity Success';
@@ -17,6 +18,10 @@ export const INSERT_ACTIVITY_FAIL = '[Log] Insert Activity Fail';
 export const UPDATE_ACTIVITY = '[Log] Update Activity';
 export const UPDATE_ACTIVITY_SUCCESS = '[Log] Update Activity Success';
 export const UPDATE_ACTIVITY_FAIL = '[Log] Update Activity Fail';
+
+export const DELETE_ACTIVITY = '[Log] Delete Activity';
+export const DELETE_ACTIVITY_SUCCESS = '[Log] Delete Activity Success';
+export const DELETE_ACTIVITY_FAIL = '[Log] Delete Activity Fail';
 
 export class LoadActivities implements Action {
     readonly type = LOAD_ACTIVITY;
@@ -58,6 +63,7 @@ export class InsertActivity implements Action {
 
 export class InsertActivitySuccess implements Action {
     readonly type = INSERT_ACTIVITY_SUCCESS;
+    constructor(public playload: DocumentReference) {}
 }
 
 export class InsertActivityFail implements Action {
@@ -82,6 +88,22 @@ export class UpdateActivityFail implements Action {
     constructor(public playload: any) {}
 }
 
+export class DeleteActivity implements Action {
+    readonly type = DELETE_ACTIVITY;
+
+    constructor(public playload: string) {}
+}
+
+export class DeleteActivitySuccess implements Action {
+    readonly type = DELETE_ACTIVITY_SUCCESS;
+}
+
+export class DeleteActivityFail implements Action {
+    readonly type = DELETE_ACTIVITY_FAIL;
+
+    constructor(public playload: any) {}
+}
+
 
 export type ActivityActions =
     LoadActivities |
@@ -95,4 +117,7 @@ export type ActivityActions =
     InsertActivityFail |
     UpdateActivity |
     UpdateActivitySuccess |
-    UpdateActivityFail;
+    UpdateActivityFail |
+    DeleteActivity |
+    DeleteActivityFail |
+    DeleteActivitySuccess;

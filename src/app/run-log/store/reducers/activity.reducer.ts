@@ -90,6 +90,16 @@ export function reducer(state: ActivityState = initialState, action: fromActivit
             return state;
         }
         case fromActivities.INSERT_ACTIVITY : {
+            state.activity.loading = true;
+            return state;
+        }
+        case fromActivities.INSERT_ACTIVITY_SUCCESS : {
+            state.activity.loading = false;
+            state.activity.loaded = true;
+            return state;
+        }
+        case fromActivities.INSERT_ACTIVITY_FAIL : {
+            state.activity.loading = true;
             return state;
         }
         case fromActivities.UPDATE_ACTIVITY : {
@@ -103,6 +113,21 @@ export function reducer(state: ActivityState = initialState, action: fromActivit
             return state;
         }
         case fromActivities.UPDATE_ACTIVITY_FAIL : {
+            state.activity.loading = false;
+            state.activity.loaded = false;
+            return state;
+        }
+        case fromActivities.DELETE_ACTIVITY : {
+            state.activity.loading = true;
+            state.activity.loaded = false;
+            return state;
+        }
+        case fromActivities.DELETE_ACTIVITY_SUCCESS : {
+            state.activity.loading = false;
+            state.activity.loaded = true;
+            return state;
+        }
+        case fromActivities.DELETE_ACTIVITY_FAIL : {
             state.activity.loading = false;
             state.activity.loaded = false;
             return state;

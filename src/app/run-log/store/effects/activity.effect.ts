@@ -1,3 +1,4 @@
+import { DELETE_ACTIVITY } from './../actions/activity.action';
 import { ActivityService } from '../../../shared/activity.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -10,6 +11,7 @@ import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
 import { YearState } from '../reducers/year.reducer';
 import { ROUTER_NAVIGATION, RouterNavigationAction } from '@ngrx/router-store';
+import { DocumentReference } from '@angular/fire/firestore';
 
 @Injectable()
 export class ActivityEffects {
@@ -77,7 +79,7 @@ export class ActivityEffects {
   insertActivity$: Observable<Action> =  this.actions$.pipe(
     ofType(activityActions.INSERT_ACTIVITY),
     mergeMap((activity: activityActions.InsertActivity) => this.activityService.insertActivity(activity.playload)
-        .then( () => new activityActions.InsertActivitySuccess())
+        .then( (ref: DocumentReference) => new activityActions.InsertActivitySuccess(ref))
         .catch((error) => new activityActions.InsertActivityFail(error))
     )
   );
@@ -88,6 +90,15 @@ export class ActivityEffects {
     mergeMap((activity: activityActions.UpdateActivity) => this.activityService.updateActivity(activity.playload)
         .then( () => new activityActions.UpdateActivitySuccess())
         .catch((error) => new activityActions.UpdateActivityFail(error))
+    )
+  );
+
+  @Effect()
+  deleteActivity$: Observable<Action> =  this.actions$.pipe(
+    ofType(activityActions.DELETE_ACTIVITY),
+    mergeMap((activity: activityActions.DeleteActivity) => this.activityService.deleteActivity(activity.playload)
+        .then( () => new activityActions.DeleteActivitySuccess())
+        .catch((error) => new activityActions.DeleteActivityFail(error))
     )
   );
 }

@@ -62,7 +62,7 @@ export class RunLogComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: Activity | string) => {
       if (result) {
         if (typeof result === 'string') {
-          // this.activityService.deleteActivity(result);
+          this.store.dispatch(new fromStore.DeleteActivity(result));
         } else if (result.activityType) {
           if (result.id) {
             this.store.dispatch(new fromStore.UpdateActivity(result));
