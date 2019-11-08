@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
+import * as fromStore from './store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-races',
@@ -25,17 +27,18 @@ export class RacesComponent implements OnInit {
 
   displayedColumns: string[];
 
-  dataSource: Race[];
+  races$: Observable<Race[]>;
   isLarge$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Large)
     .pipe(
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private activityService: ActivityService, private dialog: MatDialog) { }
+  constructor(private breakpointObserver: BreakpointObserver, private activityService: ActivityService, private dialog: MatDialog,
+    private store: Store<fromStore.RaceState>) {
+      this.races$ = this.store.select(fromStore.getAllRaces);
+    }
 
   ngOnInit() {
-    this.activityService.getRaces().subscribe((result: Race[]) => this.dataSource = result);
-
     this.isLarge$.subscribe((isLarge: boolean) => {
       this.getDisplayedColumns(isLarge);
     });
