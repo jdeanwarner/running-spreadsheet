@@ -14,6 +14,10 @@ export const UPDATE_RACE = '[Races] Update Race';
 export const UPDATE_RACE_SUCCESS = '[Races] Update Race Success';
 export const UPDATE_RACE_FAIL = '[Races] Update Race Fail';
 
+export const DELETE_RACE = '[Races] Delete Race';
+export const DELETE_RACE_SUCCESS = '[Races] Delete Race Success';
+export const DELETE_RACE_FAIL = '[Races] Delete Race Fail';
+
 
 export class LoadRaces implements Action {
     readonly type = LOAD_RACES;
@@ -58,6 +62,20 @@ export class UpdateRaceFail implements Action {
     constructor(public playload: any) {}
 }
 
+export class DeleteRace implements Action {
+    readonly type = DELETE_RACE;
+    constructor(public playload: string) {}
+}
+
+export class DeleteRaceSuccess implements Action {
+    readonly type = DELETE_RACE_SUCCESS;
+}
+
+export class DeleteRaceFail implements Action {
+    readonly type = DELETE_RACE_FAIL;
+    constructor(public playload: any) {}
+}
+
 export type RaceActions =
     LoadRaces |
     LoadRacesSuccess |
@@ -67,4 +85,7 @@ export type RaceActions =
     AddRaceFail |
     UpdateRace |
     UpdateRaceSuccess |
-    UpdateRaceFail;
+    UpdateRaceFail |
+    DeleteRace |
+    DeleteRaceSuccess |
+    DeleteRaceFail;
