@@ -1,3 +1,4 @@
+import { DeleteRace, UpdateRace, AddRace } from './store/actions/race.actions';
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../shared/activity.service';
 import { Race } from '../shared/race';
@@ -33,7 +34,7 @@ export class RacesComponent implements OnInit {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private activityService: ActivityService, private dialog: MatDialog,
+  constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog,
     private store: Store<fromStore.RaceState>) {
       this.races$ = this.store.select(fromStore.getAllRaces);
     }
@@ -56,12 +57,12 @@ export class RacesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: Race | string) => {
       if (result) {
         if (typeof result === 'string') {
-          this.activityService.deleteRace(result);
+          this.store.dispatch(new DeleteRace(result));
         } else if (result.name) {
           if (result.id) {
-            this.activityService.updateRace(result);
+            this.store.dispatch(new UpdateRace(result));
           } else {
-            this.activityService.insertRace(result);
+            this.store.dispatch(new AddRace(result));
           }
         }
       }

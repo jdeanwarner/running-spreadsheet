@@ -11,6 +11,7 @@
           <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
       </div>
+      <app-location-picker [location]="formGroup.get('location')"></app-location-picker>
       <div fxLayout="row wrap" fxLayoutAlign="start center" >
         <app-timestamp-date-picker fxFlex="100" placeholder="Date" formControlName="date"></app-timestamp-date-picker>
       </div>

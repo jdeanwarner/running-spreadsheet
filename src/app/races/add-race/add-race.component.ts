@@ -15,6 +15,10 @@ export class AddRaceComponent implements OnInit {
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
     name: new FormControl(null, Validators.required),
+    location: new FormGroup({
+      state: new FormControl(),
+      city: new FormControl()
+    }),
     date: new FormControl(null, Validators.required),
     distance: new FormControl(),
     status: new FormControl(),

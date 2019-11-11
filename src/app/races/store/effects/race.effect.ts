@@ -1,3 +1,4 @@
+import { DELETE_RACE, DeleteRace } from './../actions/race.actions';
 import { Race } from 'src/app/shared/race';
 import { ActivityService } from '../../../shared/activity.service';
 import { Injectable } from '@angular/core';
@@ -48,6 +49,15 @@ export class RaceEffects {
       mergeMap((activity: raceActions.UpdateRace) => this.activityService.updateRace(activity.playload)
         .then(() => new raceActions.UpdateRaceSuccess())
         .catch((error) => new raceActions.UpdateRaceFail(error))
+    )
+  );
+
+  @Effect()
+  deleteRace$: Observable<Action> = this.actions$.pipe(
+      ofType(raceActions.DELETE_RACE),
+      mergeMap((activity: raceActions.DeleteRace) => this.activityService.deleteRace(activity.playload)
+        .then(() => new raceActions.DeleteRaceSuccess())
+        .catch((error) => new raceActions.DeleteRaceFail(error))
     )
   );
 

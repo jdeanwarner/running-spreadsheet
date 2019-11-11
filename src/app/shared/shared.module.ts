@@ -13,6 +13,7 @@ import { RunTypePipe } from './activities/run-type.pipe';
 import { ActivityService } from './activity.service';
 import { ResultTimePipe } from './result-time.pipe';
 import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-date-picker.component';
+import { LocationPickerComponent } from './location-picker/location-picker.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-
     ActivityTypePipe,
     RunTypePipe,
     ResultTimePipe,
-    TimestampDatePickerComponent
+    TimestampDatePickerComponent,
+    LocationPickerComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -72,7 +74,8 @@ import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-
     MatTableModule,
     ResultTimePipe,
     MatMenuModule,
-    TimestampDatePickerComponent
+    TimestampDatePickerComponent,
+    LocationPickerComponent
   ]
 })
 export class SharedModule { }

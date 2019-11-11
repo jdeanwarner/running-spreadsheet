@@ -1,0 +1,14 @@
+<div [formGroup]="location">
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <mat-form-field fxFlex="49">
+      <mat-select placeholder="State" formControlName="state">
+        <mat-option *ngFor="let state of statesArray" [value]="state.key">
+          {{state.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex="49">
+      <input type="city" matInput placeholder="City" formControlName="city">
+    </mat-form-field>
+  </div>
+</div>
