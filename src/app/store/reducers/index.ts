@@ -1,5 +1,6 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
+import * as fromRace from './race.reducer';
 import { Params, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 export interface RouterStateUrl {
@@ -9,14 +10,16 @@ export interface RouterStateUrl {
 }
 
 export interface State {
+    race: fromRace.RaceState;
     routerReducer: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
-
 export const reducers: ActionReducerMap<State> = {
-    routerReducer: fromRouter.routerReducer
+    routerReducer: fromRouter.routerReducer,
+    race : fromRace.reducer
 };
 
+export const getRaceState = createFeatureSelector<State>('races');
 export const getRouterState = createFeatureSelector<fromRouter.RouterReducerState<RouterStateUrl>>('routerReducer');
 
 export class CustomSerializer implements fromRouter.RouterStateSerializer<RouterStateUrl> {

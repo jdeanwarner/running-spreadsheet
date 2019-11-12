@@ -1,4 +1,4 @@
-import { reducers, CustomSerializer } from './store';
+import { reducers, effects, CustomSerializer } from './store';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
 
@@ -29,6 +29,7 @@ import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router
     AngularFirestoreModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([]),
+    EffectsModule.forFeature(effects),
     // Note that you must instrument after importing StoreModule
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
