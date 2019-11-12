@@ -1,3 +1,4 @@
+import { Location } from './location';
 import { firestore } from 'firebase';
 import { RaceStatus } from './race-status.enum';
 
@@ -10,4 +11,5 @@ export class Race {
     raceUrl: string;
     resultUrl: string;
     status: RaceStatus;
+    location: Location;
 }

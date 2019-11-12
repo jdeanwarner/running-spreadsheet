@@ -7,6 +7,7 @@ import { ActivityType } from './activities/activity-type';
 import { RunType } from './activities/run-type';
 import { Race } from './race';
 import { Season } from './season';
+import { State } from './state.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -103,5 +104,20 @@ export class ActivityService {
 
   getScheduledActivities(seasonId: string): Observable<Activity[]> {
     return this.db.collection('season').doc(seasonId).collection<Activity>('scheduledActivity').valueChanges();
+  }
+
+  getCompletedStates(): Observable<State[]> {
+    return this.db.collection<Race>('race', ref =>
+      ref.where('distance', '>=', 26.2)
+    ).snapshotChanges()
+    .pipe(
+      map((actions: DocumentChangeAction<Race>[]) => {
+        return actions.map((a: DocumentChangeAction<Race>) => {
+          const data: Race = a.payload.doc.data();
+          data.id = a.payload.doc.id;
+          return data;
+        }).map((race: Race) => race.location.state);
+      })
+    );
   }
 }
