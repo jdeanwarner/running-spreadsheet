@@ -18,11 +18,10 @@ export class FiftyStatesComponent implements OnInit {
   statesArray: StateDisplay[] = [];
 
   constructor() {
-
+    Object.keys(State).forEach(key => this.statesEntities[key] = {key: key, value: State[key], completed: false});
   }
 
   ngOnInit() {
-    Object.keys(State).forEach(key => this.statesEntities[key] = {key: key, value: State[key], completed: false});
   }
 }
 
