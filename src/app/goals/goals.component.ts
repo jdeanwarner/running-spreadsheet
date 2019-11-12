@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import * as fromStore from './store';
+import * as fromRoot from '../store';
 import { Store } from '@ngrx/store';
 import { State } from '../shared/state.enum';
 
@@ -13,8 +13,8 @@ export class GoalsComponent implements OnInit {
 
   completedStates$: Observable<State[]>;
 
-  constructor(private store: Store<fromStore.GoalState>) {
-    this.completedStates$ = this.store.select(fromStore.getStatesCompletedDistinct);
+  constructor(private store: Store<fromRoot.State>) {
+    this.completedStates$ = this.store.select(fromRoot.getStatesCompleted);
   }
 
   ngOnInit() {
