@@ -107,16 +107,16 @@ export class ActivityService {
   }
 
   getCompletedStates(): Observable<State[]> {
-    return this.db.collection<Race>('race', ref =>
+    console.log('calling get completed states');
+    return this.db.collection<Race>('races', ref =>
       ref.where('distance', '>=', 26.2)
     ).snapshotChanges()
     .pipe(
       map((actions: DocumentChangeAction<Race>[]) => {
-        return actions.map((a: DocumentChangeAction<Race>) => {
-          const data: Race = a.payload.doc.data();
-          data.id = a.payload.doc.id;
-          return data;
-        }).map((race: Race) => race.location.state);
+        return actions
+        .map((a: DocumentChangeAction<Race>) => a.payload.doc.data())
+        .filter((race: Race) => race.location)
+        .map((race: Race) => race.location.state);
       })
     );
   }

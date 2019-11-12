@@ -7,5 +7,5 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <app-fifty-states fxFlex="20"></app-fifty-states>
+  <app-fifty-states [completedStates]="completedStates$ | async" fxFlex="20"></app-fifty-states>
 </div>

@@ -24,10 +24,17 @@ export class GoalEffects {
       ofType(ROUTER_NAVIGATION),
       filter((routeChangeAction: RouterNavigationAction<any>) => routeChangeAction.payload.event.url.includes('goals')),
       switchMap(() => {
+        console.log('here');
         return this.activityService.getCompletedStates()
           .pipe(
-            map((states: State[]) => (new goalActions.LoadStatesCompletedSuccess(states))),
-            catchError(error => of(new goalActions.LoadStatesCompletedFail(error)))
+            map((states: State[]) => {
+              console.log(states);
+              return (new goalActions.LoadStatesCompletedSuccess(states));
+            }),
+            catchError(error => {
+              console.log(error);
+              return of(new goalActions.LoadStatesCompletedFail(error));
+            })
           );
         }
       )

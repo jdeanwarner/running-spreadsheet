@@ -9,4 +9,4 @@ export const reducers: ActionReducerMap<GoalState> = {
     goal : fromGoal.reducer,
 };
 
-export const getRaceState = createFeatureSelector<GoalState>('goals');
+export const getGoalState = createFeatureSelector<GoalState>('goals');
