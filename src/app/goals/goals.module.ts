@@ -9,7 +9,7 @@ import { PrsComponent } from './prs/prs.component';
 import { FiftyStatesComponent } from './fifty-states/fifty-states.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers, effects } from '../store';
+import { reducers, effects } from './store';
 
 @NgModule({
   declarations: [GoalsComponent, YearGoalsComponent, MonthlyGoalsComponent, PrsComponent, FiftyStatesComponent],
@@ -17,8 +17,7 @@ import { reducers, effects } from '../store';
     CommonModule,
     SharedModule,
     GoalsRoutingModule,
-    // StoreModule.forFeature('goals', reducers),
-    StoreModule.forFeature('races', reducers),
+    StoreModule.forFeature('goals', reducers),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature(effects)
   ]
