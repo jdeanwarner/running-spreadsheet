@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-content>
+    <div class="state" *ngFor="let state of statesArray" >
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div class="mat-h4" fxFlex="80">{{ state.value }}</div>
+        <div fxFlex="20"><i class="material-icons">done_outline</i></div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

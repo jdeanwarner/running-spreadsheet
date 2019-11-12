@@ -1,3 +1,11 @@
-<p>
-  <app-year-goals></app-year-goals>
-</p>
+<div fxLayout="row wrap" fxLayoutAlign="space-around start">
+  <div fxFlex="78">
+    <mat-card>
+      <mat-card-content>
+        <app-year-goals></app-year-goals>
+        <app-monthly-goals></app-monthly-goals>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <app-fifty-states fxFlex="20"></app-fifty-states>
+</div>
