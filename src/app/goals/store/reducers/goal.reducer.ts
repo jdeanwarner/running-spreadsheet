@@ -1,16 +1,17 @@
 import * as fromGoal from '../actions/goal.actions';
 import { State } from 'src/app/shared/state.enum';
+import { Goal } from '../../goal';
 
 export interface GoalState {
-    states: {
-        data: State[];
+    goals: {
+        data: Goal[];
         loaded: boolean;
         loading: boolean;
     };
 }
 
 export const initialState: GoalState = {
-    states: {
+    goals: {
         data: [],
         loaded: false,
         loading: false
@@ -20,25 +21,25 @@ export const initialState: GoalState = {
 export function reducer(state: GoalState = initialState, action: fromGoal.GoalActions):
     GoalState {
     switch (action.type) {
-        case fromGoal.LOAD_STATES_COMPLETED: {
-            state.states.loading = true;
-            state.states.loaded = false;
+        case fromGoal.LOAD_YEAR_GOALS: {
+            state.goals.loading = true;
+            state.goals.loaded = false;
             return state;
         }
-        case fromGoal.LOAD_STATES_COMPLETED_SUCCESS: {
+        case fromGoal.LOAD_YEAR_GOALS_SUCCESS: {
             const states = action.playload;
             return {
                 ... state,
-                states: {
+                goals: {
                     loading: false,
                     loaded: true,
                     data : states
                 }
             };
         }
-        case fromGoal.LOAD_STATES_COMPLETED_FAIL: {
-            state.states.loading = false;
-            state.states.loaded = false;
+        case fromGoal.LOAD_YEAR_GOALS_FAIL: {
+            state.goals.loading = false;
+            state.goals.loaded = false;
             return state;
         }
         default:
@@ -46,6 +47,6 @@ export function reducer(state: GoalState = initialState, action: fromGoal.GoalAc
     }
 }
 
-export const getStatesCompletedLoading = (state: GoalState) => state.states.loading;
-export const getStatesCompletedLoaded = (state: GoalState) => state.states.loaded;
-export const getStatesCompletedData = (state: GoalState) => state.states.data;
+export const getGoalsLoading = (state: GoalState) => state.goals.loading;
+export const getGoalsLoaded = (state: GoalState) => state.goals.loaded;
+export const getGoalsData = (state: GoalState) => state.goals.data;

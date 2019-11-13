@@ -1,3 +1,6 @@
+import { Goal } from './../goals/goal';
+import { Month } from './month.enum';
+import { YearGoal } from './../goals/year-goal';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -8,6 +11,7 @@ import { RunType } from './activities/run-type';
 import { Race } from './race';
 import { Season } from './season';
 import { State } from './state.enum';
+import { MonthGoal } from '../goals/month-goal';
 
 @Injectable({
   providedIn: 'root'
@@ -106,17 +110,17 @@ export class ActivityService {
     return this.db.collection('season').doc(seasonId).collection<Activity>('scheduledActivity').valueChanges();
   }
 
-  getCompletedStates(): Observable<State[]> {
-    console.log('calling get completed states');
-    return this.db.collection<Race>('races', ref =>
-      ref.where('distance', '>=', 26.2)
+  getGoals(year: number): Observable<Goal[]> {
+    return this.db.collection<Goal>('goals', ref =>
+      ref.where('year', '==', 2019)
     ).snapshotChanges()
     .pipe(
-      map((actions: DocumentChangeAction<Race>[]) => {
-        return actions
-        .map((a: DocumentChangeAction<Race>) => a.payload.doc.data())
-        .filter((race: Race) => race.location)
-        .map((race: Race) => race.location.state);
+      map((actions: DocumentChangeAction<Goal>[]) => {
+        return actions.map((a: DocumentChangeAction<Goal>) => {
+          const data: Goal = a.payload.doc.data();
+          data.id = a.payload.doc.id;
+          return data;
+        });
       })
     );
   }

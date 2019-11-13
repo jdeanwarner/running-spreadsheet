@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { GoalType } from './../goal-type.enum';
+import { YearGoal } from './../year-goal';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-year-goals',
@@ -6,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./year-goals.component.css']
 })
 export class YearGoalsComponent implements OnInit {
+
+  @Input() yearGoals: { [type: string]: YearGoal };
+
+  goalTypes = GoalType;
 
   constructor() { }
 

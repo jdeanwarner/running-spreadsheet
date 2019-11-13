@@ -1,27 +1,26 @@
+import { YearGoal } from './../../year-goal';
 import { Action } from '@ngrx/store';
-import { State } from 'src/app/shared/state.enum';
+import { Goal } from '../../goal';
 
-export const LOAD_STATES_COMPLETED = '[Goal] Load States Completed';
-export const LOAD_STATES_COMPLETED_SUCCESS = '[Goal] Load States Completed Success';
-export const LOAD_STATES_COMPLETED_FAIL = '[Goal] Load States Completed Fail';
+export const LOAD_YEAR_GOALS = '[Goal] Load Year Goals Completed';
+export const LOAD_YEAR_GOALS_SUCCESS = '[Goal] Load Year Goals Completed Success';
+export const LOAD_YEAR_GOALS_FAIL = '[Goal] Load Year Goals Completed Fail';
 
-
-export class LoadStatesCompleted implements Action {
-    readonly type = LOAD_STATES_COMPLETED;
+export class LoadYearGoals implements Action {
+    readonly type = LOAD_YEAR_GOALS;
 }
 
-export class LoadStatesCompletedSuccess implements Action {
-    readonly type = LOAD_STATES_COMPLETED_SUCCESS;
-    constructor(public playload: State[]) {}
+export class LoadYearGoalsSuccess implements Action {
+    readonly type = LOAD_YEAR_GOALS_SUCCESS;
+    constructor(public playload: Goal[]) {}
 }
 
-export class LoadStatesCompletedFail implements Action {
-    readonly type = LOAD_STATES_COMPLETED_FAIL;
+export class LoadYearGoalsFail implements Action {
+    readonly type = LOAD_YEAR_GOALS_FAIL;
     constructor(public playload: any) {}
 }
 
-
 export type GoalActions =
-    LoadStatesCompleted |
-    LoadStatesCompletedSuccess |
-    LoadStatesCompletedFail;
+    LoadYearGoals |
+    LoadYearGoalsSuccess |
+    LoadYearGoalsFail;

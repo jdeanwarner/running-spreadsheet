@@ -1,3 +1,6 @@
+import { GoalType } from './../../goal-type.enum';
+import { YearGoal } from './../../year-goal';
+import { MonthGoal } from './../../month-goal';
 import { createSelector } from '@ngrx/store';
 
 import * as fromFeature from '../reducers';
@@ -8,15 +11,29 @@ export const getGoalsState = createSelector(
     (state: fromFeature.GoalState) => state.goal
 );
 
-export const getStatesCompletedData = createSelector(getGoalsState, fromRace.getStatesCompletedData);
+export const getGoalsData = createSelector(getGoalsState, fromRace.getGoalsData);
 
-export const getStatesCompletedDistinct = createSelector(
-    getStatesCompletedData,
+export const getYearGoals = createSelector(
+    getGoalsData,
     (data) => {
-        console.log(data);
-        return data.filter((x, i, a) => a.indexOf(x) === i);
+        return data
+            .filter((goal) => (<YearGoal>goal).year !== undefined &&  (<MonthGoal>goal).month === undefined)
+            .reduce(
+                (map: { [type: string]: YearGoal }, goal) => {
+                    return {
+                        ... map,
+                        [goal.type]: <YearGoal>goal
+                    };
+                }, {});
     }
 );
 
-export const getStatesCompletedLoaded = createSelector(getGoalsState, fromRace.getStatesCompletedLoaded);
-export const getStatesCompletedLoading = createSelector(getGoalsState, fromRace.getStatesCompletedLoading);
+export const getMonthGoals = createSelector(
+    getGoalsData,
+    (data) => {
+        return data.filter((goal) => (<MonthGoal>goal).month !== undefined);
+    }
+);
+
+export const getGoalsLoaded = createSelector(getGoalsState, fromRace.getGoalsLoaded);
+export const getGoalsLoading = createSelector(getGoalsState, fromRace.getGoalsLoading);

@@ -2,7 +2,7 @@
   <div fxFlex="58">
     <mat-card>
       <mat-card-content>
-        <app-year-goals></app-year-goals>
+        <app-year-goals [yearGoals]="yearGoals$ | async"></app-year-goals>
         <app-monthly-goals></app-monthly-goals>
       </mat-card-content>
     </mat-card>
