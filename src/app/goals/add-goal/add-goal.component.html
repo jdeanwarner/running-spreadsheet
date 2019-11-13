@@ -1,3 +1,51 @@
-<p>
-  add-goal works!
-</p>
+<h2 mat-dialog-title class="mat-h2">
+  Add Goal
+  <button mat-icon-button style="float: right" (click)="delete()">
+    <i class="material-icons">delete_forever</i>
+  </button>
+</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <div fxLayout="row wrap" fxLayoutAlign="start center" >
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Goal Period" formControlName="goalPeriod">
+          <mat-option *ngFor="let period of goalPeriodArray" [value]="period.key">
+            {{period.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" >
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Goal Type" formControlName="type">
+          <mat-option *ngFor="let type of goalTypeArray" [value]="type.key">
+            {{type.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" *ngIf="formGroup.get('goalPeriod').value === GOAL_PERIOD.MONTH">
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Month" formControlName="month">
+          <mat-option *ngFor="let month of monthArray" [value]="month.key">
+            {{month.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" >
+      <mat-form-field fxFlex="100">
+        <input matInput placeholder="Year" formControlName="year">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" >
+      <mat-form-field fxFlex="100">
+        <input matInput placeholder="Value" formControlName="value">
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row wrap" fxLayoutAlign="end center">
+  <button mat-dialog-close class="padding-top-10px align-right" mat-button color="primary" (click)="save()">Save</button>
+  <button mat-dialog-close class="padding-top-10px align-right" mat-button color="primary" (click)="close()">Close</button>
+</mat-dialog-actions>
