@@ -1,3 +1,40 @@
-<p>
-  prs works!
-</p>
+<mat-card>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="space-around center" class="pr">
+        <div class="mat-h4" fxFlex="80">5K</div>
+        <div fxFlex="20" >
+          <span *ngIf="pr5K">{{ pr5K.result | resultTime }}</span>
+          <span *ngIf="!pr5K">--</span>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center" class="pr">
+        <div class="mat-h4" fxFlex="80">10K</div>
+        <div fxFlex="20" >
+          <span *ngIf="pr10K">{{ pr10K.result | resultTime }}</span>
+          <span *ngIf="!pr10K">--</span>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center" class="pr">
+        <div class="mat-h4" fxFlex="80">15K</div>
+        <div fxFlex="20" >
+          <span *ngIf="pr15K">{{ pr15K.result | resultTime }}</span>
+          <span *ngIf="!pr15K">--</span>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center" class="pr">
+        <div class="mat-h4" fxFlex="80">Half Marathon</div>
+        <div fxFlex="20" >
+          <span *ngIf="prHalfMarathon">{{ prHalfMarathon.result | resultTime }}</span>
+          <span *ngIf="!prHalfMarathon">--</span>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div class="mat-h4" fxFlex="80">Marathon</div>
+        <div fxFlex="20" >
+          <span *ngIf="prMarathon">{{ prMarathon.result | resultTime }}</span>
+          <span *ngIf="!prMarathon">--</span>
+        </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+

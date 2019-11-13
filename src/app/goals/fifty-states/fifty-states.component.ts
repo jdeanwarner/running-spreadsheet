@@ -10,8 +10,10 @@ import { State } from 'src/app/shared/state.enum';
 export class FiftyStatesComponent implements OnInit {
 
   @Input() set completedStates(races: Race[]) {
-    races.forEach(race => this.statesEntities[race.location.state].completed = true);
-    this.statesArray = Object.values(this.statesEntities);
+    if (races) {
+      races.forEach(race => this.statesEntities[race.location.state].completed = true);
+      this.statesArray = Object.values(this.statesEntities);
+    }
   }
 
   statesEntities: { [key: string]: StateDisplay } = {};

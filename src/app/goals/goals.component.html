@@ -1,11 +1,28 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-around start">
-  <div fxFlex="78">
+  <div fxFlex="58">
     <mat-card>
       <mat-card-content>
         <app-year-goals></app-year-goals>
         <app-monthly-goals></app-monthly-goals>
       </mat-card-content>
     </mat-card>
+  </div>
+  <div fxFlex="20">
+    <div>
+      <app-prs 
+        [pr5K]="fiveKPR$ | async"
+        [pr10K]="tenKPR$ | async"
+        [pr15K]="fifteenKPR$ | async"
+        [prHalfMarathon]="halfMarathonPR$ | async"
+        [prMarathon]="marathonPR$ | async"></app-prs>
+    </div>
+    <div style="margin-top: 10px;">
+      <app-distance 
+        [fiftyKs]="fiftyKs$ | async"
+        [fiftyMs]="fiftyMs$ | async"
+        [hundredKs]="hundredKs$ | async"
+        [hundredMs]="hundredMs$ | async"></app-distance>
+    </div>
   </div>
   <app-fifty-states [completedStates]="completedStates$ | async" fxFlex="20"></app-fifty-states>
 </div>

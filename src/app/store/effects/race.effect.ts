@@ -20,7 +20,10 @@ export class RaceEffects {
 
   @Effect()
   loadRacesOnRouteChange$: Observable<Action> = this.actions$.pipe(
-      ofType(raceActions.LOAD_RACES),
+      ofType(ROUTER_NAVIGATION),
+      filter((routeChangeAction: RouterNavigationAction<any>) =>
+        routeChangeAction.payload.event.url.includes('goals') ||
+        routeChangeAction.payload.event.url.includes('races')),
       switchMap(() => {
         return this.activityService.getRaces()
           .pipe(
