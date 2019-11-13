@@ -4,6 +4,10 @@
       <mat-card-content>
         <app-year-goals [yearGoals]="yearGoals$ | async"></app-year-goals>
         <app-monthly-goals></app-monthly-goals>
+        <div fxLayout="row" fxLayoutAlign="end center" >
+          <span class="fill-space"></span>
+          <button mat-button color="primary" (click)="addGoal()">Add Goal</button>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>

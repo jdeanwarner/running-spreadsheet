@@ -12,9 +12,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects } from './store';
 import * as fromRoot from '../store';
 import { DistanceComponent } from './distance/distance.component';
+import { AddGoalComponent } from './add-goal/add-goal.component';
 
 @NgModule({
-  declarations: [GoalsComponent, YearGoalsComponent, MonthlyGoalsComponent, PrsComponent, FiftyStatesComponent, DistanceComponent],
+  declarations: [
+    GoalsComponent,
+    YearGoalsComponent,
+    MonthlyGoalsComponent,
+    PrsComponent,
+    FiftyStatesComponent,
+    DistanceComponent,
+    AddGoalComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -24,6 +32,9 @@ import { DistanceComponent } from './distance/distance.component';
     EffectsModule.forRoot([]),
     EffectsModule.forFeature(effects),
     EffectsModule.forFeature(fromRoot.effects)
+  ],
+  entryComponents: [
+    AddGoalComponent
   ]
 })
 export class GoalsModule { }

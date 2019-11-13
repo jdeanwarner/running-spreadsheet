@@ -1,3 +1,4 @@
+import { AddGoalComponent } from './add-goal/add-goal.component';
 import { getYearGoals } from './store/selectors/goal.selectors';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +9,8 @@ import { State } from '../shared/state.enum';
 import { Race } from '../shared/race';
 import { YearGoal } from './year-goal';
 import { MonthGoal } from './month-goal';
+import { MatDialog } from '@angular/material';
+import { Goal } from './goal';
 
 @Component({
   selector: 'app-goals',
@@ -32,7 +35,7 @@ export class GoalsComponent implements OnInit {
   yearGoals$: Observable<{ [type: string]: YearGoal }>;
   monthGoals$: Observable<MonthGoal[]>;
 
-  constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromRoot.State>) {
+  constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromRoot.State>, public dialog: MatDialog) {
     this.completedStates$ = this.rootStore.select(fromRoot.getStatesCompleted);
 
     this.fiveKPR$ = this.rootStore.select(fromRoot.get5kPR);
@@ -52,6 +55,30 @@ export class GoalsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new fromStore.LoadYearGoals());
+  }
+
+  addGoal() {
+    const dialogRef = this.dialog.open(AddGoalComponent, {
+      minWidth: '20%',
+      maxWidth: '99%',
+      data : {
+
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: Goal | string) => {
+      if (result) {
+        if (typeof result === 'string') {
+          // this.store.dispatch(new fromStore.DeleteActivity(result));
+        } else {
+          if (result.id) {
+            // this.store.dispatch(new fromStore.UpdateActivity(result));
+          } else {
+            // this.store.dispatch(new fromStore.InsertActivity(result));
+          }
+        }
+      }
+    });
   }
 
 }
