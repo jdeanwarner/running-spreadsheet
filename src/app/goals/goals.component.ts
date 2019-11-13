@@ -11,6 +11,8 @@ import { YearGoal } from './year-goal';
 import { MonthGoal } from './month-goal';
 import { MatDialog } from '@angular/material';
 import { Goal } from './goal';
+import { RouterReducerState } from '@ngrx/router-store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-goals',
@@ -32,10 +34,12 @@ export class GoalsComponent implements OnInit {
   hundredKs$: Observable<Race[]>;
   hundredMs$: Observable<Race[]>;
 
+  params$: Observable<RouterReducerState<fromRoot.RouterStateUrl>>;
   yearGoals$: Observable<{ [type: string]: YearGoal }>;
   monthGoals$: Observable<MonthGoal[]>;
 
-  constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromRoot.State>, public dialog: MatDialog) {
+  constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromRoot.State>,
+    public dialog: MatDialog, private router: Router) {
     this.completedStates$ = this.rootStore.select(fromRoot.getStatesCompleted);
 
     this.fiveKPR$ = this.rootStore.select(fromRoot.get5kPR);
@@ -79,6 +83,10 @@ export class GoalsComponent implements OnInit {
         }
       }
     });
+  }
+
+  changeYear(year) {
+    this.router.navigate([`/goals/${year}` ]);
   }
 
 }

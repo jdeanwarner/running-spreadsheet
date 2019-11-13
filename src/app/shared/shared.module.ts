@@ -1,3 +1,4 @@
+import { YearSelectorComponent } from './year-selector/year-selector.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -22,7 +23,8 @@ import { LocationPickerComponent } from './location-picker/location-picker.compo
     RunTypePipe,
     ResultTimePipe,
     TimestampDatePickerComponent,
-    LocationPickerComponent
+    LocationPickerComponent,
+    YearSelectorComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -75,7 +77,8 @@ import { LocationPickerComponent } from './location-picker/location-picker.compo
     ResultTimePipe,
     MatMenuModule,
     TimestampDatePickerComponent,
-    LocationPickerComponent
+    LocationPickerComponent,
+    YearSelectorComponent
   ]
 })
 export class SharedModule { }

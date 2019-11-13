@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import * as YearActions from '../../store/actions/year.action';
 
 
 @Component({

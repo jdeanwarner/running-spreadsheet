@@ -5,7 +5,7 @@ import { GoalsComponent } from './goals.component';
 
 const appRoutes: Routes = [
   {
-    path: '',
+    path: ':year',
     component: GoalsComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
