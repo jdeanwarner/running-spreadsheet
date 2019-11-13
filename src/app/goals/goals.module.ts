@@ -20,8 +20,10 @@ import { DistanceComponent } from './distance/distance.component';
     SharedModule,
     GoalsRoutingModule,
     StoreModule.forFeature('goals', reducers),
+    StoreModule.forFeature('races', fromRoot.reducers),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
+    EffectsModule.forFeature(fromRoot.effects)
   ]
 })
 export class GoalsModule { }
