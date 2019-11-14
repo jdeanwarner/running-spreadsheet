@@ -20,7 +20,7 @@ import { FormStyle } from '@angular/common';
 export class RunLogComponent implements OnInit {
 
   params$: Observable<RouterReducerState<fromRoot.RouterStateUrl>>;
-  activities$: Observable<Activity[]>;
+  activityMonthMap$: Observable<{[month: string]: Activity[]}>;
   activityTypes$: Observable<ActivityType[]>;
   runTypes$: Observable<RunType[]>;
 
@@ -33,7 +33,7 @@ export class RunLogComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private store: Store<fromStore.LogState>,
     private rootStore: Store<fromRoot.State>, private router: Router) {
-    this.activities$ = store.select(fromStore.getAllActivities);
+    this.activityMonthMap$ = store.select(fromStore.getActivitiesMonthMap);
     this.activityTypes$ = store.select(fromStore.getActivityTypes);
     this.runTypes$ = store.select(fromStore.getRunTypes);
 

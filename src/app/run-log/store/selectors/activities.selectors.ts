@@ -1,3 +1,4 @@
+import { Month } from 'src/app/shared/month.enum';
 import { Activity } from './../../../shared/activities/activity';
 import { createSelector } from '@ngrx/store';
 
@@ -27,6 +28,19 @@ export const getAllActivities = createSelector(
     getActivitiesEntites,
     (entities) => {
         return Object.keys(entities).map(id => entities[id]);
+    }
+);
+
+export const getActivitiesMonthMap = createSelector(
+    getAllActivities,
+    (data: Activity[]) => {
+        const entities: {[month: string]: Activity[]} = {};
+        const months = Object.values(Month);
+
+        data.forEach((activity: Activity) => entities[months[activity.date.toDate().getMonth()].valueOf()] ?
+                entities[months[activity.date.toDate().getMonth()].valueOf()].push(activity) :
+                entities[months[activity.date.toDate().getMonth()].valueOf()] = [activity]);
+        return entities;
     }
 );
 

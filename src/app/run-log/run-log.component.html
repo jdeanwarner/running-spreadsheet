@@ -17,10 +17,11 @@
 </div>
 <app-year 
   [year]="(params$ | async).state.params['year']"
-  [activities]="activities$ | async" 
+  [activityMonthMap]="activityMonthMap$ | async"
   [activityTypes]="activityTypes$ | async"
   [runTypes]="runTypes$ | async"
-  (daySelected)="daySelected($event)"></app-year>
+  (daySelected)="daySelected($event)"
+  (changeYear)="changeYear($event)"></app-year>
 
 <button color="primary" mat-fab class="fab-bottom" (click)="addActivity()">
   <i class="material-icons">add</i>
