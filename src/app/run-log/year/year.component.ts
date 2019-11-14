@@ -15,7 +15,7 @@ export class YearComponent implements OnInit {
   @Input() activityTypes: ActivityType[];
   @Input() activityMonthMap: {[month: string]: Activity[]};
   @Input() runTypes: RunType[];
-  @Input() year: number;
+  @Input() year: string;
 
   @Output() daySelected: EventEmitter<Run> = new EventEmitter<Run>();
   @Output() changeYear: EventEmitter<number> = new EventEmitter<number>();
@@ -32,13 +32,13 @@ export class YearComponent implements OnInit {
   }
 
   incrementMonth(i: number) {
-
+    let year = parseInt(this.year, 10);
     if (this.mobileMonth === 11 && i === 1) {
       this.mobileMonth = 0;
-      this.changeYear.emit(this.year += 1);
+      this.changeYear.emit(year += 1);
     } else if (this.mobileMonth === 0 && i === -1) {
       this.mobileMonth = 11;
-      this.changeYear.emit(this.year -= 1);
+      this.changeYear.emit(year -= 1);
     } else {
       this.mobileMonth += i;
       this.mobileMonthToShow = this.activityMonthMap[this.getMonthName(this.mobileMonth)];
