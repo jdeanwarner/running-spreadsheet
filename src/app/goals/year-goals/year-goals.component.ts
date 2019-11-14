@@ -10,12 +10,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class YearGoalsComponent implements OnInit {
 
   @Input() yearGoals: { [type: string]: YearGoal };
+  @Input() yearMiles: number;
 
   goalTypes = GoalType;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getPercentComplete(val, goal) {
+    return val / goal * 100;
   }
 
 }

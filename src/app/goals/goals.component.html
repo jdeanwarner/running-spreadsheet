@@ -6,7 +6,10 @@
           {{ params$ | async | json }}
           <!-- <app-year-selector [year]="(params$ | async).state.params['year']" (change)="changeYear($event)"></app-year-selector> -->
         </div>
-        <app-year-goals [yearGoals]="yearGoals$ | async"></app-year-goals>
+        <app-year-goals 
+          [yearGoals]="yearGoals$ | async"
+          [yearMiles]="yearMiles$ | async">
+        </app-year-goals>
         <app-monthly-goals></app-monthly-goals>
         <div fxLayout="row" fxLayoutAlign="end center" >
           <span class="fill-space"></span>

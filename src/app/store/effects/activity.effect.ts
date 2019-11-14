@@ -46,7 +46,9 @@ export class ActivityEffects {
   @Effect()
   loadActivitiesOnRouteChange$: Observable<Action> = this.actions$.pipe(
       ofType(ROUTER_NAVIGATION),
-      filter((routeChangeAction: RouterNavigationAction<any>) => routeChangeAction.payload.event.url.includes('log/')),
+      filter((routeChangeAction: RouterNavigationAction<any>) =>
+        routeChangeAction.payload.event.url.includes('log/') ||
+        routeChangeAction.payload.event.url.includes('goals')),
       withLatestFrom(
         this.store.select(getRouterState),
         (action, router) => parseInt(router.state.params.year, 10)

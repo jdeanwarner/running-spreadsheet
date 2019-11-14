@@ -36,6 +36,8 @@ export class GoalsComponent implements OnInit {
 
   params$: Observable<RouterReducerState<fromRoot.RouterStateUrl>>;
   yearGoals$: Observable<{ [type: string]: YearGoal }>;
+  yearMiles$: Observable<number>;
+
   monthGoals$: Observable<MonthGoal[]>;
 
   constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromRoot.State>,
@@ -54,6 +56,8 @@ export class GoalsComponent implements OnInit {
     this.hundredMs$ = this.rootStore.select(fromRoot.get100Milers);
 
     this.yearGoals$ = this.store.select(fromStore.getYearGoals);
+    this.yearMiles$ = this.rootStore.select(fromRoot.getTotalRunningMiles);
+
     this.monthGoals$ = <Observable<MonthGoal[]>>this.store.select(fromStore.getMonthGoals);
   }
 
