@@ -1,9 +1,9 @@
+import { getRouterState } from './../reducers/index';
 import { Month } from 'src/app/shared/month.enum';
-import { Activity } from './../../../shared/activities/activity';
+import { Activity } from '../../shared/activities/activity';
 import { createSelector } from '@ngrx/store';
 
-import * as fromRoot from '../../../store';
-import * as fromFeature from '../reducers';
+import * as fromFeature from '../../run-log/store/reducers';
 import * as fromActivity from '../reducers/activity.reducer';
 import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 import { Run } from 'src/app/shared/activities/run';
@@ -18,7 +18,7 @@ export const getActivitiesEntites = createSelector(getActivityState, fromActivit
 
 export const getSelectedActivity = createSelector(
     getActivitiesEntites,
-    fromRoot.getRouterState,
+    getRouterState,
     (entities, router): Activity => {
         return router.state && entities[router.state.params.activityId];
     }

@@ -1,6 +1,6 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as fromActivity from './activity.reducer';
+import * as fromActivity from '../../../store/reducers/activity.reducer';
 import * as fromRunType from './run-type.reducer';
 import * as fromYear from './year.reducer';
 

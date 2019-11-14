@@ -1,17 +1,16 @@
-import { DELETE_ACTIVITY } from './../actions/activity.action';
-import { ActivityService } from '../../../shared/activity.service';
+import { getRouterState } from './../reducers/index';
+import { ActivityService } from '../../shared/activity.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, catchError, withLatestFrom, switchMap, filter } from 'rxjs/operators';
 import { Action, Store } from '@ngrx/store';
 import * as activityActions from '../actions/activity.action';
-import * as fromRoot from '../../../store';
 import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
-import { YearState } from '../reducers/year.reducer';
 import { ROUTER_NAVIGATION, RouterNavigationAction } from '@ngrx/router-store';
 import { DocumentReference } from '@angular/fire/firestore';
+import { State } from '../reducers/index';
 
 @Injectable()
 export class ActivityEffects {
@@ -19,10 +18,10 @@ export class ActivityEffects {
   constructor(
     private actions$: Actions,
     private activityService: ActivityService,
-    private store: Store<fromRoot.State>
+    private store: Store<State>
   ) {}
 
-  private getYear: Observable<number> = this.store.select(fromRoot.getRouterState).pipe(
+  private getYear: Observable<number> = this.store.select(getRouterState).pipe(
     map((router) => parseInt(router.state.params.year, 10))
   );
 
@@ -49,7 +48,7 @@ export class ActivityEffects {
       ofType(ROUTER_NAVIGATION),
       filter((routeChangeAction: RouterNavigationAction<any>) => routeChangeAction.payload.event.url.includes('log/')),
       withLatestFrom(
-        this.store.select(fromRoot.getRouterState),
+        this.store.select(getRouterState),
         (action, router) => parseInt(router.state.params.year, 10)
       ),
       switchMap((year: number) => {

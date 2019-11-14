@@ -83,5 +83,5 @@ export const getStatesCompleted = createSelector(
     }
 );
 
-export const getActivitiesLoading = createSelector(getRacesState, fromRace.getRacesLoading);
-export const getActivitiesLoaded = createSelector(getRacesState, fromRace.getRacesLoaded);
+export const getRacesLoading = createSelector(getRacesState, fromRace.getRacesLoading);
+export const getRacesLoaded = createSelector(getRacesState, fromRace.getRacesLoaded);

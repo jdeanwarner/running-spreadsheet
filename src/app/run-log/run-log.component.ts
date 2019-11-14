@@ -8,7 +8,7 @@ import { ActivityType } from '../shared/activities/activity-type';
 import { RunType } from '../shared/activities/run-type';
 import { Store } from '@ngrx/store';
 import * as fromStore from './store';
-import * as fromRoot from './../store';
+import * as fromRoot from '../store';
 import { RouterReducerState } from '@ngrx/router-store';
 import { FormStyle } from '@angular/common';
 
@@ -33,22 +33,22 @@ export class RunLogComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private store: Store<fromStore.LogState>,
     private rootStore: Store<fromRoot.State>, private router: Router) {
-    this.activityMonthMap$ = store.select(fromStore.getActivitiesMonthMap);
-    this.activityTypes$ = store.select(fromStore.getActivityTypes);
+    this.activityMonthMap$ = rootStore.select(fromRoot.getActivitiesMonthMap);
+    this.activityTypes$ = rootStore.select(fromRoot.getActivityTypes);
     this.runTypes$ = store.select(fromStore.getRunTypes);
 
-    this.totalMiles$ = store.select(fromStore.getTotalRunningMiles);
-    this.countHighEfforRuns$ = store.select(fromStore.getCountHighEffortRuns);
-    this.countCrossTraining$ = store.select(fromStore.getCountCrossTrainingActivities);
+    this.totalMiles$ = rootStore.select(fromRoot.getTotalRunningMiles);
+    this.countHighEfforRuns$ = rootStore.select(fromRoot.getCountHighEffortRuns);
+    this.countCrossTraining$ = rootStore.select(fromRoot.getCountCrossTrainingActivities);
 
-    this.runTypeMap$ = store.select(fromStore.getRunTypeMap);
-    this.crossTrainingMap$ = store.select(fromStore.getCrossTrainingMap);
+    this.runTypeMap$ = rootStore.select(fromRoot.getRunTypeMap);
+    this.crossTrainingMap$ = rootStore.select(fromRoot.getCrossTrainingMap);
 
     this.params$ = rootStore.select(fromRoot.getRouterState);
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new fromStore.LoadType());
+    this.rootStore.dispatch(new fromRoot.LoadType());
     this.store.dispatch(new fromStore.LoadRunType());
   }
 
@@ -78,12 +78,12 @@ export class RunLogComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: Activity | string) => {
       if (result) {
         if (typeof result === 'string') {
-          this.store.dispatch(new fromStore.DeleteActivity(result));
+          this.rootStore.dispatch(new fromRoot.DeleteActivity(result));
         } else if (result.activityType) {
           if (result.id) {
-            this.store.dispatch(new fromStore.UpdateActivity(result));
+            this.rootStore.dispatch(new fromRoot.UpdateActivity(result));
           } else {
-            this.store.dispatch(new fromStore.InsertActivity(result));
+            this.rootStore.dispatch(new fromRoot.InsertActivity(result));
           }
         }
       }
