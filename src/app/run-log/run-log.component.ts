@@ -27,6 +27,15 @@ export class RunLogComponent implements OnInit {
   countHighEfforRuns$: Observable<number>;
   countCrossTraining$: Observable<number>;
 
+  countWorkouts$: Observable<number>;
+  countLongRuns$: Observable<number>;
+  countRaces$: Observable<number>;
+
+  countYoga$: Observable<number>;
+  countBike$: Observable<number>;
+  countGym$: Observable<number>;
+  countKettlebell$: Observable<number>;
+
   constructor(public dialog: MatDialog, private store: Store<fromStore.LogState>,
     private rootStore: Store<fromRoot.State>, private router: Router) {
     this.activities$ = store.select(fromStore.getAllActivities);
@@ -36,6 +45,15 @@ export class RunLogComponent implements OnInit {
     this.totalMiles$ = store.select(fromStore.getTotalRunningMiles);
     this.countHighEfforRuns$ = store.select(fromStore.getCountHighEffortRuns);
     this.countCrossTraining$ = store.select(fromStore.getCountCrossTrainingActivities);
+
+    this.countWorkouts$ = store.select(fromStore.getCountWorkouts);
+    this.countLongRuns$ = store.select(fromStore.getCountLongRuns);
+    this.countRaces$ = store.select(fromStore.getCountRaces);
+
+    this.countYoga$ = store.select(fromStore.getCountYoga);
+    this.countBike$ = store.select(fromStore.getCountBike);
+    this.countGym$ = store.select(fromStore.getCountGym);
+    this.countKettlebell$ = store.select(fromStore.getCountKettlebell);
 
     this.params$ = rootStore.select(fromRoot.getRouterState);
   }

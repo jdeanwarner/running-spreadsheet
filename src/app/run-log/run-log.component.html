@@ -7,8 +7,17 @@
     [crossTraining]="countCrossTraining$ | async"
     [highEffortRuns]="countHighEfforRuns$ | async">
   </app-yearly-total>
-  <app-run-type-total [activities]="activities$ | async" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-run-type-total>
-  <app-cross-training-total [activities]="activities$ | async" fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"></app-cross-training-total>
+  <app-run-type-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"
+    [race]="countRaces$ | async"
+    [workout]="countWorkouts$ | async"
+    [longRun]="countLongRuns$ | async">
+  </app-run-type-total>
+  <app-cross-training-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"
+    [yoga]="countYoga$ | async"
+    [bike]="countBike$ | async"
+    [gym]="countGym$ | async"
+    [kettlebell]="countKettlebell$ | async">
+  </app-cross-training-total>
 </div>
 <app-year 
   [year]="(params$ | async).state.params['year']"
