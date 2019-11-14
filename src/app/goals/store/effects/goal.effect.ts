@@ -1,6 +1,4 @@
 import { Goal } from './../../goal';
-import { MonthGoal } from './../../month-goal';
-import { YearGoal } from './../../year-goal';
 import { ActivityService } from '../../../shared/activity.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -9,7 +7,6 @@ import { map, mergeMap, catchError, withLatestFrom } from 'rxjs/operators';
 import { Action, Store } from '@ngrx/store';
 import * as goalActions from '../actions/goal.actions';
 import * as fromRoot from '../../../store';
-import { Month } from 'src/app/shared/month.enum';
 
 @Injectable()
 export class GoalEffects {
@@ -29,14 +26,8 @@ export class GoalEffects {
       ),
       mergeMap((year: number) => this.activityService.getGoals(year)
           .pipe(
-            map((goals: Goal[]) => {
-              console.log(goals);
-              return (new goalActions.LoadYearGoalsSuccess(goals));
-            }),
-            catchError(error => {
-              console.log(error);
-              return of(new goalActions.LoadYearGoalsFail(error));
-            })
+            map((goals: Goal[]) => new goalActions.LoadYearGoalsSuccess(goals)),
+            catchError(error => of(new goalActions.LoadYearGoalsFail(error)))
           )
         )
     );
