@@ -29,6 +29,7 @@ import { AddGoalComponent } from './add-goal/add-goal.component';
     GoalsRoutingModule,
     StoreModule.forFeature('goals', reducers),
     StoreModule.forFeature('races', fromRoot.reducers),
+    StoreModule.forFeature('activity', fromRoot.reducers),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature(effects),
     EffectsModule.forFeature(fromRoot.effects)

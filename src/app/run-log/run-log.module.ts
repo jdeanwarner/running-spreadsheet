@@ -20,7 +20,8 @@ import { YogaComponent } from './yoga/yoga.component';
 import { AddYogaComponent } from './add-yoga/add-yoga.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, effects } from './store';
-import { YearSelectorComponent } from '../shared/year-selector/year-selector.component';
+import * as fromRoot from '../store';
+
 @NgModule({
   declarations: [
     RunLogComponent,
@@ -44,8 +45,11 @@ import { YearSelectorComponent } from '../shared/year-selector/year-selector.com
     SharedModule,
     RunLogRoutingModule,
     StoreModule.forFeature('log', reducers),
+    StoreModule.forFeature('races', fromRoot.reducers),
+    StoreModule.forFeature('activity', fromRoot.reducers),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
+    EffectsModule.forFeature(fromRoot.effects)
   ],
   exports: [
     RunLogComponent

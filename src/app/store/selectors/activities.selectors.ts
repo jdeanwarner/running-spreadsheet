@@ -9,12 +9,12 @@ import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 import { Run } from 'src/app/shared/activities/run';
 import { RunTypeEnum } from 'src/app/shared/activities/run-type.enum';
 
-export const getActivityState = createSelector(
+export const getActivitiesState = createSelector(
     fromFeature.getLogState,
     (state: fromFeature.LogState) => state.activity
 );
 
-export const getActivitiesEntites = createSelector(getActivityState, fromActivity.getActivitiesEntites);
+export const getActivitiesEntites = createSelector(getActivitiesState, fromActivity.getActivitiesEntites);
 
 export const getSelectedActivity = createSelector(
     getActivitiesEntites,
@@ -150,9 +150,9 @@ export const getCountCrossTrainingActivities = createSelector(
     }
 );
 
-export const getActivitiesLoading = createSelector(getActivityState, fromActivity.getActivitiesLoading);
-export const getActivitiesLoaded = createSelector(getActivityState, fromActivity.getActivitiesLoaded);
+export const getActivitiesLoading = createSelector(getActivitiesState, fromActivity.getActivitiesLoading);
+export const getActivitiesLoaded = createSelector(getActivitiesState, fromActivity.getActivitiesLoaded);
 
-export const getActivityTypes = createSelector(getActivityState, fromActivity.getActivityTypes);
-export const getActivityTypesLoading = createSelector(getActivityState, fromActivity.getActivityTypesLoading);
-export const getActivityTypesLoaded = createSelector(getActivityState, fromActivity.getActivityTypesLoaded);
+export const getActivityTypes = createSelector(getActivitiesState, fromActivity.getActivityTypes);
+export const getActivityTypesLoading = createSelector(getActivitiesState, fromActivity.getActivityTypesLoading);
+export const getActivityTypesLoaded = createSelector(getActivitiesState, fromActivity.getActivityTypesLoaded);
