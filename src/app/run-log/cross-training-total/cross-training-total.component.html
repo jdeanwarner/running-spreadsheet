@@ -1,6 +1,6 @@
 <mat-card-title>Cross Training Totals</mat-card-title>
 <mat-card-content>
   <h3 class="mat-h3" *ngFor="let crossTrainingItem of crossTrainingMap | keyvalue">
-    {{ TYPE[crossTrainingItem.key] }}: {{ crossTrainingItem.value.length }}
+    {{ crossTrainingItem.key | activityType : activityTypes }}: {{ crossTrainingItem.value.length }}
   </h3>
 </mat-card-content>
