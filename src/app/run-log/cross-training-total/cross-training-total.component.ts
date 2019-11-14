@@ -9,10 +9,9 @@ import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 })
 export class CrossTrainingTotalComponent implements OnInit {
 
-  @Input() yoga: number;
-  @Input() bike: number;
-  @Input() gym: number;
-  @Input() kettlebell: number;
+  @Input() crossTrainingMap: {[type: string]: Activity[]};
+
+  TYPE = ActivityTypeEnum;
 
   constructor() { }
 

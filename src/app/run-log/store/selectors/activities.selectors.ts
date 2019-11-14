@@ -72,6 +72,20 @@ function getRunTypeCounts(data: Activity[], type: RunTypeEnum): number {
         .length;
 }
 
+export const getCrossTrainingMap = createSelector(
+    getAllActivities,
+    (data: Activity[]) => {
+        const entities: {[type: string]: Activity[]} = {};
+
+        data
+            .filter((activiy: Activity) => activiy.activityType !== ActivityTypeEnum.RUN)
+            .forEach((activiy: Activity) => entities[activiy.activityType] ?
+                entities[activiy.activityType].push(activiy) :
+                entities[activiy.activityType] = [activiy]);
+        return entities;
+    }
+);
+
 export const getCountYoga = createSelector(
     getAllActivities,
     (data: Activity[]) => getCrossTrainingCounts(data, ActivityTypeEnum.YOGA)

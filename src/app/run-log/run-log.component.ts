@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import * as fromStore from './store';
 import * as fromRoot from './../store';
 import { RouterReducerState } from '@ngrx/router-store';
+import { FormStyle } from '@angular/common';
 
 @Component({
   selector: 'app-run-log',
@@ -31,10 +32,7 @@ export class RunLogComponent implements OnInit {
   countLongRuns$: Observable<number>;
   countRaces$: Observable<number>;
 
-  countYoga$: Observable<number>;
-  countBike$: Observable<number>;
-  countGym$: Observable<number>;
-  countKettlebell$: Observable<number>;
+  crossTrainingMap$: Observable<{[type: string]: Activity[]}>;
 
   constructor(public dialog: MatDialog, private store: Store<fromStore.LogState>,
     private rootStore: Store<fromRoot.State>, private router: Router) {
@@ -49,11 +47,8 @@ export class RunLogComponent implements OnInit {
     this.countWorkouts$ = store.select(fromStore.getCountWorkouts);
     this.countLongRuns$ = store.select(fromStore.getCountLongRuns);
     this.countRaces$ = store.select(fromStore.getCountRaces);
-
-    this.countYoga$ = store.select(fromStore.getCountYoga);
-    this.countBike$ = store.select(fromStore.getCountBike);
-    this.countGym$ = store.select(fromStore.getCountGym);
-    this.countKettlebell$ = store.select(fromStore.getCountKettlebell);
+    
+    this.crossTrainingMap$ = store.select(fromStore.getCrossTrainingMap);
 
     this.params$ = rootStore.select(fromRoot.getRouterState);
   }
