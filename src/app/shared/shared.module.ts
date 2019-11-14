@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import {
   MatListModule, MatCardModule, MatDividerModule, MatButtonModule,
   MatDialogModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-  MatSelectModule, MatToolbarModule, MatSidenavModule, MatTableModule, MatIconModule, MatMenuModule } from '@angular/material';
+  MatSelectModule, MatToolbarModule, MatSidenavModule, MatTableModule, MatIconModule,
+  MatMenuModule, MatProgressBarModule } from '@angular/material';
 
 import { TimestampDatePipe } from './timestamp-date.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -44,7 +45,8 @@ import { LocationPickerComponent } from './location-picker/location-picker.compo
     MatSidenavModule,
     MatTableModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressBarModule
   ],
   providers: [
     TimestampDatePipe,
@@ -78,7 +80,8 @@ import { LocationPickerComponent } from './location-picker/location-picker.compo
     MatMenuModule,
     TimestampDatePickerComponent,
     LocationPickerComponent,
-    YearSelectorComponent
+    YearSelectorComponent,
+    MatProgressBarModule
   ]
 })
 export class SharedModule { }
