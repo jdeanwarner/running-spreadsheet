@@ -10,30 +10,9 @@ import { Run } from 'src/app/shared/activities/run';
 })
 export class YearlyTotalComponent implements OnInit {
 
-  @Input() set activities(activities: Activity[]) {
-    if (activities) {
-      this.runningMiles = 0;
-      this.highEffortRuns = 0;
-      this.crossTraining = 0;
-
-      activities.forEach((activity: Activity) => {
-        if (activity.activityType === ActivityTypeEnum.RUN) {
-          this.runningMiles += (<Run>activity).distance;
-          if ((<Run>activity).runType) {
-            this.highEffortRuns++;
-          }
-        } else {
-          this.crossTraining ++;
-        }
-      });
-
-      this.runningMiles = Math.round(this.runningMiles * 100) / 100;
-    }
-  }
-
-  runningMiles: number;
-  highEffortRuns: number;
-  crossTraining: number;
+  @Input() runningMiles: number;
+  @Input() highEffortRuns: number;
+  @Input() crossTraining: number;
 
   constructor() { }
 

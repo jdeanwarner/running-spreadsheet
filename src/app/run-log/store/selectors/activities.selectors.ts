@@ -4,6 +4,8 @@ import { createSelector } from '@ngrx/store';
 import * as fromRoot from '../../../store';
 import * as fromFeature from '../reducers';
 import * as fromActivity from '../reducers/activity.reducer';
+import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
+import { Run } from 'src/app/shared/activities/run';
 
 export const getActivityState = createSelector(
     fromFeature.getLogState,
@@ -24,6 +26,35 @@ export const getAllActivities = createSelector(
     getActivitiesEntites,
     (entities) => {
         return Object.keys(entities).map(id => entities[id]);
+    }
+);
+
+export const getTotalRunningMiles = createSelector(
+    getAllActivities,
+    (data: Activity[]) => {
+        return Math.round(data
+            .filter((activiy: Activity) => activiy.activityType === ActivityTypeEnum.RUN)
+            .map((activiy: Activity) => (<Run>activiy).distance)
+            .reduce((prev, curr) => prev + curr, 0) * 100) / 100;
+    }
+);
+
+export const getCountHighEffortRuns = createSelector(
+    getAllActivities,
+    (data: Activity[]) => {
+        return data
+            .filter((activiy: Activity) => activiy.activityType === ActivityTypeEnum.RUN)
+            .filter((activiy: Activity) => (<Run>activiy).runType)
+            .length;
+    }
+);
+
+export const getCountCrossTrainingActivities = createSelector(
+    getAllActivities,
+    (data: Activity[]) => {
+        return data
+            .filter((activiy: Activity) => activiy.activityType !== ActivityTypeEnum.RUN)
+            .length;
     }
 );
 
