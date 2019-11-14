@@ -8,9 +8,7 @@
     [highEffortRuns]="countHighEfforRuns$ | async">
   </app-yearly-total>
   <app-run-type-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"
-    [race]="countRaces$ | async"
-    [workout]="countWorkouts$ | async"
-    [longRun]="countLongRuns$ | async">
+    [runTypeMap]="runTypeMap$ | async">
   </app-run-type-total>
   <app-cross-training-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"
     [crossTrainingMap]="crossTrainingMap$ | async">

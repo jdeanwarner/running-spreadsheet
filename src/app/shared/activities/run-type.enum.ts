@@ -1,5 +1,5 @@
 export enum RunTypeEnum {
-    RACE = 'RACE',
-    LONG_RUN = 'LONG_RUN',
-    WORKOUT = 'WORKOUT'
+    RACE = 'Race',
+    LONG_RUN = 'Long Run',
+    WORKOUT = 'Workout'
 }

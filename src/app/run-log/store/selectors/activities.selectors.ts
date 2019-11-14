@@ -50,6 +50,21 @@ export const getCountHighEffortRuns = createSelector(
     }
 );
 
+export const getRunTypeMap = createSelector(
+    getAllActivities,
+    (data: Activity[]) => {
+        const entities: {[type: string]: Activity[]} = {};
+
+        data
+            .filter((activiy: Activity) => activiy.activityType === ActivityTypeEnum.RUN)
+            .filter((activiy: Activity) => (<Run>activiy).runType)
+            .forEach((activiy: Activity) => entities[(<Run>activiy).runType] ?
+                entities[(<Run>activiy).runType].push(activiy) :
+                entities[(<Run>activiy).runType] = [activiy]);
+        return entities;
+    }
+);
+
 export const getCountWorkouts = createSelector(
     getAllActivities,
     (data: Activity[]) => getRunTypeCounts(data, RunTypeEnum.WORKOUT)

@@ -1,6 +1,6 @@
 <mat-card-title>Run Type Totals</mat-card-title>
 <mat-card-content>
-  <h3 class="mat-h3">Workout: {{ workout }}</h3>
-  <h3 class="mat-h3">Long Run: {{ longRun }}</h3>
-  <h3 class="mat-h3">Race: {{ race }}</h3>
+  <h3 class="mat-h3" *ngFor="let runTypeItem of runTypeMap | keyvalue">
+    {{ TYPE[runTypeItem.key] }}: {{ runTypeItem.value.length }}
+  </h3>
 </mat-card-content>

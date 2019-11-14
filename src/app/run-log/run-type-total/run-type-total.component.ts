@@ -11,9 +11,9 @@ import { RunTypeEnum } from 'src/app/shared/activities/run-type.enum';
 })
 export class RunTypeTotalComponent implements OnInit {
 
-  @Input() workout: number;
-  @Input() longRun: number;
-  @Input() race: number;
+  @Input() runTypeMap: {[type: string]: Activity[]};
+
+  TYPE = RunTypeEnum;
 
   constructor() { }
 

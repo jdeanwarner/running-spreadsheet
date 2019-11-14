@@ -28,10 +28,7 @@ export class RunLogComponent implements OnInit {
   countHighEfforRuns$: Observable<number>;
   countCrossTraining$: Observable<number>;
 
-  countWorkouts$: Observable<number>;
-  countLongRuns$: Observable<number>;
-  countRaces$: Observable<number>;
-
+  runTypeMap$: Observable<{[type: string]: Activity[]}>;
   crossTrainingMap$: Observable<{[type: string]: Activity[]}>;
 
   constructor(public dialog: MatDialog, private store: Store<fromStore.LogState>,
@@ -44,10 +41,7 @@ export class RunLogComponent implements OnInit {
     this.countHighEfforRuns$ = store.select(fromStore.getCountHighEffortRuns);
     this.countCrossTraining$ = store.select(fromStore.getCountCrossTrainingActivities);
 
-    this.countWorkouts$ = store.select(fromStore.getCountWorkouts);
-    this.countLongRuns$ = store.select(fromStore.getCountLongRuns);
-    this.countRaces$ = store.select(fromStore.getCountRaces);
-    
+    this.runTypeMap$ = store.select(fromStore.getRunTypeMap);
     this.crossTrainingMap$ = store.select(fromStore.getCrossTrainingMap);
 
     this.params$ = rootStore.select(fromRoot.getRouterState);

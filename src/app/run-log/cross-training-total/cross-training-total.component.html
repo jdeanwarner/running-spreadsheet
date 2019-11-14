@@ -1,7 +1,6 @@
 <mat-card-title>Cross Training Totals</mat-card-title>
 <mat-card-content>
-  <h3 class="mat-h3" *ngIf="crossTrainingMap[TYPE.YOGA]">Yoga: {{ crossTrainingMap[TYPE.YOGA].length }}</h3>
-  <h3 class="mat-h3" *ngIf="crossTrainingMap[TYPE.BIKE]">Bike: {{ crossTrainingMap[TYPE.BIKE].length }}</h3>
-  <h3 class="mat-h3" *ngIf="crossTrainingMap[TYPE.GYM]">Gym: {{ crossTrainingMap[TYPE.GYM].length }}</h3>
-  <h3 class="mat-h3" *ngIf="crossTrainingMap[TYPE.KETTLEBELL]">Kettlebell: {{ crossTrainingMap[TYPE.KETTLEBELL].length }}</h3>
+  <h3 class="mat-h3" *ngFor="let crossTrainingItem of crossTrainingMap | keyvalue">
+    {{ TYPE[crossTrainingItem.key] }}: {{ crossTrainingItem.value.length }}
+  </h3>
 </mat-card-content>
