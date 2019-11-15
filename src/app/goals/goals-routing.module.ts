@@ -1,3 +1,4 @@
+import { ActivitiesResolver } from './../shared/resolvers/activities.resolver';
 import { RacesResolver } from './../shared/resolvers/races.resolver';
 
 import { NgModule } from '@angular/core';
@@ -10,7 +11,8 @@ const appRoutes: Routes = [
     component: GoalsComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: [
-      RacesResolver
+      RacesResolver,
+      ActivitiesResolver
     ]
   },
   { path: '',

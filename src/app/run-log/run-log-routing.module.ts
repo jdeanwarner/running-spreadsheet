@@ -1,3 +1,4 @@
+import { ActivitiesResolver } from './../shared/resolvers/activities.resolver';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,7 +8,10 @@ const appRoutes: Routes = [
   {
     path: ':year',
     component: RunLogComponent,
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange'
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    resolve: [
+      ActivitiesResolver
+    ]
   },
   { path: '',
     redirectTo : '',

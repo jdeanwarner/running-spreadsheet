@@ -1,16 +1,13 @@
-import { getRouterState } from '../../../store/reducers/index';
 import { ActivityService } from '../../../shared/activity.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { map, mergeMap, catchError, withLatestFrom, switchMap, filter } from 'rxjs/operators';
-import { Action, Store } from '@ngrx/store';
+import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
+import { Action } from '@ngrx/store';
 import * as activityActions from '../actions/activity.action';
 import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
-import { ROUTER_NAVIGATION, RouterNavigationAction } from '@ngrx/router-store';
 import { DocumentReference } from '@angular/fire/firestore';
-import { State } from '../../../store/reducers/index';
 
 @Injectable()
 export class ActivityEffects {
@@ -18,45 +15,13 @@ export class ActivityEffects {
   constructor(
     private actions$: Actions,
     private activityService: ActivityService,
-    private store: Store<State>,
-    private rootStore: Store<State>
   ) {}
 
-  private getYear: Observable<number> = this.store.select(getRouterState).pipe(
-    map((router) => parseInt(router.state.params.year, 10))
-  );
-
-  /*@Effect()
+  @Effect()
   loadActivities$: Observable<Action> = this.actions$.pipe(
       ofType(activityActions.LOAD_ACTIVITY),
-      withLatestFrom(
-        this.store.select(fromRoot.getRouterState),
-        (action, router) => parseInt(router.state.params.year, 10)
-      ),
-      switchMap((year: number) => {
-        console.log(year);
-        return this.activityService.getActivitiesByYear(year)
-          .pipe(
-            map((activityTypes: Activity[]) => (new activityActions.LoadActivitiesSuccess(activityTypes))),
-            catchError(error => of(new activityActions.LoadActivitiesFail(error)))
-          );
-        }
-      )
-  );*/
-
-  @Effect()
-  loadActivitiesOnRouteChange$: Observable<Action> = this.actions$.pipe(
-      ofType(ROUTER_NAVIGATION),
-      filter((routeChangeAction: RouterNavigationAction<any>) =>
-        routeChangeAction.payload.event.url.includes('log') ||
-        routeChangeAction.payload.event.url.includes('goals')),
-      withLatestFrom(
-        this.store.select(getRouterState),
-        (action, router) => parseInt(router.state.params.year, 10)
-      ),
-      switchMap((year: number) => {
-        console.log(year);
-        return this.activityService.getActivitiesByYear(year)
+      switchMap((activity: activityActions.LoadActivities) => {
+        return this.activityService.getActivitiesByYear(parseInt(activity.playload, 10))
           .pipe(
             map((activityTypes: Activity[]) => (new activityActions.LoadActivitiesSuccess(activityTypes))),
             catchError(error => of(new activityActions.LoadActivitiesFail(error)))

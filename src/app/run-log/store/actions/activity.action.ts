@@ -25,6 +25,8 @@ export const DELETE_ACTIVITY_FAIL = '[Log] Delete Activity Fail';
 
 export class LoadActivities implements Action {
     readonly type = LOAD_ACTIVITY;
+
+    constructor(public playload: string) {}
 }
 
 export class LoadActivitiesSuccess implements Action {
