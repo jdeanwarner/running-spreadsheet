@@ -1,5 +1,5 @@
-import { getRouterState } from './../reducers/index';
-import { ActivityService } from '../../shared/activity.service';
+import { getRouterState } from '../../../store/reducers/index';
+import { ActivityService } from '../../../shared/activity.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
@@ -10,7 +10,7 @@ import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
 import { ROUTER_NAVIGATION, RouterNavigationAction } from '@ngrx/router-store';
 import { DocumentReference } from '@angular/fire/firestore';
-import { State } from '../reducers/index';
+import { State } from '../../../store/reducers/index';
 
 @Injectable()
 export class ActivityEffects {
@@ -18,7 +18,8 @@ export class ActivityEffects {
   constructor(
     private actions$: Actions,
     private activityService: ActivityService,
-    private store: Store<State>
+    private store: Store<State>,
+    private rootStore: Store<State>
   ) {}
 
   private getYear: Observable<number> = this.store.select(getRouterState).pipe(
@@ -47,7 +48,7 @@ export class ActivityEffects {
   loadActivitiesOnRouteChange$: Observable<Action> = this.actions$.pipe(
       ofType(ROUTER_NAVIGATION),
       filter((routeChangeAction: RouterNavigationAction<any>) =>
-        routeChangeAction.payload.event.url.includes('log/') ||
+        routeChangeAction.payload.event.url.includes('log') ||
         routeChangeAction.payload.event.url.includes('goals')),
       withLatestFrom(
         this.store.select(getRouterState),

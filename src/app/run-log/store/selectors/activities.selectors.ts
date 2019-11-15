@@ -1,9 +1,9 @@
-import { getRouterState } from './../reducers/index';
+import { getRouterState } from '../../../store/reducers/index';
 import { Month } from 'src/app/shared/month.enum';
-import { Activity } from '../../shared/activities/activity';
+import { Activity } from '../../../shared/activities/activity';
 import { createSelector } from '@ngrx/store';
 
-import * as fromFeature from '../../run-log/store/reducers';
+import * as fromFeature from '../reducers';
 import * as fromActivity from '../reducers/activity.reducer';
 import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 import { Run } from 'src/app/shared/activities/run';

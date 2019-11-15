@@ -2,6 +2,7 @@ import { AddGoalComponent } from './add-goal/add-goal.component';
 import { getYearGoals } from './store/selectors/goal.selectors';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import * as fromLog from '../run-log/store';
 import * as fromRoot from '../store';
 import * as fromStore from './store';
 import { Store } from '@ngrx/store';
@@ -56,7 +57,7 @@ export class GoalsComponent implements OnInit {
     this.hundredMs$ = this.rootStore.select(fromRoot.get100Milers);
 
     this.yearGoals$ = this.store.select(fromStore.getYearGoals);
-    this.yearMiles$ = this.rootStore.select(fromRoot.getTotalRunningMiles);
+    this.yearMiles$ = this.rootStore.select(fromLog.getTotalRunningMiles);
 
     this.monthGoals$ = <Observable<MonthGoal[]>>this.store.select(fromStore.getMonthGoals);
   }

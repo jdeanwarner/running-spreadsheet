@@ -46,10 +46,8 @@ import * as fromRoot from '../store';
     RunLogRoutingModule,
     StoreModule.forFeature('log', reducers),
     StoreModule.forFeature('races', fromRoot.reducers),
-    StoreModule.forFeature('activity', fromRoot.reducers),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature(effects),
-    EffectsModule.forFeature(fromRoot.effects)
+    EffectsModule.forFeature(effects)
   ],
   exports: [
     RunLogComponent

@@ -1,3 +1,4 @@
+import { LoadType } from './store/actions/activity.action';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -33,22 +34,22 @@ export class RunLogComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private store: Store<fromStore.LogState>,
     private rootStore: Store<fromRoot.State>, private router: Router) {
-    this.activityMonthMap$ = rootStore.select(fromRoot.getActivitiesMonthMap);
-    this.activityTypes$ = rootStore.select(fromRoot.getActivityTypes);
+    this.activityMonthMap$ = store.select(fromStore.getActivitiesMonthMap);
+    this.activityTypes$ = store.select(fromStore.getActivityTypes);
     this.runTypes$ = store.select(fromStore.getRunTypes);
 
-    this.totalMiles$ = rootStore.select(fromRoot.getTotalRunningMiles);
-    this.countHighEfforRuns$ = rootStore.select(fromRoot.getCountHighEffortRuns);
-    this.countCrossTraining$ = rootStore.select(fromRoot.getCountCrossTrainingActivities);
+    this.totalMiles$ = store.select(fromStore.getTotalRunningMiles);
+    this.countHighEfforRuns$ = store.select(fromStore.getCountHighEffortRuns);
+    this.countCrossTraining$ = store.select(fromStore.getCountCrossTrainingActivities);
 
-    this.runTypeMap$ = rootStore.select(fromRoot.getRunTypeMap);
-    this.crossTrainingMap$ = rootStore.select(fromRoot.getCrossTrainingMap);
+    this.runTypeMap$ = store.select(fromStore.getRunTypeMap);
+    this.crossTrainingMap$ = store.select(fromStore.getCrossTrainingMap);
 
     this.params$ = rootStore.select(fromRoot.getRouterState);
   }
 
   ngOnInit(): void {
-    this.rootStore.dispatch(new fromRoot.LoadType());
+    this.store.dispatch(new fromStore.LoadType());
     this.store.dispatch(new fromStore.LoadRunType());
   }
 
@@ -78,12 +79,12 @@ export class RunLogComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: Activity | string) => {
       if (result) {
         if (typeof result === 'string') {
-          this.rootStore.dispatch(new fromRoot.DeleteActivity(result));
+          this.store.dispatch(new fromStore.DeleteActivity(result));
         } else if (result.activityType) {
           if (result.id) {
-            this.rootStore.dispatch(new fromRoot.UpdateActivity(result));
+            this.store.dispatch(new fromStore.UpdateActivity(result));
           } else {
-            this.rootStore.dispatch(new fromRoot.InsertActivity(result));
+            this.store.dispatch(new fromStore.InsertActivity(result));
           }
         }
       }
