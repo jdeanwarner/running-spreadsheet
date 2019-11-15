@@ -45,7 +45,6 @@ import * as fromRoot from '../store';
     SharedModule,
     RunLogRoutingModule,
     StoreModule.forFeature('log', reducers),
-    StoreModule.forFeature('races', fromRoot.reducers),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature(effects)
   ],

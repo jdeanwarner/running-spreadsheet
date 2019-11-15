@@ -2,26 +2,22 @@ import { Race } from 'src/app/shared/race';
 import * as fromRace from '../actions/race.actions';
 
 export interface RaceState {
-    races: {
-        entities: { [id: number]: Race };
-        loaded: boolean;
-        loading: boolean;
-    };
+    entities: { [id: number]: Race };
+    loaded: boolean;
+    loading: boolean;
 }
 
 export const initialState: RaceState = {
-    races: {
-        entities: {},
-        loaded: false,
-        loading: false
-    }
+    entities: {},
+    loaded: false,
+    loading: false
 };
 
 export function reducer(state: RaceState = initialState, action: fromRace.RaceActions):
     RaceState {
     switch (action.type) {
         case fromRace.LOAD_RACES: {
-            state.races.loading = true;
+            state.loading = true;
             return state;
         }
         case fromRace.LOAD_RACES_SUCCESS: {
@@ -35,46 +31,44 @@ export function reducer(state: RaceState = initialState, action: fromRace.RaceAc
                 }, {});
             return {
                 ... state,
-                races: {
-                    loading: false,
-                    loaded: true,
-                    entities : entities
-                }
+                loading: false,
+                loaded: true,
+                entities : entities
             };
         }
         case fromRace.LOAD_RACES_FAIL: {
-            state.races.loading = false;
-            state.races.loaded = false;
+            state.loading = false;
+            state.loaded = false;
             return state;
         }
         case fromRace.ADD_RACE: {
-            state.races.loading = true;
-            state.races.loaded = false;
+            state.loading = true;
+            state.loaded = false;
             return state;
         }
         case fromRace.ADD_RACE_SUCCESS: {
-            state.races.loading = false;
-            state.races.loaded = true;
+            state.loading = false;
+            state.loaded = true;
             return state;
         }
         case fromRace.ADD_RACE_FAIL: {
-            state.races.loading = false;
-            state.races.loaded = false;
+            state.loading = false;
+            state.loaded = false;
             return state;
         }
         case fromRace.UPDATE_RACE: {
-            state.races.loading = true;
-            state.races.loaded = false;
+            state.loading = true;
+            state.loaded = false;
             return state;
         }
         case fromRace.UPDATE_RACE_SUCCESS: {
-            state.races.loading = false;
-            state.races.loaded = true;
+            state.loading = false;
+            state.loaded = true;
             return state;
         }
         case fromRace.UPDATE_RACE_FAIL: {
-            state.races.loading = false;
-            state.races.loaded = false;
+            state.loading = false;
+            state.loaded = false;
             return state;
         }
         default:
@@ -82,6 +76,6 @@ export function reducer(state: RaceState = initialState, action: fromRace.RaceAc
     }
 }
 
-export const getRacesLoading = (state: RaceState) => state.races.loading;
-export const getRacesLoaded = (state: RaceState) => state.races.loaded;
-export const getRacesEntites = (state: RaceState) => state.races.entities;
+export const getRacesLoading = (state: RaceState) => state.loading;
+export const getRacesLoaded = (state: RaceState) => state.loaded;
+export const getRacesEntites = (state: RaceState) => state.entities;

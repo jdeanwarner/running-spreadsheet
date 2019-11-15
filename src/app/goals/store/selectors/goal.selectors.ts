@@ -1,4 +1,3 @@
-import { GoalType } from './../../goal-type.enum';
 import { YearGoal } from './../../year-goal';
 import { MonthGoal } from './../../month-goal';
 import { createSelector } from '@ngrx/store';
@@ -8,7 +7,7 @@ import * as fromGoal from '../reducers/goal.reducer';
 
 export const getGoalsState = createSelector(
     fromFeature.getGoalState,
-    (state: fromFeature.GoalState) => state.goal
+    (state: fromFeature.GoalState) => state.goals
 );
 
 export const getGoalsData = createSelector(getGoalsState, fromGoal.getGoalsData);

@@ -6,13 +6,13 @@ import * as fromYear from './year.reducer';
 
 export interface LogState {
     activity: fromActivity.ActivityState;
-    runType: fromRunType.RunTypeState;
+    runTypes: fromRunType.RunTypeState;
     year: fromYear.YearState;
 }
 
 export const reducers: ActionReducerMap<LogState> = {
     activity: fromActivity.reducer,
-    runType: fromRunType.reducer,
+    runTypes: fromRunType.reducer,
     year: fromYear.reducer
 };
 
@@ -29,7 +29,7 @@ export const getYear = createSelector(getYearState, fromYear.getYear);
 // run type state
 export const getRunTypeState = createSelector(
     getLogState,
-    (state: LogState) => state.runType
+    (state: LogState) => state.runTypes
 );
 
 export const getRunTypesEntities = createSelector(getRunTypeState, fromRunType.getRunTypesEntities);
