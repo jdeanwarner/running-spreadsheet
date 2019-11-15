@@ -1,10 +1,9 @@
-import { DELETE_RACE, DeleteRace } from './../actions/race.actions';
 import { Race } from 'src/app/shared/race';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, catchError, filter, switchMap } from 'rxjs/operators';
-import { Action, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import * as raceActions from '../actions/race.actions';
 import { ROUTER_NAVIGATION, RouterNavigationAction } from '@ngrx/router-store';
 import { DocumentReference } from '@angular/fire/firestore';

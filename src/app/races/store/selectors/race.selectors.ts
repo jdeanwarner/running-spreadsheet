@@ -6,7 +6,7 @@ import { Race } from 'src/app/shared/race';
 
 export const getRacesState = createSelector(
     fromFeature.getRaceState,
-    (state: fromFeature.State) => state.race
+    (state: fromFeature.RaceState) => state.races
 );
 
 export const getRaceEntites = createSelector(getRacesState, fromRace.getRacesEntites);

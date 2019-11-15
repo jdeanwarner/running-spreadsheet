@@ -10,7 +10,7 @@ import { FiftyStatesComponent } from './fifty-states/fifty-states.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects } from './store';
-import * as fromRoot from '../store';
+import * as fromRaces from '../races/store';
 import * as fromLog from '../run-log/store';
 import { DistanceComponent } from './distance/distance.component';
 import { AddGoalComponent } from './add-goal/add-goal.component';
@@ -29,12 +29,12 @@ import { AddGoalComponent } from './add-goal/add-goal.component';
     SharedModule,
     GoalsRoutingModule,
     StoreModule.forFeature('goals', reducers),
-    StoreModule.forFeature('races', fromRoot.reducers),
+    StoreModule.forFeature('races', fromRaces.reducers),
     StoreModule.forFeature('log', fromLog.reducers),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature(effects),
-    EffectsModule.forFeature(fromRoot.effects),
-    EffectsModule.forFeature(fromLog.effects)
+    EffectsModule.forFeature(fromLog.effects),
+    EffectsModule.forFeature(fromRaces.effects)
   ],
   entryComponents: [
     AddGoalComponent

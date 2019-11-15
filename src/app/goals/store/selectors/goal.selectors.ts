@@ -4,14 +4,14 @@ import { MonthGoal } from './../../month-goal';
 import { createSelector } from '@ngrx/store';
 
 import * as fromFeature from '../reducers';
-import * as fromRace from '../reducers/goal.reducer';
+import * as fromGoal from '../reducers/goal.reducer';
 
 export const getGoalsState = createSelector(
     fromFeature.getGoalState,
     (state: fromFeature.GoalState) => state.goal
 );
 
-export const getGoalsData = createSelector(getGoalsState, fromRace.getGoalsData);
+export const getGoalsData = createSelector(getGoalsState, fromGoal.getGoalsData);
 
 export const getYearGoals = createSelector(
     getGoalsData,
@@ -35,5 +35,5 @@ export const getMonthGoals = createSelector(
     }
 );
 
-export const getGoalsLoaded = createSelector(getGoalsState, fromRace.getGoalsLoaded);
-export const getGoalsLoading = createSelector(getGoalsState, fromRace.getGoalsLoading);
+export const getGoalsLoaded = createSelector(getGoalsState, fromGoal.getGoalsLoaded);
+export const getGoalsLoading = createSelector(getGoalsState, fromGoal.getGoalsLoading);

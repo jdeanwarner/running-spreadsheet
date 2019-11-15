@@ -1,4 +1,3 @@
-import { LoadRaces } from './store/actions/race.actions';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
@@ -19,8 +18,8 @@ export class AppComponent implements OnInit {
     .pipe(
       map(result => result.matches)
     );
-  constructor(private breakpointObserver: BreakpointObserver, private store: Store<fromRoot.State>) {
-    this.store.dispatch(new LoadRaces());
+  constructor(private breakpointObserver: BreakpointObserver) {
+
   }
 
   ngOnInit(): void {

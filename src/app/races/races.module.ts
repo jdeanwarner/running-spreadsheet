@@ -7,7 +7,7 @@ import { AddRaceComponent } from './add-race/add-race.component';
 import { ResultSetterComponent } from './result-setter/result-setter.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers, effects } from '../store';
+import { reducers, effects } from './store';
 
 @NgModule({
   declarations: [RacesComponent, AddRaceComponent, ResultSetterComponent],
@@ -16,8 +16,8 @@ import { reducers, effects } from '../store';
     SharedModule,
     RacesRoutingModule,
     StoreModule.forFeature('races', reducers),
-    // EffectsModule.forRoot([]),
-    // EffectsModule.forFeature(effects)
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature(effects)
   ],
   entryComponents: [
     AddRaceComponent

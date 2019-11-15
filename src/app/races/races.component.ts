@@ -1,4 +1,4 @@
-import { DeleteRace, UpdateRace, AddRace } from '../store';
+import { DeleteRace, UpdateRace, AddRace } from './store';
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../shared/activity.service';
 import { Race } from '../shared/race';
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import * as fromRoot from '../store';
+import * as fromStore from './store';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -35,8 +36,8 @@ export class RacesComponent implements OnInit {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog,
-    private store: Store<fromRoot.State>) {
-      this.races$ = this.store.select(fromRoot.getAllRaces);
+    private rootStore: Store<fromRoot.State>, private store: Store<fromStore.RaceState>) {
+      this.races$ = this.store.select(fromStore.getAllRaces);
     }
 
   ngOnInit() {
