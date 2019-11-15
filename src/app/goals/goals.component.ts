@@ -65,7 +65,7 @@ export class GoalsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new fromStore.LoadYearGoals());
+
   }
 
   addGoal() {

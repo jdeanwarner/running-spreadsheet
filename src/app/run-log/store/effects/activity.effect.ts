@@ -20,8 +20,8 @@ export class ActivityEffects {
   @Effect()
   loadActivities$: Observable<Action> = this.actions$.pipe(
       ofType(activityActions.LOAD_ACTIVITY),
-      switchMap((activity: activityActions.LoadActivities) => {
-        return this.activityService.getActivitiesByYear(parseInt(activity.playload, 10))
+      switchMap((loadAction: activityActions.LoadActivities) => {
+        return this.activityService.getActivitiesByYear(parseInt(loadAction.playload, 10))
           .pipe(
             map((activityTypes: Activity[]) => (new activityActions.LoadActivitiesSuccess(activityTypes))),
             catchError(error => of(new activityActions.LoadActivitiesFail(error)))

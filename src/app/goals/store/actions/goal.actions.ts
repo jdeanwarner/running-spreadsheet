@@ -8,6 +8,7 @@ export const LOAD_YEAR_GOALS_FAIL = '[Goal] Load Year Goals Completed Fail';
 
 export class LoadYearGoals implements Action {
     readonly type = LOAD_YEAR_GOALS;
+    constructor(public playload: string) {}
 }
 
 export class LoadYearGoalsSuccess implements Action {

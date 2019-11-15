@@ -18,6 +18,7 @@ import { ActivityService } from './activity.service';
 import { ResultTimePipe } from './result-time.pipe';
 import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-date-picker.component';
 import { LocationPickerComponent } from './location-picker/location-picker.component';
+import { GoalsResolver } from './resolvers/goals.resolver';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { LocationPickerComponent } from './location-picker/location-picker.compo
     ResultTimePipe,
     MatIconModule,
     RacesResolver,
-    ActivitiesResolver
+    ActivitiesResolver,
+    GoalsResolver
   ],
   exports: [
     FlexLayoutModule,
