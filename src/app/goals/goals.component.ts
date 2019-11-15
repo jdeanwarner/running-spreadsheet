@@ -1,5 +1,4 @@
 import { AddGoalComponent } from './add-goal/add-goal.component';
-import { getYearGoals } from './store/selectors/goal.selectors';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import * as fromLog from '../run-log/store';
@@ -7,10 +6,7 @@ import * as fromRoot from '../store';
 import * as fromStore from './store';
 import * as fromRaces from '../races/store';
 import { Store } from '@ngrx/store';
-import { State } from '../shared/state.enum';
 import { Race } from '../shared/race';
-import { YearGoal } from './year-goal';
-import { MonthGoal } from './month-goal';
 import { MatDialog } from '@angular/material';
 import { Goal } from './goal';
 import { RouterReducerState } from '@ngrx/router-store';
@@ -37,10 +33,8 @@ export class GoalsComponent implements OnInit {
   hundredMs$: Observable<Race[]>;
 
   params$: Observable<RouterReducerState<fromRoot.RouterStateUrl>>;
-  yearGoals$: Observable<{ [type: string]: YearGoal }>;
+  goals$: Observable<{ [type: string]: Goal }>;
   yearMiles$: Observable<number>;
-
-  monthGoals$: Observable<MonthGoal[]>;
 
   constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromStore.GoalState>,
     private raceStore: Store<fromRaces.RaceState>, private logStore: Store<fromLog.LogState>,
@@ -58,10 +52,8 @@ export class GoalsComponent implements OnInit {
     this.hundredKs$ = this.raceStore.select(fromRaces.get100Ks);
     this.hundredMs$ = this.raceStore.select(fromRaces.get100Milers);
 
-    this.yearGoals$ = this.store.select(fromStore.getYearGoals);
+    this.goals$ = this.store.select(fromStore.getGoalsEntities);
     this.yearMiles$ = this.logStore.select(fromLog.getTotalRunningMiles);
-
-    this.monthGoals$ = <Observable<MonthGoal[]>>this.store.select(fromStore.getMonthGoals);
   }
 
   ngOnInit() {

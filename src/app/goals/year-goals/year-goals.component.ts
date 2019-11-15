@@ -1,6 +1,6 @@
 import { GoalType } from './../goal-type.enum';
-import { YearGoal } from './../year-goal';
 import { Component, OnInit, Input } from '@angular/core';
+import { Goal } from '../goal';
 
 @Component({
   selector: 'app-year-goals',
@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class YearGoalsComponent implements OnInit {
 
-  @Input() yearGoals: { [type: string]: YearGoal };
+  @Input() goals: Goal;
   @Input() yearMiles: number;
 
   goalTypes = GoalType;
@@ -17,10 +17,6 @@ export class YearGoalsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
-
-  getPercentComplete(val, goal) {
-    return val / goal * 100;
   }
 
 }

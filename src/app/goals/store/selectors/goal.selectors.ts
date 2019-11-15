@@ -1,5 +1,4 @@
-import { YearGoal } from './../../year-goal';
-import { MonthGoal } from './../../month-goal';
+import { Goal } from './../../goal';
 import { createSelector } from '@ngrx/store';
 
 import * as fromFeature from '../reducers';
@@ -12,25 +11,17 @@ export const getGoalsState = createSelector(
 
 export const getGoalsData = createSelector(getGoalsState, fromGoal.getGoalsData);
 
-export const getYearGoals = createSelector(
+export const getGoalsEntities = createSelector(
     getGoalsData,
     (data) => {
         return data
-            .filter((goal) => (<YearGoal>goal).year !== undefined &&  (<MonthGoal>goal).month === undefined)
             .reduce(
-                (map: { [type: string]: YearGoal }, goal) => {
+                (map: { [type: string]: Goal }, goal) => {
                     return {
                         ... map,
-                        [goal.type]: <YearGoal>goal
+                        [goal.id]: goal
                     };
                 }, {});
-    }
-);
-
-export const getMonthGoals = createSelector(
-    getGoalsData,
-    (data) => {
-        return data.filter((goal) => (<MonthGoal>goal).month !== undefined);
     }
 );
 

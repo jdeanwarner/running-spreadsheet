@@ -1,15 +1,4 @@
 <mat-card-title>Year Goals</mat-card-title>
 <mat-card-content>
-  <div fxLayout="row" fxLayoutAlign="space-around center" class="goal" *ngIf="yearGoals[goalTypes.MILES]">
-      <div class="mat-h4" fxFlex="10">Miles</div>
-      <div fxFlex="10" style="text-align: center;">
-          <span>{{ yearMiles }}</span>
-        </div>
-      <div fxFlex="75" >
-        <mat-progress-bar mode="determinate" value="{{ getPercentComplete(yearMiles, yearGoals[goalTypes.MILES].value) }}"></mat-progress-bar>
-      </div>
-      <div fxFlex="5" style="text-align: right;">
-        <span>{{ yearGoals[goalTypes.MILES].value }}</span>
-      </div>
-  </div>
+  <app-progress-meter [title]="'Miles'" [goal]="goals.miles" [current]="yearMiles"></app-progress-meter>
 </mat-card-content>

@@ -1,6 +1,4 @@
 import { Goal } from './../goals/goal';
-import { Month } from './month.enum';
-import { YearGoal } from './../goals/year-goal';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -10,8 +8,6 @@ import { ActivityType } from './activities/activity-type';
 import { RunType } from './activities/run-type';
 import { Race } from './race';
 import { Season } from './season';
-import { State } from './state.enum';
-import { MonthGoal } from '../goals/month-goal';
 
 @Injectable({
   providedIn: 'root'

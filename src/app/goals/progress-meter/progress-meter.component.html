@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" class="goal">
+    <div class="mat-h4" fxFlex="10">{{ title }}</div>
+    <div fxFlex="10" style="text-align: center;">
+        <span>{{ current }}</span>
+      </div>
+    <div fxFlex="75" >
+      <mat-progress-bar mode="determinate" value="{{ getPercentComplete(current, goal) }}"></mat-progress-bar>
+    </div>
+    <div fxFlex="5" style="text-align: right;">
+      <span>{{ goal }}</span>
+    </div>
+</div>

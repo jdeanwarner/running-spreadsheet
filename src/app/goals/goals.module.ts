@@ -14,6 +14,7 @@ import * as fromRaces from '../races/store';
 import * as fromLog from '../run-log/store';
 import { DistanceComponent } from './distance/distance.component';
 import { AddGoalComponent } from './add-goal/add-goal.component';
+import { ProgressMeterComponent } from './progress-meter/progress-meter.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AddGoalComponent } from './add-goal/add-goal.component';
     PrsComponent,
     FiftyStatesComponent,
     DistanceComponent,
-    AddGoalComponent],
+    AddGoalComponent,
+    ProgressMeterComponent],
   imports: [
     CommonModule,
     SharedModule,

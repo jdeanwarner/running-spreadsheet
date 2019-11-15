@@ -7,7 +7,7 @@
           <!-- <app-year-selector [year]="(params$ | async).state.params['year']" (change)="changeYear($event)"></app-year-selector> -->
         </div>
         <app-year-goals 
-          [yearGoals]="yearGoals$ | async"
+          [goals]="goals$ | async"
           [yearMiles]="yearMiles$ | async">
         </app-year-goals>
         <app-monthly-goals></app-monthly-goals>
