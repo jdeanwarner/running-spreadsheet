@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects } from './store';
 import * as fromRoot from '../store';
+import * as fromLog from '../run-log/store';
 import { DistanceComponent } from './distance/distance.component';
 import { AddGoalComponent } from './add-goal/add-goal.component';
 
@@ -29,10 +30,11 @@ import { AddGoalComponent } from './add-goal/add-goal.component';
     GoalsRoutingModule,
     StoreModule.forFeature('goals', reducers),
     StoreModule.forFeature('races', fromRoot.reducers),
-    StoreModule.forFeature('activity', fromRoot.reducers),
+    StoreModule.forFeature('log', fromLog.reducers),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature(effects),
-    EffectsModule.forFeature(fromRoot.effects)
+    EffectsModule.forFeature(fromRoot.effects),
+    EffectsModule.forFeature(fromLog.effects)
   ],
   entryComponents: [
     AddGoalComponent
