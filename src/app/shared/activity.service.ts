@@ -107,17 +107,33 @@ export class ActivityService {
   }
 
   getGoals(year: number): Observable<Goal[]> {
-    return this.db.collection<Goal>('goals', ref =>
+    console.log('getting goals');
+    return this.db.collection<Goal>('goal', ref =>
       ref.where('year', '==', 2019)
+        .limit(1)
     ).snapshotChanges()
     .pipe(
       map((actions: DocumentChangeAction<Goal>[]) => {
+        console.log(actions);
         return actions.map((a: DocumentChangeAction<Goal>) => {
           const data: Goal = a.payload.doc.data();
           data.id = a.payload.doc.id;
+          console.log(data);
           return data;
         });
       })
     );
+  }
+
+  insertGoal(goal: Goal): Promise<DocumentReference> {
+    return this.db.collection('goal').add(goal);
+  }
+
+  updateGoal(goal: Goal): Promise<void> {
+    return this.db.collection('goal').doc(goal.id).set(goal);
+  }
+
+  deleteGoal(id: string): Promise<void> {
+    return this.db.collection('goal').doc(id).delete();
   }
 }

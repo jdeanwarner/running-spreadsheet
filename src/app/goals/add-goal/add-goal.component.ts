@@ -15,15 +15,29 @@ export class AddGoalComponent implements OnInit {
 
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
-    type: new FormControl(),
-    value: new FormControl(),
-    month: new FormControl(),
-    year: new FormControl()
+    year: new FormControl(),
+    miles: new FormControl(),
+    crossTraining: new FormControl(),
+    highEffortRuns: new FormControl(),
+    months: new FormGroup({
+      JANUARY: new FormControl(),
+      FEBRUARY: new FormControl(),
+      MARCH: new FormControl(),
+      APRIL: new FormControl(),
+      MAY: new FormControl(),
+      JUNE: new FormControl(),
+      JULY: new FormControl(),
+      AUGUST: new FormControl(),
+      SEPTEMBER: new FormControl(),
+      OCTOBER: new FormControl(),
+      NOVEMBER: new FormControl(),
+      DECEMBER: new FormControl(),
+    })
   });
 
   GOAL_PERIOD = GoalPeriod;
   GOAL_TYPE = GoalType;
-  MONTH = Month;
+  MONTHS = Month;
   showMonth = false;
 
   constructor(private dialogRef: MatDialogRef<AddGoalComponent>,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-monthly-goals',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./monthly-goals.component.css']
 })
 export class MonthlyGoalsComponent implements OnInit {
+
+  @Input() monthlyGoalMap: { [month: string]: number };
 
   constructor() { }
 

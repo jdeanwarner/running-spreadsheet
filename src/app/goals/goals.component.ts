@@ -33,7 +33,7 @@ export class GoalsComponent implements OnInit {
   hundredMs$: Observable<Race[]>;
 
   params$: Observable<RouterReducerState<fromRoot.RouterStateUrl>>;
-  goals$: Observable<{ [type: string]: Goal }>;
+  goals$: Observable<Goal[]>;
   yearMiles$: Observable<number>;
 
   constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromStore.GoalState>,
@@ -52,7 +52,7 @@ export class GoalsComponent implements OnInit {
     this.hundredKs$ = this.raceStore.select(fromRaces.get100Ks);
     this.hundredMs$ = this.raceStore.select(fromRaces.get100Milers);
 
-    this.goals$ = this.store.select(fromStore.getGoalsEntities);
+    this.goals$ = this.store.select(fromStore.getGoalsData);
     this.yearMiles$ = this.logStore.select(fromLog.getTotalRunningMiles);
   }
 
@@ -72,12 +72,12 @@ export class GoalsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: Goal | string) => {
       if (result) {
         if (typeof result === 'string') {
-          // this.store.dispatch(new fromStore.DeleteActivity(result));
+          this.store.dispatch(new fromStore.DeleteGoal(result));
         } else {
           if (result.id) {
-            // this.store.dispatch(new fromStore.UpdateActivity(result));
+            this.store.dispatch(new fromStore.UpdateGoal(result));
           } else {
-            // this.store.dispatch(new fromStore.InsertActivity(result));
+            this.store.dispatch(new fromStore.AddGoal(result));
           }
         }
       }

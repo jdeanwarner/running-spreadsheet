@@ -1,4 +1,6 @@
 <mat-card-title>Year Goals</mat-card-title>
 <mat-card-content>
-  <app-progress-meter [title]="'Miles'" [goal]="goals.miles" [current]="yearMiles"></app-progress-meter>
+  <app-progress-meter class="goal" [title]="'Miles'" [goal]="goals.miles" [current]="yearMiles"></app-progress-meter>
+  <app-progress-meter class="goal" [title]="'Cross Training'" [goal]="goals.crossTraining" [current]="yearMiles"></app-progress-meter>
+  <app-progress-meter [title]="'High Effort Runs'" [goal]="goals.highEffortRuns" [current]="yearMiles"></app-progress-meter>
 </mat-card-content>

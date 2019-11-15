@@ -8,40 +8,30 @@
   <form [formGroup]="formGroup">
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
       <mat-form-field fxFlex="100">
-        <mat-select placeholder="Goal Period" (selectionChange)="periodChange($event)">
-          <mat-option *ngFor="let period of GOAL_PERIOD | keyvalue" [value]="period.value" >
-            {{period.value}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center" >
-      <mat-form-field fxFlex="100">
-        <mat-select placeholder="Goal Type" formControlName="type">
-          <mat-option *ngFor="let type of GOAL_TYPE | keyvalue" [value]="type.value">
-            {{type.value}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center" *ngIf="showMonth">
-      <mat-form-field fxFlex="100">
-        <mat-select placeholder="Month" formControlName="month">
-          <mat-option *ngFor="let month of MONTH | keyvalue" [value]="month.value">
-            {{month.value}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center" >
-      <mat-form-field fxFlex="100">
         <input type="number" matInput placeholder="Year" formControlName="year">
       </mat-form-field>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
       <mat-form-field fxFlex="100">
-        <input type="number" matInput placeholder="Value" formControlName="value">
+        <input type="number" matInput placeholder="Miles" formControlName="miles">
       </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" >
+      <mat-form-field fxFlex="100">
+        <input type="number" matInput placeholder="Cross Training" formControlName="crossTraining">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" >
+      <mat-form-field fxFlex="100">
+        <input type="number" matInput placeholder="High Effort Runs" formControlName="highEffortRuns">
+      </mat-form-field>
+    </div>
+    <div [formGroup]="formGroup.controls['months']">
+      <div fxLayout="row wrap" fxLayoutAlign="start center" *ngFor="let month of MONTHS | keyvalue">
+        <mat-form-field fxFlex="100" >
+          <input type="number" matInput placeholder="{{ month.value }}" formControlName="{{ month.key }}">
+        </mat-form-field>
+      </div>
     </div>
   </form>
 </mat-dialog-content>

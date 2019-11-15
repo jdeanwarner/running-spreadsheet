@@ -1,21 +1,6 @@
 <mat-card-title>Month Goals</mat-card-title>
 <mat-card-content>
-  <div fxLayout="row" fxLayoutAlign="space-around center" class="goal">
-      <div class="mat-h4" fxFlex="15">January</div>
-      <div fxFlex="80" >
-        <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-      </div>
-      <div fxFlex="5" style="text-align: right;">
-        <span></span>
-      </div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-around center" class="goal">
-      <div class="mat-h4" fxFlex="15">Febuary</div>
-      <div fxFlex="80" >
-        <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-      </div>
-      <div fxFlex="5" style="text-align: right;">
-        <span></span>
-      </div>
+  <div *ngFor="let month of monthlyGoalMap | keyvalue">
+    <app-progress-meter class="goal" [title]="month.key" [goal]="month.value" [current]=""></app-progress-meter>
   </div>
 </mat-card-content>
