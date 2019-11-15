@@ -2,7 +2,9 @@ import { Month } from './../../shared/month.enum';
 import { GoalType } from './../goal-type.enum';
 import { GoalPeriod } from './../goal-period.enum';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatSelectChange, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Goal } from '../goal';
 
 @Component({
   selector: 'app-add-goal',
@@ -13,7 +15,6 @@ export class AddGoalComponent implements OnInit {
 
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
-    goalPeriod: new FormControl(),
     type: new FormControl(),
     value: new FormControl(),
     month: new FormControl(),
@@ -22,26 +23,35 @@ export class AddGoalComponent implements OnInit {
 
   GOAL_PERIOD = GoalPeriod;
   GOAL_TYPE = GoalType;
+  MONTH = Month;
+  showMonth = false;
 
-  goalPeriodArray = Object.keys(GoalPeriod).map(k => ({key: k, value: GoalPeriod[k]}));
-  goalTypeArray = Object.keys(GoalType).map(k => ({key: k, value: GoalType[k]}));
-  monthArray = Object.keys(Month).map(k => ({key: k, value: Month[k]}));
-
-  constructor() { }
+  constructor(private dialogRef: MatDialogRef<AddGoalComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: { goal: Goal }) { }
 
   ngOnInit() {
+    if (this.data.goal) {
+      this.formGroup.patchValue(this.data.goal);
+    }
+  }
+
+  periodChange(period: MatSelectChange ) {
+    this.showMonth = period.value === GoalPeriod.MONTH;
   }
 
   delete() {
-
+    this.dialogRef.close(this.data.goal.id);
   }
 
   save() {
-
+    if (this.formGroup.valid) {
+      const saveGaol: Goal = this.formGroup.value;
+      this.dialogRef.close(saveGaol);
+    }
   }
 
   close() {
-
+    this.dialogRef.close();
   }
 
 }

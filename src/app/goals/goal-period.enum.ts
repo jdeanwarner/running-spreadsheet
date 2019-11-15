@@ -1,4 +1,4 @@
 export enum GoalPeriod {
-    MONTH = 'Month',
-    YEAR = 'Year'
+    MONTH = 'MONTH',
+    YEAR = 'YEAR'
 }

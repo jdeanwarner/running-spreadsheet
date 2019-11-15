@@ -59,7 +59,8 @@ export function reducer(state: ActivityState = initialState, action: fromActivit
             return state;
         }
         case fromActivities.LOAD_ACTIVITY_TYPES: {
-            // state.types.loading = true;
+            state.types.loading = true;
+            state.types.loaded = false;
             return state;
         }
         case fromActivities.LOAD_ACTIVITY_TYPES_SUCCESS: {

@@ -8,8 +8,8 @@
   <form [formGroup]="formGroup">
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
       <mat-form-field fxFlex="100">
-        <mat-select placeholder="Goal Period" formControlName="goalPeriod">
-          <mat-option *ngFor="let period of goalPeriodArray" [value]="period.key">
+        <mat-select placeholder="Goal Period" (selectionChange)="periodChange($event)">
+          <mat-option *ngFor="let period of GOAL_PERIOD | keyvalue" [value]="period.value" >
             {{period.value}}
           </mat-option>
         </mat-select>
@@ -18,16 +18,16 @@
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
       <mat-form-field fxFlex="100">
         <mat-select placeholder="Goal Type" formControlName="type">
-          <mat-option *ngFor="let type of goalTypeArray" [value]="type.key">
+          <mat-option *ngFor="let type of GOAL_TYPE | keyvalue" [value]="type.value">
             {{type.value}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center" *ngIf="formGroup.get('goalPeriod').value === GOAL_PERIOD.MONTH">
+    <div fxLayout="row wrap" fxLayoutAlign="start center" *ngIf="showMonth">
       <mat-form-field fxFlex="100">
         <mat-select placeholder="Month" formControlName="month">
-          <mat-option *ngFor="let month of monthArray" [value]="month.key">
+          <mat-option *ngFor="let month of MONTH | keyvalue" [value]="month.value">
             {{month.value}}
           </mat-option>
         </mat-select>
@@ -35,12 +35,12 @@
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
       <mat-form-field fxFlex="100">
-        <input matInput placeholder="Year" formControlName="year">
+        <input type="number" matInput placeholder="Year" formControlName="year">
       </mat-form-field>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
       <mat-form-field fxFlex="100">
-        <input matInput placeholder="Value" formControlName="value">
+        <input type="number" matInput placeholder="Value" formControlName="value">
       </mat-form-field>
     </div>
   </form>
