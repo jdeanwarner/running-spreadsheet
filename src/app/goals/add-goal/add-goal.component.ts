@@ -1,6 +1,4 @@
 import { Month } from './../../shared/month.enum';
-import { GoalType } from './../goal-type.enum';
-import { GoalPeriod } from './../goal-period.enum';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatSelectChange, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -35,8 +33,6 @@ export class AddGoalComponent implements OnInit {
     })
   });
 
-  GOAL_PERIOD = GoalPeriod;
-  GOAL_TYPE = GoalType;
   MONTHS = Month;
   showMonth = false;
 
@@ -47,10 +43,6 @@ export class AddGoalComponent implements OnInit {
     if (this.data.goal) {
       this.formGroup.patchValue(this.data.goal);
     }
-  }
-
-  periodChange(period: MatSelectChange ) {
-    this.showMonth = period.value === GoalPeriod.MONTH;
   }
 
   delete() {

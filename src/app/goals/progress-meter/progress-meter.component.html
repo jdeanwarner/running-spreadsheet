@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="space-around center" class="goal">
+<div fxLayout="row" fxLayoutAlign="space-around center" [ngClass]="getClass(status)">
     <div class="mat-h4" fxFlex="10">{{ title }}</div>
     <div fxFlex="10" style="text-align: center;">
         <span>{{ current }}</span>

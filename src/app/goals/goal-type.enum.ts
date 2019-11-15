@@ -1,5 +1,0 @@
-export enum GoalType {
-    MILES = 'MILES',
-    CROSS_TRAINING = 'CROSS_TRAINING',
-    HIGH_EFFORT_RUNS = 'HIGH_EFFORT_RUNS'
-}
