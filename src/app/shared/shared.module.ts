@@ -1,3 +1,4 @@
+import { RacesResolver } from './resolvers/races.resolver';
 import { YearSelectorComponent } from './year-selector/year-selector.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -55,7 +56,8 @@ import { LocationPickerComponent } from './location-picker/location-picker.compo
     RunTypePipe,
     ActivityService,
     ResultTimePipe,
-    MatIconModule
+    MatIconModule,
+    RacesResolver
   ],
   exports: [
     FlexLayoutModule,

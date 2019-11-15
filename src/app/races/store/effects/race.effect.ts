@@ -2,10 +2,9 @@ import { Race } from 'src/app/shared/race';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { map, mergeMap, catchError, filter, switchMap } from 'rxjs/operators';
+import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
 import * as raceActions from '../actions/race.actions';
-import { ROUTER_NAVIGATION, RouterNavigationAction } from '@ngrx/router-store';
 import { DocumentReference } from '@angular/fire/firestore';
 import { ActivityService } from 'src/app/shared/activity.service';
 
@@ -19,10 +18,7 @@ export class RaceEffects {
 
   @Effect()
   loadRacesOnRouteChange$: Observable<Action> = this.actions$.pipe(
-      ofType(ROUTER_NAVIGATION),
-      filter((routeChangeAction: RouterNavigationAction<any>) =>
-        routeChangeAction.payload.event.url.includes('goals') ||
-        routeChangeAction.payload.event.url.includes('races')),
+      ofType(raceActions.LOAD_RACES),
       switchMap(() => {
         return this.activityService.getRaces()
           .pipe(
