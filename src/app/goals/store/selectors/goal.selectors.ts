@@ -7,6 +7,7 @@ import * as fromFeature from '../reducers';
 import * as fromGoal from '../reducers/goal.reducer';
 import { GoalType } from '../../goal-type.enum';
 import { DefaultProjectorFn } from '@ngrx/store/src/selector';
+import { CountActivityGoal } from '../../count-activity.goal';
 
 export const getGoalsState = createSelector(
     fromFeature.getGoalState,
@@ -68,6 +69,8 @@ export const getGoalResultsMap =
                 case GoalType.SUM_PROPERTY:
                     goalMap[goal.id] = sumPropertyGoal(<SumPropertyGoal>goal, activities);
                     break;
+                case GoalType.COUNT_ACTIVITY:
+                    goalMap[goal.id] = countActivityGoal(<CountActivityGoal>goal, activities);
             }
         });
         return goalMap;
@@ -78,6 +81,12 @@ function sumPropertyGoal(goal: SumPropertyGoal, activities: Activity[]): number 
         .filter((activity: Activity) => activity.activityType === goal.activityType)
         .map((activity: any) => <number>activity[goal.property])
         .reduce((prev, curr) => prev + curr);
+}
+
+function countActivityGoal(goal: CountActivityGoal, activities: Activity[]): number {
+    return activities
+        .filter((activity: Activity) => goal.activityTypes.includes(activity.activityType))
+        .length;
 }
 
 
