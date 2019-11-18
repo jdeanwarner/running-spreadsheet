@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GoalsComponent } from './goals.component';
 import { SharedModule } from '../shared/shared.module';
 import { GoalsRoutingModule } from './goals-routing.module';
-import { YearGoalsComponent } from './year-goals/year-goals.component';
+import { GoalsListComponent } from './goals-list/goals-list.component';
 import { MonthlyGoalsComponent } from './monthly-goals/monthly-goals.component';
 import { PrsComponent } from './prs/prs.component';
 import { FiftyStatesComponent } from './fifty-states/fifty-states.component';
@@ -19,7 +19,7 @@ import { ProgressMeterComponent } from './progress-meter/progress-meter.componen
 @NgModule({
   declarations: [
     GoalsComponent,
-    YearGoalsComponent,
+    GoalsListComponent,
     MonthlyGoalsComponent,
     PrsComponent,
     FiftyStatesComponent,

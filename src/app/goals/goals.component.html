@@ -2,18 +2,11 @@
   <div fxFlex="58">
     <mat-card>
       <mat-card-content>
-        <div fxLayout="row wrap" fxLayoutAlign="end end" class="margin-top--10px">
-          {{ params$ | async | json }}
-          <!-- <app-year-selector [year]="(params$ | async).state.params['year']" (change)="changeYear($event)"></app-year-selector> -->
-        </div>
-        <app-year-goals 
-          [goals]="(goals$ | async)[0]"
-          [miles]="yearMiles$ | async"
-          [crossTraining]="crossTraining$ | async"
-          [highEffortRuns]="highEffortRuns$ | async">
-        </app-year-goals>
-        <app-monthly-goals
-          [monthlyGoalMap]="(goals$ | async)[0].months"></app-monthly-goals>
+        <app-goals-list
+          [name]="'Current Goals'"
+          [list]="goals$ | async"
+          [results]="resultsMap$ | async">
+        </app-goals-list>
         <div fxLayout="row" fxLayoutAlign="end center" >
           <span class="fill-space"></span>
           <button mat-button color="primary" (click)="addGoal()">Add Goal</button>

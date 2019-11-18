@@ -1,8 +1,12 @@
+import { GoalType } from './goal-type.enum';
+import { firestore } from 'firebase';
+
 export class Goal {
     id: string;
-    year: number;
-    miles: number;
-    crossTraining: number;
-    highEffortRuns: number;
-    months: {[month: string]: number};
+    name: string;
+    startDate: firestore.Timestamp;
+    endDate: firestore.Timestamp;
+    type: GoalType;
+    value: number;
+    pinned: boolean;
 }

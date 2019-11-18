@@ -38,6 +38,8 @@ export class GoalsComponent implements OnInit {
   crossTraining$: Observable<number>;
   highEffortRuns$: Observable<number>;
 
+  resultsMap$: Observable<{[ goalName: string ]: number}>;
+
   constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromStore.GoalState>,
     private raceStore: Store<fromRaces.RaceState>, private logStore: Store<fromLog.LogState>,
     public dialog: MatDialog, private router: Router) {
@@ -58,6 +60,8 @@ export class GoalsComponent implements OnInit {
     this.yearMiles$ = this.logStore.select(fromLog.getTotalRunningMiles);
     this.crossTraining$ = this.logStore.select(fromLog.getCountCrossTrainingActivities);
     this.highEffortRuns$ = this.logStore.select(fromLog.getCountHighEffortRuns);
+
+    this.resultsMap$ = this.store.select(fromStore.getGoalResultsMap(fromLog.getAllActivities));
   }
 
   ngOnInit() {

@@ -19,6 +19,7 @@ import { ResultTimePipe } from './result-time.pipe';
 import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-date-picker.component';
 import { LocationPickerComponent } from './location-picker/location-picker.component';
 import { GoalsResolver } from './resolvers/goals.resolver';
+import { RoundPipe } from './round.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { GoalsResolver } from './resolvers/goals.resolver';
     ResultTimePipe,
     TimestampDatePickerComponent,
     LocationPickerComponent,
-    YearSelectorComponent
+    YearSelectorComponent,
+    RoundPipe
   ],
   imports: [
     FlexLayoutModule,
@@ -87,7 +89,8 @@ import { GoalsResolver } from './resolvers/goals.resolver';
     TimestampDatePickerComponent,
     LocationPickerComponent,
     YearSelectorComponent,
-    MatProgressBarModule
+    MatProgressBarModule,
+    RoundPipe
   ]
 })
 export class SharedModule { }

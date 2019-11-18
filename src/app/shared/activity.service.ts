@@ -108,10 +108,7 @@ export class ActivityService {
 
   getGoals(year: number): Observable<Goal[]> {
     console.log('getting goals');
-    return this.db.collection<Goal>('goal', ref =>
-      ref.where('year', '==', 2019)
-        .limit(1)
-    ).snapshotChanges()
+    return this.db.collection<Goal>('goals').snapshotChanges()
     .pipe(
       map((actions: DocumentChangeAction<Goal>[]) => {
         console.log(actions);

@@ -1,0 +1,8 @@
+<mat-card-title>{{ name }}</mat-card-title>
+<mat-card-content>
+  <app-progress-meter *ngFor="let goal of list"
+    class="goal" [title]="goal.name" 
+    [goal]="goal.value" [current]="results[goal.id]" 
+    [status]="getStatus(goal, results[goal.id])">
+</app-progress-meter>
+</mat-card-content>
