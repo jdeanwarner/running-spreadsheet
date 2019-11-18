@@ -8,6 +8,7 @@ import * as fromGoal from '../reducers/goal.reducer';
 import { GoalType } from '../../goal-type.enum';
 import { DefaultProjectorFn } from '@ngrx/store/src/selector';
 import { CountActivityGoal } from '../../count-activity.goal';
+import { CountPropertyGoal } from '../../count-property.goal';
 
 export const getGoalsState = createSelector(
     fromFeature.getGoalState,
@@ -71,6 +72,10 @@ export const getGoalResultsMap =
                     break;
                 case GoalType.COUNT_ACTIVITY:
                     goalMap[goal.id] = countActivityGoal(<CountActivityGoal>goal, activities);
+                    break;
+                case GoalType.COUNT_PROPERTY:
+                    goalMap[goal.id] = countPropertyGoal(<CountPropertyGoal>goal, activities);
+                    break;
             }
         });
         return goalMap;
@@ -89,6 +94,11 @@ function countActivityGoal(goal: CountActivityGoal, activities: Activity[]): num
         .length;
 }
 
+function countPropertyGoal(goal: CountPropertyGoal, activities: Activity[]): number {
+    return activities
+        .filter((activity: Activity) => goal.propertyValues.includes(activity[goal.property]))
+        .length;
+}
 
 export const getGoalsLoaded = createSelector(getGoalsState, fromGoal.getGoalsLoaded);
 export const getGoalsLoading = createSelector(getGoalsState, fromGoal.getGoalsLoading);

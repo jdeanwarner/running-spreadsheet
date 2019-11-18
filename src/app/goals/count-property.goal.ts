@@ -4,5 +4,5 @@ import { Goal } from './goal';
 export class CountPropertyGoal extends Goal {
     activityType: ActivityTypeEnum;
     property: string;
-    values: string[];
+    propertyValues: string[];
 }
