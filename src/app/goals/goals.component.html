@@ -3,9 +3,9 @@
     <mat-card>
       <mat-card-content>
         <app-goals-list
-          [name]="'Current Goals'"
-          [list]="goals$ | async"
-          [results]="resultsMap$ | async">
+          [name]="'Active Goals'"
+          [list]="activeGoals$ | async"
+          [results]="activeGoalResults$ | async">
         </app-goals-list>
         <div fxLayout="row" fxLayoutAlign="end center" >
           <span class="fill-space"></span>

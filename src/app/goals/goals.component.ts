@@ -33,12 +33,15 @@ export class GoalsComponent implements OnInit {
   hundredMs$: Observable<Race[]>;
 
   params$: Observable<RouterReducerState<fromRoot.RouterStateUrl>>;
-  goals$: Observable<Goal[]>;
-  yearMiles$: Observable<number>;
-  crossTraining$: Observable<number>;
-  highEffortRuns$: Observable<number>;
+  pinnedGoals$: Observable<Goal[]>;
+  activeGoals$: Observable<Goal[]>;
+  futureGoals$: Observable<Goal[]>;
+  pastGoals$: Observable<Goal[]>;
 
-  resultsMap$: Observable<{[ goalName: string ]: number}>;
+  pinnedGoalResults$: Observable<{[ goalName: string ]: number}>;
+  activeGoalResults$: Observable<{[ goalName: string ]: number}>;
+  futureGoalResults$: Observable<{[ goalName: string ]: number}>;
+  pastGoalResults$: Observable<{[ goalName: string ]: number}>;
 
   constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromStore.GoalState>,
     private raceStore: Store<fromRaces.RaceState>, private logStore: Store<fromLog.LogState>,
@@ -56,12 +59,15 @@ export class GoalsComponent implements OnInit {
     this.hundredKs$ = this.raceStore.select(fromRaces.get100Ks);
     this.hundredMs$ = this.raceStore.select(fromRaces.get100Milers);
 
-    this.goals$ = this.store.select(fromStore.getGoalsData);
-    this.yearMiles$ = this.logStore.select(fromLog.getTotalRunningMiles);
-    this.crossTraining$ = this.logStore.select(fromLog.getCountCrossTrainingActivities);
-    this.highEffortRuns$ = this.logStore.select(fromLog.getCountHighEffortRuns);
+    this.pinnedGoals$ = this.store.select(fromStore.getPinnedGoals);
+    this.activeGoals$ = this.store.select(fromStore.getActiveGoals);
+    this.futureGoals$ = this.store.select(fromStore.getFutureGoals);
+    this.pastGoals$ = this.store.select(fromStore.getPastGoals);
 
-    this.resultsMap$ = this.store.select(fromStore.getGoalResultsMap(fromLog.getAllActivities));
+    this.pinnedGoalResults$ = this.store.select(fromStore.getGoalResultsMap(fromLog.getAllActivities, fromStore.getPinnedGoals));
+    this.activeGoalResults$ = this.store.select(fromStore.getGoalResultsMap(fromLog.getAllActivities, fromStore.getActiveGoals));
+    this.futureGoalResults$ = this.store.select(fromStore.getGoalResultsMap(fromLog.getAllActivities, fromStore.getFutureGoals));
+    this.pastGoalResults$ = this.store.select(fromStore.getGoalResultsMap(fromLog.getAllActivities, fromStore.getPastGoals));
   }
 
   ngOnInit() {

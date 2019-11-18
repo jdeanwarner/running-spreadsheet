@@ -1,8 +1,3 @@
-import { Swim } from './../../../shared/activities/swim';
-import { Kettlebell } from 'src/app/shared/activities/kettlebell';
-import { Bike } from './../../../shared/activities/bike';
-import { Run } from 'src/app/shared/activities/run';
-import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
 import { Activity } from 'src/app/shared/activities/activity';
 import { SumPropertyGoal } from './../../sum-property.goal';
 import { Goal } from './../../goal';
@@ -10,8 +5,6 @@ import { createSelector, MemoizedSelector } from '@ngrx/store';
 
 import * as fromFeature from '../reducers';
 import * as fromGoal from '../reducers/goal.reducer';
-import * as fromActivities from '../../../run-log/store';
-import { Type } from '@angular/compiler';
 import { GoalType } from '../../goal-type.enum';
 import { DefaultProjectorFn } from '@ngrx/store/src/selector';
 
@@ -36,9 +29,38 @@ export const getGoalsEntities = createSelector(
     }
 );
 
-export const getGoalResultsMap = (activitySelector: MemoizedSelector<object, Activity[], DefaultProjectorFn<Activity[]>>) => createSelector(
-    activitySelector,
+export const getPinnedGoals = createSelector(
     getGoalsData,
+    (goals: Goal[]) => goals.filter((goal: Goal) => goal.pinned)
+);
+
+export const getActiveGoals = createSelector(
+    getGoalsData,
+    (goals: Goal[]) => goals.filter((goal: Goal) =>
+        new Date().getTime() > goal.startDate.toDate().getTime() &&
+        new Date().getTime() < goal.endDate.toDate().getTime() &&
+        !goal.pinned)
+);
+
+export const getPastGoals = createSelector(
+    getGoalsData,
+    (goals: Goal[]) => goals.filter((goal: Goal) =>
+        new Date().getTime() > goal.endDate.toDate().getTime() &&
+        !goal.pinned)
+);
+
+export const getFutureGoals = createSelector(
+    getGoalsData,
+    (goals: Goal[]) => goals.filter((goal: Goal) =>
+        new Date().getTime() < goal.startDate.toDate().getTime() &&
+        !goal.pinned)
+);
+
+export const getGoalResultsMap =
+    (activitySelector: MemoizedSelector<object, Activity[], DefaultProjectorFn<Activity[]>>,
+    goalSelector: MemoizedSelector<object, Goal[], DefaultProjectorFn<Goal[]>>) => createSelector(
+    activitySelector,
+    goalSelector,
     (activities, goals) => {
         const goalMap: {[ id: string ]: number} = {};
         goals.map((goal: Goal) => {
