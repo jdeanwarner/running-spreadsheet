@@ -24,7 +24,7 @@ export class ProgressMeterComponent implements OnInit {
 
   getClass(status: GoalStatus) {
     return status === GoalStatus.COMPLETE ? 'completed' :
-      status === GoalStatus.FAILED ? 'failed' :
+      status === GoalStatus.BEHIND_PACE ? 'behind-pace' :
       status === GoalStatus.ON_PACE ? 'on-pace' : 'failed';
   }
 

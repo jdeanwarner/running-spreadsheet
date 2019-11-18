@@ -31,9 +31,9 @@
 }
 
 ::ng-deep .behind-pace .mat-progress-bar-buffer {
-    background-color: lightyellow;
+    background-color: rgb(253, 242, 176);
 }
 
 ::ng-deep .behind-pace .mat-progress-bar-fill::after {
-    background-color: yellow;
+    background-color: rgb(255, 166, 0);
 }
