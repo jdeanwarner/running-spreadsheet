@@ -18,18 +18,30 @@ export class ActivityEffects {
   ) {}
 
   @Effect()
-  loadActivities$: Observable<Action> = this.actions$.pipe(
-      ofType(activityActions.LOAD_ACTIVITY),
-      switchMap((loadAction: activityActions.LoadActivities) => {
+  loadActivitiesByYear$: Observable<Action> = this.actions$.pipe(
+      ofType(activityActions.LOAD_ACTIVITIES_BY_YEAR),
+      switchMap((loadAction: activityActions.LoadActivitiesByYear) => {
         return this.activityService.getActivitiesByYear(parseInt(loadAction.playload, 10))
           .pipe(
-            map((activityTypes: Activity[]) => (new activityActions.LoadActivitiesSuccess(activityTypes))),
-            catchError(error => of(new activityActions.LoadActivitiesFail(error)))
+            map((activityTypes: Activity[]) => (new activityActions.LoadActivitiesByYearSuccess(activityTypes))),
+            catchError(error => of(new activityActions.LoadActivitiesByYearFail(error)))
           );
         }
       )
   );
 
+  @Effect()
+  loadAllActivities$: Observable<Action> = this.actions$.pipe(
+      ofType(activityActions.LOAD_ALL_ACTIVITIES),
+      switchMap(() => {
+        return this.activityService.getAllActivities()
+          .pipe(
+            map((activityTypes: Activity[]) => (new activityActions.LoadAllActivitiesSuccess(activityTypes))),
+            catchError(error => of(new activityActions.LoadAllActivitiesFail(error)))
+          );
+        }
+      )
+  );
 
   @Effect()
   loadActivityTypes$: Observable<Action> =  this.actions$.pipe(

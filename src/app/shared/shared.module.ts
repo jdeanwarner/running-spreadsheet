@@ -1,4 +1,5 @@
-import { ActivitiesResolver } from './resolvers/activities.resolver';
+import { AllActivitiesResolver } from './resolvers/all-activities.resolver';
+import { ActivitiesByYearResolver } from './resolvers/activities-by-year.resolver';
 import { RacesResolver } from './resolvers/races.resolver';
 import { YearSelectorComponent } from './year-selector/year-selector.component';
 import { NgModule } from '@angular/core';
@@ -62,7 +63,8 @@ import { RoundPipe } from './round.pipe';
     ResultTimePipe,
     MatIconModule,
     RacesResolver,
-    ActivitiesResolver,
+    ActivitiesByYearResolver,
+    AllActivitiesResolver,
     GoalsResolver
   ],
   exports: [

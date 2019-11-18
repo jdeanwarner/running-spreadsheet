@@ -1,4 +1,4 @@
-import { LoadActivities } from './../../run-log/store/actions/activity.action';
+import { LoadAllActivities } from './../../run-log/store/actions/activity.action';
 import * as fromStore from '../../run-log/store';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
@@ -6,12 +6,12 @@ import { Store } from '@ngrx/store';
 
 
 @Injectable()
-export class ActivitiesResolver implements Resolve<void> {
+export class AllActivitiesResolver implements Resolve<void> {
 
     constructor(private store: Store<fromStore.LogState>) {}
 
-    resolve(route: ActivatedRouteSnapshot): void {
-        this.store.dispatch(new LoadActivities(route.paramMap.get('year')));
+    resolve(): void {
+        this.store.dispatch(new LoadAllActivities());
     }
 
 }

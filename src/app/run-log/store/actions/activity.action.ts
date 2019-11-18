@@ -3,9 +3,13 @@ import { Activity } from 'src/app/shared/activities/activity';
 import { ActivityType } from 'src/app/shared/activities/activity-type';
 import { DocumentReference } from '@angular/fire/firestore';
 
-export const LOAD_ACTIVITY = '[Log] Load Activity';
-export const LOAD_ACTIVITY_SUCCESS = '[Log] Load Activity Success';
-export const LOAD_ACTIVITY_FAIL = '[Log] Load Activity Fail';
+export const LOAD_ACTIVITIES_BY_YEAR = '[Log] Load Activity By Year';
+export const LOAD_ACTIVITIES_BY_YEAR_SUCCESS = '[Log] Load Activity By Year Success';
+export const LOAD_ACTIVITIES_BY_YEAR_FAIL = '[Log] Load Activity By Year Fail';
+
+export const LOAD_ALL_ACTIVITIES = '[Log] Load All Activity';
+export const LOAD_ALL_ACTIVITIES_SUCCESS = '[Log] Load All Activity Success';
+export const LOAD_ALL_ACTIVITIES_FAIL = '[Log] Load All Activity Fail';
 
 export const LOAD_ACTIVITY_TYPES = '[Log] Load Activity Types';
 export const LOAD_ACTIVITY_TYPES_SUCCESS = '[Log] Load Activity Types Success';
@@ -23,20 +27,36 @@ export const DELETE_ACTIVITY = '[Log] Delete Activity';
 export const DELETE_ACTIVITY_SUCCESS = '[Log] Delete Activity Success';
 export const DELETE_ACTIVITY_FAIL = '[Log] Delete Activity Fail';
 
-export class LoadActivities implements Action {
-    readonly type = LOAD_ACTIVITY;
+export class LoadActivitiesByYear implements Action {
+    readonly type = LOAD_ACTIVITIES_BY_YEAR;
 
     constructor(public playload: string) {}
 }
 
-export class LoadActivitiesSuccess implements Action {
-    readonly type = LOAD_ACTIVITY_SUCCESS;
+export class LoadActivitiesByYearSuccess implements Action {
+    readonly type = LOAD_ACTIVITIES_BY_YEAR_SUCCESS;
 
     constructor(public playload: Activity[]) {}
 }
 
-export class LoadActivitiesFail implements Action {
-    readonly type = LOAD_ACTIVITY_FAIL;
+export class LoadActivitiesByYearFail implements Action {
+    readonly type = LOAD_ACTIVITIES_BY_YEAR_FAIL;
+
+    constructor(public playload: any) {}
+}
+
+export class LoadAllActivities implements Action {
+    readonly type = LOAD_ALL_ACTIVITIES;
+}
+
+export class LoadAllActivitiesSuccess implements Action {
+    readonly type = LOAD_ALL_ACTIVITIES_SUCCESS;
+
+    constructor(public playload: Activity[]) {}
+}
+
+export class LoadAllActivitiesFail implements Action {
+    readonly type = LOAD_ALL_ACTIVITIES_FAIL;
 
     constructor(public playload: any) {}
 }
@@ -108,9 +128,12 @@ export class DeleteActivityFail implements Action {
 
 
 export type ActivityActions =
-    LoadActivities |
-    LoadActivitiesSuccess |
-    LoadActivitiesFail |
+    LoadActivitiesByYear |
+    LoadActivitiesByYearSuccess |
+    LoadActivitiesByYearFail |
+    LoadAllActivities |
+    LoadAllActivitiesSuccess |
+    LoadAllActivitiesFail |
     LoadType |
     LoadTypeSuccess |
     LoadTypeFail |

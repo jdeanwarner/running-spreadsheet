@@ -82,22 +82,28 @@ export const getGoalResultsMap =
     });
 
 function sumPropertyGoal(goal: SumPropertyGoal, activities: Activity[]): number {
-    return activities
+    return getActivitiesInRange(goal, activities)
         .filter((activity: Activity) => activity.activityType === goal.activityType)
         .map((activity: any) => <number>activity[goal.property])
         .reduce((prev, curr) => prev + curr);
 }
 
 function countActivityGoal(goal: CountActivityGoal, activities: Activity[]): number {
-    return activities
+    return getActivitiesInRange(goal, activities)
         .filter((activity: Activity) => goal.activityTypes.includes(activity.activityType))
         .length;
 }
 
 function countPropertyGoal(goal: CountPropertyGoal, activities: Activity[]): number {
-    return activities
+    return getActivitiesInRange(goal, activities)
         .filter((activity: Activity) => goal.propertyValues.includes(activity[goal.property]))
         .length;
+}
+
+function getActivitiesInRange<T extends Goal>(goal: T, activities: Activity[]): Activity[] {
+    return activities.filter((activity: Activity) =>
+        activity.date.toDate().getTime() >= goal.startDate.toDate().getTime() &&
+        activity.date.toDate().getTime() <= goal.endDate.toDate().getTime());
 }
 
 export const getGoalsLoaded = createSelector(getGoalsState, fromGoal.getGoalsLoaded);

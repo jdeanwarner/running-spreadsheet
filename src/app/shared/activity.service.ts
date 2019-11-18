@@ -32,6 +32,19 @@ export class ActivityService {
     );
   }
 
+  getAllActivities(): Observable<Activity[]> {
+    return this.db.collection<Activity>('runs').snapshotChanges()
+    .pipe(
+      map((actions: DocumentChangeAction<Activity>[]) => {
+        return actions.map((a: DocumentChangeAction<Activity>) => {
+          const data: Activity = a.payload.doc.data();
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      })
+    );
+  }
+
   getActivityTypes(): Observable<ActivityType[]> {
     return this.db.collection<ActivityType>('activityType').valueChanges();
   }

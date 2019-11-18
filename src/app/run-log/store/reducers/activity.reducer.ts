@@ -28,32 +28,53 @@ export const initialState: ActivityState = {
     },
 };
 
+function getActivityEntities(activities: Activity[]) {
+    return activities.reduce(
+        (map: { [id: number]: Activity }, activity) => {
+            return {
+                ... map,
+                [activity.id]: activity
+            };
+    }, {});
+}
+
 export function reducer(state: ActivityState = initialState, action: fromActivities.ActivityActions):
     ActivityState {
     switch (action.type) {
-        case fromActivities.LOAD_ACTIVITY: {
+        case fromActivities.LOAD_ACTIVITIES_BY_YEAR: {
             state.activities.loading = true;
             return state;
         }
-        case fromActivities.LOAD_ACTIVITY_SUCCESS: {
-            const activities = action.playload;
-            const entities = activities.reduce(
-                (map: { [id: number]: Activity }, activity) => {
-                    return {
-                        ... map,
-                        [activity.id]: activity
-                    };
-                }, {});
+        case fromActivities.LOAD_ACTIVITIES_BY_YEAR_SUCCESS: {
             return {
                 ... state,
                 activities: {
                     loading: false,
                     loaded: true,
-                    entities : entities
+                    entities : getActivityEntities(action.playload)
                 }
             };
         }
-        case fromActivities.LOAD_ACTIVITY_FAIL: {
+        case fromActivities.LOAD_ACTIVITIES_BY_YEAR_FAIL: {
+            state.activities.loading = false;
+            state.activities.loaded = false;
+            return state;
+        }
+        case fromActivities.LOAD_ALL_ACTIVITIES: {
+            state.activities.loading = true;
+            return state;
+        }
+        case fromActivities.LOAD_ALL_ACTIVITIES_SUCCESS: {
+            return {
+                ... state,
+                activities: {
+                    loading: false,
+                    loaded: true,
+                    entities : getActivityEntities(action.playload)
+                }
+            };
+        }
+        case fromActivities.LOAD_ALL_ACTIVITIES_FAIL: {
             state.activities.loading = false;
             state.activities.loaded = false;
             return state;
