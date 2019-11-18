@@ -8,7 +8,9 @@
         </div>
         <app-year-goals 
           [goals]="(goals$ | async)[0]"
-          [yearMiles]="yearMiles$ | async">
+          [miles]="yearMiles$ | async"
+          [crossTraining]="crossTraining$ | async"
+          [highEffortRuns]="highEffortRuns$ | async">
         </app-year-goals>
         <app-monthly-goals
           [monthlyGoalMap]="(goals$ | async)[0].months"></app-monthly-goals>

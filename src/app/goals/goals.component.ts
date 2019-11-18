@@ -35,6 +35,8 @@ export class GoalsComponent implements OnInit {
   params$: Observable<RouterReducerState<fromRoot.RouterStateUrl>>;
   goals$: Observable<Goal[]>;
   yearMiles$: Observable<number>;
+  crossTraining$: Observable<number>;
+  highEffortRuns$: Observable<number>;
 
   constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromStore.GoalState>,
     private raceStore: Store<fromRaces.RaceState>, private logStore: Store<fromLog.LogState>,
@@ -54,6 +56,8 @@ export class GoalsComponent implements OnInit {
 
     this.goals$ = this.store.select(fromStore.getGoalsData);
     this.yearMiles$ = this.logStore.select(fromLog.getTotalRunningMiles);
+    this.crossTraining$ = this.logStore.select(fromLog.getCountCrossTrainingActivities);
+    this.highEffortRuns$ = this.logStore.select(fromLog.getCountHighEffortRuns);
   }
 
   ngOnInit() {

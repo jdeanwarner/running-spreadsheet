@@ -11,7 +11,9 @@ import { GoalStatus } from '../goal-status.enum';
 export class YearGoalsComponent implements OnInit {
 
   @Input() goals: Goal;
-  @Input() yearMiles: number;
+  @Input() miles: number;
+  @Input() crossTraining: number;
+  @Input() highEffortRuns: number;
 
   constructor() { }
 
