@@ -33,17 +33,10 @@ export class ActivityEffects {
   loadAllActivities$: Observable<Action> = createEffect(() => this.actions$.pipe(
       ofType(activityActions.LOAD_ALL_ACTIVITIES),
       switchMap(() => {
-        console.log('running');
         return this.activityService.getAllActivities()
           .pipe(
-            map((activityTypes: Activity[]) => {
-              console.log('success');
-              return (new activityActions.LoadAllActivitiesSuccess(activityTypes));
-            }),
-            catchError(error => {
-              console.error(error);
-              return of(new activityActions.LoadAllActivitiesFail(error));
-            })
+            map((activityTypes: Activity[]) => new activityActions.LoadAllActivitiesSuccess(activityTypes)),
+            catchError(error => of(new activityActions.LoadAllActivitiesFail(error)))
           );
         }
       )

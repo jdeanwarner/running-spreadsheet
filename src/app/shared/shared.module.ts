@@ -31,6 +31,7 @@ import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-
 import { LocationPickerComponent } from './location-picker/location-picker.component';
 import { GoalsResolver } from './resolvers/goals.resolver';
 import { RoundPipe } from './round.pipe';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { RoundPipe } from './round.pipe';
     MatTableModule,
     MatIconModule,
     MatMenuModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    AngularFireAuthModule
   ],
   providers: [
     TimestampDatePipe,

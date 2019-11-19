@@ -1,3 +1,4 @@
+import { AuthService } from './shared/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
     .pipe(
       map(result => result.matches)
     );
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver, public auth: AuthService) {
 
   }
 

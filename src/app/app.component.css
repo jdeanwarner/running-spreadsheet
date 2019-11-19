@@ -25,3 +25,7 @@ mat-sidenav-content {
 .sidenav {
     width: 150px;
 }
+
+.fill-space {
+    flex: 1 1 auto;
+}

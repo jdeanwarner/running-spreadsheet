@@ -8,14 +8,21 @@
             <i class="material-icons">menu</i>
         </button>
     </div>
-    <span>Jordan's Workouts</span>
+    <span>Workout Tracker</span>
     <div fxShow="false" fxShow.gt-sm class="margin-left-10px">
         <button mat-button routerLink="/log/2019" routerLinkActive="active">Log</button>
         <button mat-button routerLink="/schedule" routerLinkActive="active">Schedule</button>
         <button mat-button routerLink="/races" routerLinkActive="active">Races</button>
         <button mat-button routerLink="/goals" routerLinkActive="active">Goals</button>
+        
     </div>
+    <span class="fill-space"></span>
+    <button *ngIf="auth.user$ | async as user; else login" mat-button (click)="auth.signOut()">Sign Out</button>
+    <ng-template #login>
+        <button mat-button (click)="auth.googleSignin()">Login with Google</button>
+    </ng-template>
 </mat-toolbar>
+
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav
         #drawer
