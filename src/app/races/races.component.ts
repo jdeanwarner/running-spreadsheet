@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../shared/activity.service';
 import { Race } from '../shared/race';
 import { AddRaceComponent } from './add-race/add-race.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';

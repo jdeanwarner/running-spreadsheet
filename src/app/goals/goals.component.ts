@@ -7,7 +7,7 @@ import * as fromStore from './store';
 import * as fromRaces from '../races/store';
 import { Store } from '@ngrx/store';
 import { Race } from '../shared/race';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Goal } from './goal';
 import { RouterReducerState } from '@ngrx/router-store';
 import { Router } from '@angular/router';

@@ -2,7 +2,7 @@ import { Activity } from 'src/app/shared/activities/activity';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Season } from 'src/app/shared/season';
 import { TrainingBlock } from 'src/app/shared/training-block';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { AddSeasonComponent } from '../add-season/add-season.component';
 
 @Component({

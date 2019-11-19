@@ -2,7 +2,7 @@ import { Activity } from 'src/app/shared/activities/activity';
 import { AddSeasonComponent } from './../add-season/add-season.component';
 import { Season } from './../../shared/season';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list',

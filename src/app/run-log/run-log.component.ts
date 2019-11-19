@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AddActivityComponent } from './add-activity/add-activity.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Activity } from '../shared/activities/activity';
 import { ActivityType } from '../shared/activities/activity-type';
 import { RunType } from '../shared/activities/run-type';

@@ -8,7 +8,8 @@ import { GoalType } from './../goal-type.enum';
 import { Month } from './../../shared/month.enum';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatSelectChange, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
 import { Goal } from '../goal';
 
 @Component({

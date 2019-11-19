@@ -1,6 +1,6 @@
 import { Activity } from 'src/app/shared/activities/activity';
 import { Component, OnInit, Input } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { EditWeekScheduleComponent } from '../edit-week-schedule/edit-week-schedule.component';
 
 @Component({
