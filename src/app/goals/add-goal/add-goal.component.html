@@ -8,30 +8,56 @@
   <form [formGroup]="formGroup">
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
       <mat-form-field fxFlex="100">
-        <input type="number" matInput placeholder="Year" formControlName="year">
+        <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start center">
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Goal Type" formControlName="type">
+            <mat-option *ngFor="let type of GOAL_TYPE | keyvalue" [value]="type.key" (onSelectionChange)="changeGoalType(type.value)">
+              {{ type.value }}
+            </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
-      <mat-form-field fxFlex="100">
-        <input type="number" matInput placeholder="Miles" formControlName="miles">
-      </mat-form-field>
+      <app-timestamp-date-picker placeholder="Start Date" formControlName="startDate" fxFlex="100"></app-timestamp-date-picker>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start center" >
-      <mat-form-field fxFlex="100">
-        <input type="number" matInput placeholder="Cross Training" formControlName="crossTraining">
-      </mat-form-field>
+      <app-timestamp-date-picker placeholder="End Date" formControlName="endDate" fxFlex="100"></app-timestamp-date-picker>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start center" >
-      <mat-form-field fxFlex="100">
-        <input type="number" matInput placeholder="High Effort Runs" formControlName="highEffortRuns">
-      </mat-form-field>
-    </div>
-    <div [formGroup]="formGroup.controls['months']">
-      <div fxLayout="row wrap" fxLayoutAlign="start center" *ngFor="let month of MONTHS | keyvalue">
-        <mat-form-field fxFlex="100" >
-          <input type="number" matInput placeholder="{{ month.value }}" formControlName="{{ month.key }}">
-        </mat-form-field>
+    <div [ngSwitch]="formGroup.get('type').value">
+      <div *ngSwitchCase="GOAL_TYPE.COUNT_ACTIVITY">
+
       </div>
+      <div *ngSwitchCase="GOAL_TYPE.COUNT_PROPERTY">
+        
+      </div>
+      <div *ngSwitchCase="GOAL_TYPE.SUM_PROPERTY">
+        <div fxLayout="row wrap" fxLayoutAlign="start center">
+          <mat-form-field fxFlex="100">
+            <mat-select placeholder="Activity Type" formControlName="activityType">
+                <mat-option *ngFor="let type of ACTIVITY_TYPES | keyvalue" [value]="type.key" (onSelectionChange)="getProperties(type.value)">
+                  {{ type.value }}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="start center">
+          <mat-form-field fxFlex="100">
+            <mat-select placeholder="Property" formControlName="property">
+                <mat-option *ngFor="let prop of activityProperties" [value]="prop">
+                  {{ prop }}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start center" >
+      <mat-form-field fxFlex="100">
+        <input type="number" matInput placeholder="Value" formControlName="value">
+      </mat-form-field>
     </div>
   </form>
 </mat-dialog-content>

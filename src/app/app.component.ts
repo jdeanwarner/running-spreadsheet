@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import * as fromRoot from './store';
 
 @Component({
   selector: 'app-root',

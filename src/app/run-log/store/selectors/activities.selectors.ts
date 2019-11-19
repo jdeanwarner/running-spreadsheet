@@ -1,3 +1,4 @@
+import { LogState } from './../reducers/index';
 import { getRouterState } from '../../../store/reducers/index';
 import { Month } from 'src/app/shared/month.enum';
 import { Activity } from '../../../shared/activities/activity';
@@ -31,8 +32,16 @@ export const getAllActivities = createSelector(
     }
 );
 
-export const getActivitiesMonthMap = createSelector(
+export const getActivitiesByYear = createSelector(
     getAllActivities,
+    fromFeature.getLogState,
+    (data: Activity[], state: LogState) =>
+        data.filter((activity: Activity) => activity.date.toDate().getFullYear() === state.year.data)
+
+);
+
+export const getActivitiesMonthMap = createSelector(
+    getActivitiesByYear,
     (data: Activity[]) => {
         const entities: {[month: string]: Activity[]} = {};
         const months = Object.values(Month);
@@ -72,7 +81,7 @@ export const getRunTypeMap = createSelector(
         data
             .filter((activiy: Activity) => activiy.activityType === ActivityTypeEnum.RUN)
             .filter((activiy: Activity) => (<Run>activiy).runType)
-            .forEach((activiy: Activity) => entities[(<Run>activiy).runType] ?
+            .map((activiy: Activity) => entities[(<Run>activiy).runType] ?
                 entities[(<Run>activiy).runType].push(activiy) :
                 entities[(<Run>activiy).runType] = [activiy]);
         return entities;
@@ -108,7 +117,7 @@ export const getCrossTrainingMap = createSelector(
 
         data
             .filter((activiy: Activity) => activiy.activityType !== ActivityTypeEnum.RUN)
-            .forEach((activiy: Activity) => entities[activiy.activityType] ?
+            .map((activiy: Activity) => entities[activiy.activityType] ?
                 entities[activiy.activityType].push(activiy) :
                 entities[activiy.activityType] = [activiy]);
         return entities;

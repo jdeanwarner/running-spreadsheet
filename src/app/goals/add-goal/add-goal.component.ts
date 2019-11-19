@@ -1,5 +1,12 @@
+import { Yoga } from 'src/app/shared/activities/yoga';
+import { Swim } from './../../shared/activities/swim';
+import { Run } from 'src/app/shared/activities/run';
+import { Kettlebell } from 'src/app/shared/activities/kettlebell';
+import { Bike } from './../../shared/activities/bike';
+import { ActivityTypeEnum } from 'src/app/shared/activities/activity-type.enum';
+import { GoalType } from './../goal-type.enum';
 import { Month } from './../../shared/month.enum';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatSelectChange, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Goal } from '../goal';
@@ -13,28 +20,18 @@ export class AddGoalComponent implements OnInit {
 
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
-    year: new FormControl(),
-    miles: new FormControl(),
-    crossTraining: new FormControl(),
-    highEffortRuns: new FormControl(),
-    months: new FormGroup({
-      JANUARY: new FormControl(),
-      FEBRUARY: new FormControl(),
-      MARCH: new FormControl(),
-      APRIL: new FormControl(),
-      MAY: new FormControl(),
-      JUNE: new FormControl(),
-      JULY: new FormControl(),
-      AUGUST: new FormControl(),
-      SEPTEMBER: new FormControl(),
-      OCTOBER: new FormControl(),
-      NOVEMBER: new FormControl(),
-      DECEMBER: new FormControl(),
-    })
+    name: new FormControl(),
+    type: new FormControl(),
+    startDate: new FormControl(),
+    endDate: new FormControl(),
+    pinned: new FormControl(),
+    value: new FormControl()
   });
 
-  MONTHS = Month;
+  GOAL_TYPE = GoalType;
+  ACTIVITY_TYPES = ActivityTypeEnum;
   showMonth = false;
+  activityProperties: string[] = [];
 
   constructor(private dialogRef: MatDialogRef<AddGoalComponent>,
     @Inject(MAT_DIALOG_DATA) private data: { goal: Goal }) { }
@@ -43,6 +40,57 @@ export class AddGoalComponent implements OnInit {
     if (this.data.goal) {
       this.formGroup.patchValue(this.data.goal);
     }
+  }
+
+  changeGoalType(type: GoalType) {
+    this.removeExtraControls();
+    if (type === GoalType.COUNT_PROPERTY) {
+      this.formGroup.addControl('property', new FormControl());
+      this.formGroup.addControl('propertyValue', new FormArray([
+        new FormControl()
+      ]));
+    } else if (type === GoalType.COUNT_ACTIVITY) {
+      this.formGroup.addControl('activityTypes', new FormArray([
+        new FormControl()
+      ]));
+    } else if (type === GoalType.SUM_PROPERTY) {
+      this.formGroup.addControl('activityType', new FormControl());
+      this.formGroup.addControl('property', new FormControl());
+    }
+  }
+
+  getProperties(activityType: ActivityTypeEnum) {
+    this.activityProperties = [];
+    switch (activityType) {
+      case ActivityTypeEnum.BIKE:
+        this.activityProperties = Object.keys(new Bike());
+        break;
+      case ActivityTypeEnum.KETTLEBELL:
+        this.activityProperties = Object.keys(new Kettlebell());
+        break;
+      case ActivityTypeEnum.RUN:
+        this.activityProperties = Object.keys(new Run());
+        break;
+      case ActivityTypeEnum.SWIM:
+        this.activityProperties = Object.keys(new Swim());
+        break;
+      case ActivityTypeEnum.YOGA:
+        this.activityProperties = Object.keys(new Yoga());
+        break;
+    }
+
+
+    const run = new Run();
+    console.log(Object.keys(run));
+    console.log(this.activityProperties);
+  }
+
+  removeExtraControls() {
+    this.formGroup.removeControl('property');
+    this.formGroup.removeControl('propertyValue');
+    this.formGroup.removeControl('activityTypes');
+    this.formGroup.removeControl('activityType');
+    this.formGroup.removeControl('property');
   }
 
   delete() {

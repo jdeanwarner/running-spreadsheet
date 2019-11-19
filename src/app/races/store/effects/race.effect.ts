@@ -17,7 +17,7 @@ export class RaceEffects {
     ) {}
 
   @Effect()
-  loadRacesOnRouteChange$: Observable<Action> = this.actions$.pipe(
+  loadRaces$: Observable<Action> = this.actions$.pipe(
       ofType(raceActions.LOAD_RACES),
       switchMap(() => {
         return this.activityService.getRaces()

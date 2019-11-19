@@ -7,7 +7,6 @@ const appRoutes: Routes = [
   {
     path: '',
     component: RacesComponent,
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: [
       RacesResolver
     ]
