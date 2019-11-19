@@ -10,7 +10,6 @@ const appRoutes: Routes = [
   {
     path: '',
     component: GoalsComponent,
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: [
       RacesResolver,
       AllActivitiesResolver,

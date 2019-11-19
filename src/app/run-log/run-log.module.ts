@@ -44,7 +44,6 @@ import { reducers, effects } from './store';
     SharedModule,
     RunLogRoutingModule,
     StoreModule.forFeature('log', reducers),
-    EffectsModule.forRoot([]),
     EffectsModule.forFeature(effects)
   ],
   exports: [

@@ -16,7 +16,6 @@ import { reducers, effects } from './store';
     SharedModule,
     RacesRoutingModule,
     StoreModule.forFeature('races', reducers),
-    EffectsModule.forRoot([]),
     EffectsModule.forFeature(effects)
   ],
   entryComponents: [
