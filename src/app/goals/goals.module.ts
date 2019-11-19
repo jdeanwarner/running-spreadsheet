@@ -33,7 +33,7 @@ import { ProgressMeterComponent } from './progress-meter/progress-meter.componen
     StoreModule.forFeature('goals', reducers),
     StoreModule.forFeature('races', fromRaces.reducers),
     StoreModule.forFeature('log', fromLog.reducers),
-    EffectsModule.forRoot([]),
+    // EffectsModule.forRoot([]),
     EffectsModule.forFeature(effects),
     EffectsModule.forFeature(fromLog.effects),
     EffectsModule.forFeature(fromRaces.effects)

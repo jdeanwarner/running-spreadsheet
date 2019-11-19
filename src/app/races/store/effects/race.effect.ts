@@ -1,6 +1,6 @@
 import { Race } from 'src/app/shared/race';
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
@@ -16,8 +16,7 @@ export class RaceEffects {
         private activityService: ActivityService
     ) {}
 
-  @Effect()
-  loadRaces$: Observable<Action> = this.actions$.pipe(
+  loadRaces$: Observable<Action> = createEffect(() => this.actions$.pipe(
       ofType(raceActions.LOAD_RACES),
       switchMap(() => {
         return this.activityService.getRaces()
@@ -27,33 +26,33 @@ export class RaceEffects {
           );
         }
       )
-  );
-
-  @Effect()
-  addRace$: Observable<Action> = this.actions$.pipe(
-      ofType(raceActions.ADD_RACE),
-      mergeMap((activity: raceActions.AddRace) => this.activityService.insertRace(activity.playload)
-        .then((ref: DocumentReference) => new raceActions.AddRaceSuccess(ref))
-        .catch((error) => new raceActions.AddRaceFail(error))
     )
   );
 
-  @Effect()
-  updateRace$: Observable<Action> = this.actions$.pipe(
-      ofType(raceActions.UPDATE_RACE),
-      mergeMap((activity: raceActions.UpdateRace) => this.activityService.updateRace(activity.playload)
-        .then(() => new raceActions.UpdateRaceSuccess())
-        .catch((error) => new raceActions.UpdateRaceFail(error))
+  addRace$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(raceActions.ADD_RACE),
+        mergeMap((activity: raceActions.AddRace) => this.activityService.insertRace(activity.playload)
+          .then((ref: DocumentReference) => new raceActions.AddRaceSuccess(ref))
+          .catch((error) => new raceActions.AddRaceFail(error))
+      )
     )
   );
 
-  @Effect()
-  deleteRace$: Observable<Action> = this.actions$.pipe(
-      ofType(raceActions.DELETE_RACE),
-      mergeMap((activity: raceActions.DeleteRace) => this.activityService.deleteRace(activity.playload)
-        .then(() => new raceActions.DeleteRaceSuccess())
-        .catch((error) => new raceActions.DeleteRaceFail(error))
+  updateRace$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(raceActions.UPDATE_RACE),
+        mergeMap((activity: raceActions.UpdateRace) => this.activityService.updateRace(activity.playload)
+          .then(() => new raceActions.UpdateRaceSuccess())
+          .catch((error) => new raceActions.UpdateRaceFail(error))
+      )
     )
   );
 
+  deleteRace$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(raceActions.DELETE_RACE),
+        mergeMap((activity: raceActions.DeleteRace) => this.activityService.deleteRace(activity.playload)
+          .then(() => new raceActions.DeleteRaceSuccess())
+          .catch((error) => new raceActions.DeleteRaceFail(error))
+      )
+    )
+  );
 }
