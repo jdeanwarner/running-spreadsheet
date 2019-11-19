@@ -1,3 +1,4 @@
+import { ActivityService } from 'src/app/shared/activity.service';
 import { AuthService } from './shared/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -17,11 +18,11 @@ export class AppComponent implements OnInit {
     .pipe(
       map(result => result.matches)
     );
-  constructor(private breakpointObserver: BreakpointObserver, public auth: AuthService) {
+  constructor(private breakpointObserver: BreakpointObserver, public auth: AuthService, private activityService: ActivityService) {
 
   }
 
   ngOnInit(): void {
-
+    // this.auth.user$.subscribe((user) => this.activityService.updateAllRaces(user.uid));
   }
 }

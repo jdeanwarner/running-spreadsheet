@@ -1,9 +1,9 @@
+import { Activity } from 'src/app/shared/activities/activity';
 import { User } from './user';
 import { Goal } from './../goals/goal';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Activity } from './activities/activity';
 import { map, take } from 'rxjs/operators';
 import { ActivityType } from './activities/activity-type';
 import { RunType } from './activities/run-type';
@@ -19,7 +19,7 @@ export class ActivityService {
   constructor(private db: AngularFirestore) { }
 
   getActivitiesByYear(year: number): Observable<Activity[]> {
-    return this.db.collection<Activity>('runs', ref =>
+    return this.db.collection<Activity>('activities', ref =>
       ref.where('date', '>=', new Date(year, 0, 1))
         .where('date', '<', new Date(year + 1, 0, 1))
     ).snapshotChanges()
@@ -35,7 +35,7 @@ export class ActivityService {
   }
 
   getAllActivities(): Observable<Activity[]> {
-    return this.db.collection<Activity>('runs').snapshotChanges()
+    return this.db.collection<Activity>('activities').snapshotChanges()
     .pipe(
       map((actions: DocumentChangeAction<Activity>[]) => {
         return actions.map((a: DocumentChangeAction<Activity>) => {
@@ -47,6 +47,23 @@ export class ActivityService {
     );
   }
 
+  /* updateAllRaces(userId: string): void {
+    this.getRaces().subscribe((races: Race[]) => {
+      let batch = this.db.firestore.batch();
+      let commitCount = 1;
+      races.forEach((race: Race, index) => {
+        if ( (index / commitCount) > 499) {
+          batch.commit();
+          batch = this.db.firestore.batch();
+          commitCount++;
+        }
+        batch.set(this.db.collection('races').doc(race.id).ref, { ...race, userId: userId });
+      });
+      console.log('committing');
+      batch.commit();
+    });
+  } */
+
   getActivityTypes(): Observable<ActivityType[]> {
     return this.db.collection<ActivityType>('activityType').valueChanges();
   }
@@ -56,15 +73,15 @@ export class ActivityService {
   }
 
   deleteActivity(id: string): Promise<void> {
-    return this.db.collection('runs').doc(id).delete();
+    return this.db.collection('activities').doc(id).delete();
   }
 
   updateActivity(activity: Activity): Promise<void> {
-    return this.db.collection('runs').doc(activity.id).set(activity);
+    return this.db.collection('activities').doc(activity.id).set(activity);
   }
 
   insertActivity(activity: Activity): Promise<DocumentReference> {
-    return this.db.collection('runs').add(activity);
+    return this.db.collection('activities').add(activity);
   }
 
   getRaces(): Observable<Race[]> {

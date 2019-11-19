@@ -12,4 +12,5 @@ export class Race {
     resultUrl: string;
     status: RaceStatus;
     location: Location;
+    userId: string;
 }
