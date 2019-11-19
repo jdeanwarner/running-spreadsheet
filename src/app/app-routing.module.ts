@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RunLogComponent } from './run-log/run-log.component';
 
 const appRoutes: Routes = [
     {
-        path: 'goals',
-        loadChildren: './goals/goals.module#GoalsModule'
+      path: 'goals',
+      loadChildren: () => import('./goals/goals.module').then(m => m.GoalsModule)
     },
     {
       path: 'schedule',
-      loadChildren: './schedule/schedule.module#ScheduleModule'
+      loadChildren: () => import('./schedule/schedule.module').then(m => m.ScheduleModule)
     },
     {
       path: 'races',
-      loadChildren: './races/races.module#RacesModule'
+      loadChildren: () => import('./races/races.module').then(m => m.RacesModule)
     },
     {
-        path: 'log',
-        loadChildren: './run-log/run-log.module#RunLogModule'
+      path: 'log',
+      loadChildren: () => import('./run-log/run-log.module').then(m => m.RunLogModule)
     },
     { path: '',
       redirectTo : '/log',
