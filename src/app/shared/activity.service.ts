@@ -1,13 +1,15 @@
+import { User } from './user';
 import { Goal } from './../goals/goal';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Activity } from './activities/activity';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { ActivityType } from './activities/activity-type';
 import { RunType } from './activities/run-type';
 import { Race } from './race';
 import { Season } from './season';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'

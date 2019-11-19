@@ -5,4 +5,5 @@ export class Activity {
     id: string;
     activityType: ActivityTypeEnum;
     date: firestore.Timestamp;
+    userId: string;
 }
