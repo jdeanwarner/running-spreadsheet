@@ -14,6 +14,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
-    })
+    }),
+    HttpClientModule
   ],
   providers: [
     { provide: RouterStateSerializer, useClass: CustomSerializer }

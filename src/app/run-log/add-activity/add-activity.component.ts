@@ -21,6 +21,7 @@ export class AddActivityComponent implements OnInit {
   activityTypeEnum = ActivityTypeEnum;
   formGroup: FormGroup = new FormGroup({
     id: new FormControl(),
+    userId: new FormControl(),
     activityType: new FormControl(Validators.required),
     date: new FormControl(Validators.required)
   });

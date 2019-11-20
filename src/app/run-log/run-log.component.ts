@@ -71,6 +71,7 @@ export class RunLogComponent implements OnInit {
   }
 
   openActivity(activity: Activity) {
+    console.log(activity);
     const dialogRef = this.dialog.open(AddActivityComponent, {
       minWidth: '20%',
       maxWidth: '99%',

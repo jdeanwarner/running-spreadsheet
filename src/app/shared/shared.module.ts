@@ -64,7 +64,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     MatIconModule,
     MatMenuModule,
     MatProgressBarModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
   providers: [
     TimestampDatePipe,
@@ -77,7 +77,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     RacesResolver,
     ActivitiesByYearResolver,
     AllActivitiesResolver,
-    GoalsResolver
+    GoalsResolver,
   ],
   exports: [
     FlexLayoutModule,

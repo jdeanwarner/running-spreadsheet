@@ -7,7 +7,7 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -15,6 +15,7 @@ import { Observable, of } from 'rxjs';
 })
 export class AuthService {
 
+  private currentUserSubject: BehaviorSubject<User>;
   user$: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
@@ -27,6 +28,10 @@ export class AuthService {
         }
       })
     );
+  }
+
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
   }
 
   async googleSignin() {
@@ -50,6 +55,7 @@ export class AuthService {
       photoURL: user.photoURL
     };
 
+    this.currentUserSubject.next(user);
     return userRef.set(data, { merge: true });
   }
 }
