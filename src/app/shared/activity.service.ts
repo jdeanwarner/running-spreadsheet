@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Activity } from 'src/app/shared/activities/activity';
 import { User } from './user';
 import { Goal } from './../goals/goal';

@@ -15,7 +15,6 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-  private currentUserSubject: BehaviorSubject<User>;
   user$: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
@@ -28,10 +27,6 @@ export class AuthService {
         }
       })
     );
-  }
-
-  public get currentUserValue(): User {
-    return this.currentUserSubject.value;
   }
 
   async googleSignin() {
@@ -54,8 +49,6 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL
     };
-
-    this.currentUserSubject.next(user);
     return userRef.set(data, { merge: true });
   }
 }
