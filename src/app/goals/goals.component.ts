@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Goal } from './goal';
 import { RouterReducerState } from '@ngrx/router-store';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-goals',
@@ -43,9 +44,11 @@ export class GoalsComponent implements OnInit {
   futureGoalResults$: Observable<{[ goalName: string ]: number}>;
   pastGoalResults$: Observable<{[ goalName: string ]: number}>;
 
+  loggedInUserId: string;
+
   constructor(private rootStore: Store<fromRoot.State>, private store: Store<fromStore.GoalState>,
     private raceStore: Store<fromRaces.RaceState>, private logStore: Store<fromLog.LogState>,
-    public dialog: MatDialog, private router: Router) {
+    public dialog: MatDialog, private router: Router, private afAuth: AngularFireAuth) {
     this.completedStates$ = this.rootStore.select(fromRaces.getStatesCompleted);
 
     this.fiveKPR$ = this.raceStore.select(fromRaces.get5kPR);
@@ -91,7 +94,7 @@ export class GoalsComponent implements OnInit {
           if (result.id) {
             this.store.dispatch(new fromStore.UpdateGoal(result));
           } else {
-            this.store.dispatch(new fromStore.AddGoal(result));
+            this.store.dispatch(new fromStore.AddGoal({ ...result, userId: this.loggedInUserId }));
           }
         }
       }
