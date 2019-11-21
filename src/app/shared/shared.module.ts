@@ -1,3 +1,4 @@
+import { StravaInterceptor } from './strava.interceptor';
 import { StravaAuthService } from './services/strava-auth.service';
 import { AllActivitiesResolver } from './resolvers/all-activities.resolver';
 import { ActivitiesByYearResolver } from './resolvers/activities-by-year.resolver';
@@ -35,6 +36,7 @@ import { RoundPipe } from './round.pipe';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { StravaService } from './services/strava.service';
 import { AngularFireFunctionsModule, FUNCTIONS_REGION, FunctionsRegionToken } from '@angular/fire/functions';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,8 @@ import { AngularFireFunctionsModule, FUNCTIONS_REGION, FunctionsRegionToken } fr
     GoalsResolver,
     StravaService,
     StravaAuthService,
-    { provide: FunctionsRegionToken, useValue: 'us-central1' }
+    { provide: FunctionsRegionToken, useValue: 'us-central1' },
+    { provide: HTTP_INTERCEPTORS, useClass: StravaInterceptor, multi: true }
   ],
   exports: [
     FlexLayoutModule,

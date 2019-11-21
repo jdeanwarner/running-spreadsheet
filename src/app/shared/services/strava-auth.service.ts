@@ -1,13 +1,14 @@
+import { StravaToken } from './../models/strava/strava-token';
 import { StravaConfig } from '../models/strava/strava-config';
 import { Injectable } from '@angular/core';
 import * as querystring from 'querystring';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, forkJoin } from 'rxjs';
-import { StravaToken } from '../models/strava/strava-token';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map, take } from 'rxjs/operators';
+import { map, take, switchMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { User } from '../user';
 
 
 @Injectable({
@@ -19,7 +20,6 @@ export class StravaAuthService {
 
   constructor( private http: HttpClient, private afs: AngularFirestore, private userAuth: AuthService ) {
     this.getStravaConfig().subscribe((config: StravaConfig) => {
-      console.log(config);
       if (!this.config) {
         this.config = new BehaviorSubject<StravaConfig>(config);
       }
@@ -52,6 +52,42 @@ export class StravaAuthService {
     ]).subscribe(([token, user]) => {
       this.afs.doc(`users/${user.uid}`).set({ ...user, strava: token }, {merge: true});
     });
+  }
+
+  checkRefreshToken(): Observable<void> {
+    return this.userAuth.user$.pipe(
+      take(1),
+      map((user: User) => {
+        console.log(user);
+          if (user.strava.expires_in === 0) {
+            this.refreshToken(user.strava.refresh_token).pipe(
+              map((token: StravaToken) => {
+                user.strava = { ...user.strava, ...token };
+                return this.afs.doc(`users/${user.uid}`).set(user, {merge: true});
+              })
+            );
+          }
+      })
+    );
+
+
+    /*console.log('checking');
+    return this.userAuth.user$.pipe(
+      take(1),
+      switchMap((user: User) => {
+        console.log(user);
+        if (user.strava.expires_in === 0) {
+          this.refreshToken(user.strava.refresh_token).pipe(
+            map((token: StravaToken) => {
+              user.strava = { ...user.strava, ...token };
+              return this.afs.doc(`users/${user.uid}`).set(user, {merge: true});
+            })
+          );
+        } else {
+          return Promise.resolve();
+        }
+      })
+    );*/
   }
 
   getToken(code: string): Observable<StravaToken> {
