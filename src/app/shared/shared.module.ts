@@ -32,6 +32,8 @@ import { LocationPickerComponent } from './location-picker/location-picker.compo
 import { GoalsResolver } from './resolvers/goals.resolver';
 import { RoundPipe } from './round.pipe';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { StravaService } from './services/strava.service';
+import { AngularFireFunctionsModule, FUNCTIONS_REGION, FunctionsRegionToken } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     MatMenuModule,
     MatProgressBarModule,
     AngularFireAuthModule,
+    AngularFireFunctionsModule
   ],
   providers: [
     TimestampDatePipe,
@@ -78,6 +81,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     ActivitiesByYearResolver,
     AllActivitiesResolver,
     GoalsResolver,
+    StravaService,
+    { provide: FunctionsRegionToken, useValue: 'us-central1' }
   ],
   exports: [
     FlexLayoutModule,

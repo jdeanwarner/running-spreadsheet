@@ -4,6 +4,10 @@ import { AuthGuard } from './shared/guards/auth.guard';
 
 const appRoutes: Routes = [
     {
+      path: 'welcome',
+      loadChildren: () => import('./welcome/welcome.module').then(m => m.WelcomeModule)
+    },
+    {
       path: 'goals',
       loadChildren: () => import('./goals/goals.module').then(m => m.GoalsModule),
       canActivate: [ AuthGuard ]
@@ -24,7 +28,7 @@ const appRoutes: Routes = [
       canActivate: [ AuthGuard ]
     },
     { path: '',
-      redirectTo : '/log',
+      redirectTo : '/welcome',
       pathMatch : 'full'}
   ];
 
