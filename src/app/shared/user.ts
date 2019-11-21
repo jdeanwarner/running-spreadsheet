@@ -1,4 +1,4 @@
-import { StravaToken } from './strava-token';
+import { StravaToken } from './models/strava/strava-token';
 export interface User {
     uid: string;
     email: string;

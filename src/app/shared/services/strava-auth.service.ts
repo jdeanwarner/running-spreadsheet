@@ -1,10 +1,10 @@
-import { StravaConfig } from './../strava-config';
+import { StravaConfig } from '../models/strava/strava-config';
 import { Injectable } from '@angular/core';
 import * as querystring from 'querystring';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, forkJoin } from 'rxjs';
-import { StravaToken } from '../strava-token';
+import { StravaToken } from '../models/strava/strava-token';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map, take } from 'rxjs/operators';
 import { AuthService } from './auth.service';
