@@ -1,3 +1,4 @@
+import { StravaAuthService } from './services/strava-auth.service';
 import { AllActivitiesResolver } from './resolvers/all-activities.resolver';
 import { ActivitiesByYearResolver } from './resolvers/activities-by-year.resolver';
 import { RacesResolver } from './resolvers/races.resolver';
@@ -25,7 +26,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivityTypePipe } from './activities/activity-type.pipe';
 import { RunTypePipe } from './activities/run-type.pipe';
-import { ActivityService } from './activity.service';
+import { ActivityService } from './services/activity.service';
 import { ResultTimePipe } from './result-time.pipe';
 import { TimestampDatePickerComponent } from './timestamp-date-picker/timestamp-date-picker.component';
 import { LocationPickerComponent } from './location-picker/location-picker.component';
@@ -82,6 +83,7 @@ import { AngularFireFunctionsModule, FUNCTIONS_REGION, FunctionsRegionToken } fr
     AllActivitiesResolver,
     GoalsResolver,
     StravaService,
+    StravaAuthService,
     { provide: FunctionsRegionToken, useValue: 'us-central1' }
   ],
   exports: [

@@ -1,6 +1,10 @@
+import { AuthService } from './../shared/services/auth.service';
 import { StravaService } from './../shared/services/strava.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { StravaAuthService } from '../shared/services/strava-auth.service';
+import { Observable } from 'rxjs';
+import { User } from '../shared/user';
 
 @Component({
   selector: 'app-welcome',
@@ -9,12 +13,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private strava: StravaService, private route: ActivatedRoute) { }
+  constructor(private strava: StravaAuthService, private route: ActivatedRoute, public userAuth: AuthService) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(result => {
       if (result.get('code')) {
-        this.strava.getData(result.get('code')).subscribe(data => console.log(data));
+        setTimeout(() => this.strava.setToken(result.get('code')), 2000);
       }
     });
   }

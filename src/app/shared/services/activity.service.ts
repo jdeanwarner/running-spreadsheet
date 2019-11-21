@@ -1,15 +1,15 @@
 import { AuthService } from './auth.service';
 import { Activity } from 'src/app/shared/activities/activity';
-import { User } from './user';
-import { Goal } from './../goals/goal';
+import { User } from '../user';
+import { Goal } from '../../goals/goal';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { ActivityType } from './activities/activity-type';
-import { RunType } from './activities/run-type';
-import { Race } from './race';
-import { Season } from './season';
+import { ActivityType } from '../activities/activity-type';
+import { RunType } from '../activities/run-type';
+import { Race } from '../race';
+import { Season } from '../season';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({

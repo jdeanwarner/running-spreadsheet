@@ -1,5 +1,5 @@
 import { Goal } from '../../goal';
-import { ActivityService } from '../../../shared/activity.service';
+import { ActivityService } from '../../../shared/services/activity.service';
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';

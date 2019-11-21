@@ -11,6 +11,11 @@ export const environment = {
     projectId: 'running-spreadsheet-ee7b6',
     storageBucket: 'running-spreadsheet-ee7b6.appspot.com',
     messagingSenderId: '227156919392'
+  },
+  strava: {
+    clientId: 40965,
+    redirectUrl: 'http://localhost:4200/welcome',
+    url: 'https://www.strava.com'
   }
 };
 

@@ -1,5 +1,5 @@
 import { Season } from './../shared/season';
-import { ActivityService } from './../shared/activity.service';
+import { ActivityService } from '../shared/services/activity.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 

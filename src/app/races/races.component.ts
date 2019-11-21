@@ -1,6 +1,6 @@
 import { DeleteRace, UpdateRace, AddRace } from './store';
 import { Component, OnInit } from '@angular/core';
-import { ActivityService } from '../shared/activity.service';
+import { ActivityService } from '../shared/services/activity.service';
 import { Race } from '../shared/race';
 import { AddRaceComponent } from './add-race/add-race.component';
 import { MatDialog } from '@angular/material/dialog';

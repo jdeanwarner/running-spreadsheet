@@ -6,7 +6,7 @@ import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
 import * as raceActions from '../actions/race.actions';
 import { DocumentReference } from '@angular/fire/firestore';
-import { ActivityService } from 'src/app/shared/activity.service';
+import { ActivityService } from 'src/app/shared/services/activity.service';
 
 @Injectable()
 export class RaceEffects {

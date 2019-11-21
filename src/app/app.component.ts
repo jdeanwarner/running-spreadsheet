@@ -1,5 +1,5 @@
-import { ActivityService } from 'src/app/shared/activity.service';
-import { AuthService } from './shared/auth.service';
+import { ActivityService } from 'src/app/shared/services/activity.service';
+import { AuthService } from './shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
