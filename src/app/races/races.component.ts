@@ -29,7 +29,6 @@ export class RacesComponent implements OnInit {
     { def: 'status', showMobile: false }];
 
   displayedColumns: string[];
-  loggedInUserId: string;
 
   races$: Observable<Race[]>;
   isLarge$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Large)
@@ -38,12 +37,11 @@ export class RacesComponent implements OnInit {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog,
-    private store: Store<fromStore.RaceState>, private afAuth: AngularFireAuth) {
+    private store: Store<fromStore.RaceState>) {
       this.races$ = this.store.select(fromStore.getAllRaces);
     }
 
   ngOnInit() {
-    this.afAuth.authState.subscribe((user: firebase.User) => this.loggedInUserId = user.uid);
 
     this.isLarge$.subscribe((isLarge: boolean) => {
       this.getDisplayedColumns(isLarge);
@@ -67,7 +65,7 @@ export class RacesComponent implements OnInit {
           if (result.id) {
             this.store.dispatch(new UpdateRace(result));
           } else {
-            this.store.dispatch(new AddRace({ ...result, userId: this.loggedInUserId }));
+            this.store.dispatch(new AddRace(result));
           }
         }
       }
