@@ -1,3 +1,3 @@
 export class UserOwned {
-    userId: string;
+    userId?: string;
 }

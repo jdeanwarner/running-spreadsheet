@@ -1,3 +1,5 @@
+import { StravaActivityType } from './strava-activity-type.enum';
+
 export class StravaActivity {
     resource_state: number;
     athlete: {
@@ -9,13 +11,13 @@ export class StravaActivity {
     moving_time: number;
     elapsed_time: number;
     total_elevation_gain: number;
-    type: string;
-    workout_type: string;
+    type: StravaActivityType;
+    workout_type: number;
     id: number;
     external_id: string;
     upload_id: number;
-    start_date: Date;
-    start_date_local: Date;
+    start_date: string;
+    start_date_local: string;
     timezone: string;
     utc_offset: number;
     start_latlng: string;

@@ -4,5 +4,6 @@ export enum ActivityTypeEnum {
     SWIM = 'SWIM',
     YOGA = 'YOGA',
     GYM = 'GYM',
-    KETTLEBELL = 'KETTLEBELL'
+    KETTLEBELL = 'KETTLEBELL',
+    OTHER = 'OTHER'
 }
