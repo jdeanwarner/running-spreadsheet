@@ -3,6 +3,7 @@ import { createSelector } from '@ngrx/store';
 import * as fromFeature from '../reducers';
 import * as fromRace from '../reducers/race.reducer';
 import { Race } from 'src/app/shared/race';
+import { RaceStatus } from 'src/app/shared/race-status.enum';
 
 export const getRacesState = createSelector(
     fromFeature.getRaceState,
@@ -65,6 +66,7 @@ export const get100Milers = createSelector(
 
 function getPR(distance: number, entities: { [id: number]: Race }): Race {
     return getDistance(distance, entities)
+        .filter((race: Race) => race.status === RaceStatus.COMPLETE)
         .sort((a: Race, b: Race) => a.result < b.result ? -1 : a.result > b.result ? 1 : 0)[0];
 }
 
