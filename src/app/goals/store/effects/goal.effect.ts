@@ -18,10 +18,13 @@ export class GoalEffects {
 
     loadGoals$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(goalActions.LOAD_YEAR_GOALS),
-        mergeMap((loadAction: goalActions.LoadYearGoals) => this.activityService.getGoals(parseInt(loadAction.playload, 10))
+        mergeMap(() => this.activityService.getGoals()
             .pipe(
               map((goals: Goal[]) => new goalActions.LoadYearGoalsSuccess(goals)),
-              catchError(error => of(new goalActions.LoadYearGoalsFail(error)))
+              catchError(error => {
+                console.log(error);
+                return of(new goalActions.LoadYearGoalsFail(error));
+              })
             )
           )
       )

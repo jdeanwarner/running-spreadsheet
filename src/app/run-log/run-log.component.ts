@@ -1,8 +1,6 @@
-import { User } from './../shared/user';
-import { LoadType } from './store/actions/activity.action';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AddActivityComponent } from './add-activity/add-activity.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Activity } from '../shared/activities/activity';
@@ -12,7 +10,6 @@ import { Store } from '@ngrx/store';
 import * as fromStore from './store';
 import * as fromRoot from '../store';
 import { RouterReducerState } from '@ngrx/router-store';
-import { FormStyle } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -34,8 +31,6 @@ export class RunLogComponent implements OnInit {
   runTypeMap$: Observable<{[type: string]: Activity[]}>;
   crossTrainingMap$: Observable<{[type: string]: Activity[]}>;
 
-  loggedInUserId: string;
-
   constructor(public dialog: MatDialog, private store: Store<fromStore.LogState>,
     private rootStore: Store<fromRoot.State>, private router: Router, private afAuth: AngularFireAuth) {
     this.activityMonthMap$ = store.select(fromStore.getActivitiesMonthMap);
@@ -55,7 +50,6 @@ export class RunLogComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new fromStore.LoadType());
     this.store.dispatch(new fromStore.LoadRunType());
-    this.afAuth.authState.subscribe((user: firebase.User) => this.loggedInUserId = user.uid);
   }
 
   changeYear(year) {
@@ -90,7 +84,7 @@ export class RunLogComponent implements OnInit {
           if (result.id) {
             this.store.dispatch(new fromStore.UpdateActivity(result));
           } else {
-            this.store.dispatch(new fromStore.InsertActivity({ ...result, userId: this.loggedInUserId }));
+            this.store.dispatch(new fromStore.InsertActivity(result));
           }
         }
       }

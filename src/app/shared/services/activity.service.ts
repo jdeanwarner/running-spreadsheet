@@ -1,3 +1,4 @@
+import { UserOwned } from './../user-owned';
 import { AuthService } from './auth.service';
 import { Activity } from 'src/app/shared/activities/activity';
 import { User } from '../user';
@@ -5,7 +6,7 @@ import { Goal } from '../../goals/goal';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, take, switchMap } from 'rxjs/operators';
 import { ActivityType } from '../activities/activity-type';
 import { RunType } from '../activities/run-type';
 import { Race } from '../race';
@@ -17,12 +18,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class ActivityService {
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private userAuth: AuthService) { }
 
   getActivitiesByYear(year: number): Observable<Activity[]> {
-    return this.db.collection<Activity>('activities', ref =>
+    const getRequest = (user: User) => this.db.collection<Activity>('activities', ref =>
       ref.where('date', '>=', new Date(year, 0, 1))
         .where('date', '<', new Date(year + 1, 0, 1))
+        .where('userId', '==', user.uid)
     ).snapshotChanges()
     .pipe(
       map((actions: DocumentChangeAction<Activity>[]) => {
@@ -33,32 +35,51 @@ export class ActivityService {
         });
       })
     );
+
+    return this.makeUserOwnedGetRequest(getRequest);
   }
 
   getAllActivities(): Observable<Activity[]> {
-    return this.db.collection<Activity>('activities').snapshotChanges()
-    .pipe(
-      map((actions: DocumentChangeAction<Activity>[]) => {
-        return actions.map((a: DocumentChangeAction<Activity>) => {
-          const data: Activity = a.payload.doc.data();
-          data.id = a.payload.doc.id;
-          return data;
-        });
-      })
+    const getRequest = (user: User): Observable<Activity[]> =>
+     this.db.collection<Activity>('activities', ref =>
+        ref.where('userId', '==', user.uid)).snapshotChanges()
+      .pipe(
+        map((actions: DocumentChangeAction<Activity>[]) => {
+          return actions.map((a: DocumentChangeAction<Activity>) => {
+            const data: Activity = a.payload.doc.data();
+            data.id = a.payload.doc.id;
+            return data;
+          });
+        })
+      );
+
+    return this.makeUserOwnedGetRequest(getRequest);
+  }
+
+  makeUserOwnedGetRequest(func: (user: User) => Observable<any>): Observable<any> {
+    return this.userAuth.user$.pipe(
+      take(1),
+      switchMap((user: User) => func(user))
     );
   }
 
-  /* updateAllRaces(userId: string): void {
-    this.getRaces().subscribe((races: Race[]) => {
+  makeUserOwnedSetRequest<T extends UserOwned>(userObj: T, func: (userObj: T) => Promise<DocumentReference>): Promise<DocumentReference> {
+    return this.userAuth.user$
+      .toPromise()
+      .then((user: User) => func({ ...userObj, userId: user.uid }));
+  }
+
+  /* updateGoals(userId: string): void {
+    this.getGoals().subscribe((goals: Goal[]) => {
       let batch = this.db.firestore.batch();
       let commitCount = 1;
-      races.forEach((race: Race, index) => {
+      goals.forEach((goal: Goal, index) => {
         if ( (index / commitCount) > 499) {
           batch.commit();
           batch = this.db.firestore.batch();
           commitCount++;
         }
-        batch.set(this.db.collection('races').doc(race.id).ref, { ...race, userId: userId });
+        batch.set(this.db.collection('goals').doc(goal.id).ref, { ...goal, userId: userId }, {merge : true});
       });
       console.log('committing');
       batch.commit();
@@ -82,12 +103,15 @@ export class ActivityService {
   }
 
   insertActivity(activity: Activity): Promise<DocumentReference> {
-    return this.db.collection('activities').add(activity);
+    const request = (act: Activity) => this.db.collection('activities').add(act);
+
+    return this.makeUserOwnedSetRequest(activity, request);
   }
 
   getRaces(): Observable<Race[]> {
-    return this.db.collection<Race>('races', ref =>
-      ref.orderBy('date', 'desc')).snapshotChanges()
+    const request = (user: User) => this.db.collection<Race>('races', ref =>
+      ref.where('userId', '==', user.uid)
+        .orderBy('date', 'desc')).snapshotChanges()
     .pipe(
       map((actions: DocumentChangeAction<Race>[]) => {
         return actions.map((a: DocumentChangeAction<Race>) => {
@@ -97,6 +121,8 @@ export class ActivityService {
         });
       })
     );
+
+    return this.makeUserOwnedGetRequest(request);
   }
 
   updateRace(race: Race): Promise<void> {
@@ -104,7 +130,8 @@ export class ActivityService {
   }
 
   insertRace(race: Race): Promise<DocumentReference> {
-    return this.db.collection('races').add(race);
+    const request = (userRace: Race) => this.db.collection('activities').add(userRace);
+    return this.makeUserOwnedSetRequest(race, request);
   }
 
   deleteRace(id: string): Promise<void> {
@@ -139,24 +166,26 @@ export class ActivityService {
     return this.db.collection('season').doc(seasonId).collection<Activity>('scheduledActivity').valueChanges();
   }
 
-  getGoals(year: number): Observable<Goal[]> {
-    console.log('getting goals');
-    return this.db.collection<Goal>('goals').snapshotChanges()
+  getGoals(): Observable<Goal[]> {
+    const request = (user: User) => this.db.collection<Goal>('goals', ref =>
+      ref.where('userId', '==', user.uid))
+    .snapshotChanges()
     .pipe(
       map((actions: DocumentChangeAction<Goal>[]) => {
-        console.log(actions);
         return actions.map((a: DocumentChangeAction<Goal>) => {
           const data: Goal = a.payload.doc.data();
           data.id = a.payload.doc.id;
-          console.log(data);
           return data;
         });
       })
     );
+
+    return this.makeUserOwnedGetRequest(request);
   }
 
   insertGoal(goal: Goal): Promise<DocumentReference> {
-    return this.db.collection('goal').add(goal);
+    const request = (userGoal: Goal) => this.db.collection('activities').add(userGoal);
+    return this.makeUserOwnedSetRequest(goal, request);
   }
 
   updateGoal(goal: Goal): Promise<void> {

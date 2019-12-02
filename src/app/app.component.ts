@@ -23,6 +23,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.auth.user$.subscribe((user) => this.activityService.updateAllRaces(user.uid));
+    // this.auth.user$.subscribe((user) => this.activityService.updateGoals(user.uid));
   }
 }
