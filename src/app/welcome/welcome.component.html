@@ -1,6 +1,6 @@
 <div *ngIf="userAuth.user$ | async as user" >
     <div *ngIf="user.strava && user.strava.access_token">
-        <button mat-button color="primary" (click)="loadStravaActivities(user)">Pull Strava Activities</button>
+        <button mat-button color="primary" (click)="loadStravaActivities()">Pull Strava Activities</button>
     </div>
     <div *ngIf="!user.strava || !user.strava.access_token">
         <button mat-button color="primary" (click)="authorizeStrava()">Connect With Strava</button>

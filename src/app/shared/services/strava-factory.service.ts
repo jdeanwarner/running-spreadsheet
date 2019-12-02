@@ -15,9 +15,9 @@ export class StravaFactoryService {
 
   constructor(private stravaService: StravaService, private activityService: ActivityService) { }
 
-  loadStravaActivities(user: User) {
+  loadStravaActivities() {
     forkJoin([
-      this.getAllStravaActivities(user),
+      this.getAllStravaActivities(),
       this.activityService.getAllActivities().pipe(
         take(1)
       )
@@ -26,7 +26,7 @@ export class StravaFactoryService {
     });
   }
 
-  getAllStravaActivities(user: User): Observable<StravaActivity[]> {
+  getAllStravaActivities(): Observable<StravaActivity[]> {
     let stravaActivities: StravaActivity[] = [];
     const params: StravaActivityParams = {
       per_page: 100,
@@ -34,7 +34,7 @@ export class StravaFactoryService {
     };
 
     const getActivities = (activityParams: StravaActivityParams): Observable<StravaActivity[]> => {
-      return this.stravaService.getAllActivitiesForUser(user, activityParams).pipe(
+      return this.stravaService.getAllActivitiesForUser(activityParams).pipe(
         switchMap((activities: StravaActivity[]) => {
           stravaActivities = stravaActivities.concat(activities);
           if ( activities.length === 100 ) {

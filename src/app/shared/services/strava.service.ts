@@ -15,15 +15,9 @@ export class StravaService {
 
   constructor( private http: HttpClient ) { }
 
-  getAllActivitiesForUser(user: User, params: StravaActivityParams): Observable<StravaActivity[]> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${user.strava.access_token}`
-    });
+  getAllActivitiesForUser(params: StravaActivityParams): Observable<StravaActivity[]> {
     return this.http.get<StravaActivity[]>(
-      `${environment.strava.url}/api/v3/athlete/activities?${querystring.stringify(params)}`,
-      { headers: headers }
-    );
+      `${environment.strava.url}/api/v3/athlete/activities?${querystring.stringify(params)}`);
   }
 
 

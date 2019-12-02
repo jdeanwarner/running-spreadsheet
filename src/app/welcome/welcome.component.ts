@@ -27,8 +27,8 @@ export class WelcomeComponent implements OnInit {
     this.strava.authorize();
   }
 
-  loadStravaActivities(user: User) {
-    this.stravaFactory.loadStravaActivities(user);
+  loadStravaActivities() {
+    this.stravaFactory.loadStravaActivities();
   }
 
 }

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import * as querystring from 'querystring';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, forkJoin } from 'rxjs';
+import { Observable, BehaviorSubject, forkJoin, of, empty } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map, take, switchMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -54,40 +54,22 @@ export class StravaAuthService {
     });
   }
 
-  checkRefreshToken(): Observable<void> {
-    return this.userAuth.user$.pipe(
-      take(1),
-      map((user: User) => {
-        console.log(user);
-          if (user.strava.expires_in === 0) {
-            this.refreshToken(user.strava.refresh_token).pipe(
-              map((token: StravaToken) => {
-                user.strava = { ...user.strava, ...token };
-                return this.afs.doc(`users/${user.uid}`).set(user, {merge: true});
-              })
-            );
-          }
-      })
-    );
-
-
-    /*console.log('checking');
+  checkRefreshToken(): Observable<User> {
     return this.userAuth.user$.pipe(
       take(1),
       switchMap((user: User) => {
-        console.log(user);
-        if (user.strava.expires_in === 0) {
-          this.refreshToken(user.strava.refresh_token).pipe(
-            map((token: StravaToken) => {
-              user.strava = { ...user.strava, ...token };
-              return this.afs.doc(`users/${user.uid}`).set(user, {merge: true});
-            })
-          );
-        } else {
-          return Promise.resolve();
-        }
+          if (Math.round(new Date().getTime() / 1000)  > user.strava.expires_at ) {
+            return this.refreshToken(user.strava.refresh_token).pipe(
+              switchMap((token: StravaToken) => {
+                user.strava = { ...user.strava, ...token };
+                return this.afs.doc(`users/${user.uid}`).set(user, {merge: true}).then(() => user);
+              })
+            );
+          } else {
+            return of(user);
+          }
       })
-    );*/
+    );
   }
 
   getToken(code: string): Observable<StravaToken> {
