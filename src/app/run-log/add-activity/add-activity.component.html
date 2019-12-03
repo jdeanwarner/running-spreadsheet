@@ -25,6 +25,13 @@
       <app-add-yoga *ngSwitchCase="activityTypeEnum.YOGA" [yoga]="activity" [formGroup]="yogaGroup"></app-add-yoga>
     </div>
   </form>
+  <div fxLayout="row wrap" fxLayoutAlign="start center" *ngIf="activity.stravaId">
+    <a fxFlex="100" class="padding-top-10px align-right" 
+      mat-raised-button color="primary" 
+      href="https://www.strava.com/activities/{{activity.stravaId}}" target="_blank">
+      View on Strava
+    </a>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row wrap" fxLayoutAlign="end center">
   <button mat-dialog-close class="padding-top-10px align-right" mat-button color="primary" (click)="save()">Save</button>
