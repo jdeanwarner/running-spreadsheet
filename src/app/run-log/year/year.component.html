@@ -1,84 +1,86 @@
-<div fxHide.lt-md>
-  <div fxLayout="row" fxLayoutAlign="space-between none">
-    <mat-card fxFlex="25">
-      <app-month [year]="year" [monthNum]="0" [activities]="activityMonthMap[MONTHS.JANUARY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-    <mat-card fxFlex="25">
-      <app-month [year]="year" [monthNum]="1" [activities]="activityMonthMap[MONTHS.FEBRUARY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-    <mat-card fxFlex="25">
-      <app-month [year]="year" [monthNum]="2" [activities]="activityMonthMap[MONTHS.MARCH]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-    <mat-card fxFlex="25">
-      <app-month [year]="year" [monthNum]="3" [activities]="activityMonthMap[MONTHS.APRIL]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-    <mat-card fxFlex="25">
-      <app-month [year]="year" [monthNum]="4" [activities]="activityMonthMap[MONTHS.MAY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-    <mat-card fxFlex="25">
-      <app-month [year]="year" [monthNum]="5" [activities]="activityMonthMap[MONTHS.JUNE]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
+<div>
+  <div fxHide.lt-md>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+      <mat-card fxFlex="25">
+        <app-month [year]="year" [monthNum]="0" [activities]="activityMonthMap[MONTHS.JANUARY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+      <mat-card fxFlex="25">
+        <app-month [year]="year" [monthNum]="1" [activities]="activityMonthMap[MONTHS.FEBRUARY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+      <mat-card fxFlex="25">
+        <app-month [year]="year" [monthNum]="2" [activities]="activityMonthMap[MONTHS.MARCH]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+      <mat-card fxFlex="25">
+        <app-month [year]="year" [monthNum]="3" [activities]="activityMonthMap[MONTHS.APRIL]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+      <mat-card fxFlex="25">
+        <app-month [year]="year" [monthNum]="4" [activities]="activityMonthMap[MONTHS.MAY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+      <mat-card fxFlex="25">
+        <app-month [year]="year" [monthNum]="5" [activities]="activityMonthMap[MONTHS.JUNE]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between none" class="padding-top-25">
+      <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="6" [activities]="activityMonthMap[MONTHS.JULY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+      <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="7" [activities]="activityMonthMap[MONTHS.AUGUST]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+      <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="8" [activities]="activityMonthMap[MONTHS.SEPTEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+      <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="9" [activities]="activityMonthMap[MONTHS.OCTOBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+      <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="10" [activities]="activityMonthMap[MONTHS.NOVEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+      <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="11" [activities]="activityMonthMap[MONTHS.DECEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+    </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-between none" class="padding-top-25">
-    <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="6" [activities]="activityMonthMap[MONTHS.JULY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-    <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="7" [activities]="activityMonthMap[MONTHS.AUGUST]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-    <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="8" [activities]="activityMonthMap[MONTHS.SEPTEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-    <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="9" [activities]="activityMonthMap[MONTHS.OCTOBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-    <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="10" [activities]="activityMonthMap[MONTHS.NOVEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-    <mat-card fxFlex="25"><app-month [year]="year" [monthNum]="11" [activities]="activityMonthMap[MONTHS.DECEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+  <div fxHide fxShow.sm>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+      <mat-card fxFlex="50">
+        <app-month [year]="year" [monthNum]="0" [activities]="activityMonthMap[MONTHS.JANUARY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+      <mat-card fxFlex="50">
+        <app-month [year]="year" [monthNum]="1" [activities]="activityMonthMap[MONTHS.FEBRUARY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+      <mat-card fxFlex="50">
+        <app-month [year]="year" [monthNum]="2" [activities]="activityMonthMap[MONTHS.MARCH]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+      <mat-card fxFlex="50">
+        <app-month [year]="year" [monthNum]="3" [activities]="activityMonthMap[MONTHS.APRIL]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+      <mat-card fxFlex="50">
+        <app-month [year]="year" [monthNum]="4" [activities]="activityMonthMap[MONTHS.MAY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+      <mat-card fxFlex="50">
+        <app-month [year]="year" [monthNum]="5" [activities]="activityMonthMap[MONTHS.JUNE]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between none" class="padding-top-25">
+      <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="6" [activities]="activityMonthMap[MONTHS.JULY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+      <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="7" [activities]="activityMonthMap[MONTHS.AUGUST]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+      <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="8" [activities]="activityMonthMap[MONTHS.SEPTEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+      <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="9" [activities]="activityMonthMap[MONTHS.OCTOBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+      <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="10" [activities]="activityMonthMap[MONTHS.NOVEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+      <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="11" [activities]="activityMonthMap[MONTHS.DECEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
+    </div>
   </div>
-</div>
-<div fxHide fxShow.sm>
-  <div fxLayout="row" fxLayoutAlign="space-between none">
-    <mat-card fxFlex="50">
-      <app-month [year]="year" [monthNum]="0" [activities]="activityMonthMap[MONTHS.JANUARY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-    <mat-card fxFlex="50">
-      <app-month [year]="year" [monthNum]="1" [activities]="activityMonthMap[MONTHS.FEBRUARY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between none">
-    <mat-card fxFlex="50">
-      <app-month [year]="year" [monthNum]="2" [activities]="activityMonthMap[MONTHS.MARCH]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-    <mat-card fxFlex="50">
-      <app-month [year]="year" [monthNum]="3" [activities]="activityMonthMap[MONTHS.APRIL]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between none">
-    <mat-card fxFlex="50">
-      <app-month [year]="year" [monthNum]="4" [activities]="activityMonthMap[MONTHS.MAY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-    <mat-card fxFlex="50">
-      <app-month [year]="year" [monthNum]="5" [activities]="activityMonthMap[MONTHS.JUNE]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between none" class="padding-top-25">
-    <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="6" [activities]="activityMonthMap[MONTHS.JULY]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-    <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="7" [activities]="activityMonthMap[MONTHS.AUGUST]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between none">
-    <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="8" [activities]="activityMonthMap[MONTHS.SEPTEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-    <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="9" [activities]="activityMonthMap[MONTHS.OCTOBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between none">
-    <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="10" [activities]="activityMonthMap[MONTHS.NOVEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-    <mat-card fxFlex="50"><app-month [year]="year" [monthNum]="11" [activities]="activityMonthMap[MONTHS.DECEMBER]" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month></mat-card>
-  </div>
-</div>
-<div fxHide fxShow.lt-sm>
-  <div fxLayout="row wrap" fxLayoutAlign="end center" class="margin">
-    <button mat-icon-button (click)="incrementMonth(-1)">
-      <i class="material-icons">keyboard_arrow_left</i>
-    </button>
-    <h2 class="mat-h2">{{ getMonthName(mobileMonth) }}</h2>
-    <button mat-icon-button (click)="incrementMonth(1)">
-      <i class="material-icons">keyboard_arrow_right</i>
-    </button>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="space-between none">
-    <mat-card fxFlex="100">
-      <app-month [year]="year" [monthNum]="mobileMonth" [activities]="mobileMonthToShow" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
-    </mat-card>
+  <div fxHide fxShow.lt-sm>
+    <div fxLayout="row wrap" fxLayoutAlign="end center" class="margin">
+      <button mat-icon-button (click)="incrementMonth(-1)">
+        <i class="material-icons">keyboard_arrow_left</i>
+      </button>
+      <h2 class="mat-h2">{{ getMonthName(mobileMonth) }}</h2>
+      <button mat-icon-button (click)="incrementMonth(1)">
+        <i class="material-icons">keyboard_arrow_right</i>
+      </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+      <mat-card fxFlex="100">
+        <app-month [year]="year" [monthNum]="mobileMonth" [activities]="mobileMonthToShow" [activityTypes]="activityTypes" [runTypes]="runTypes" (selected)="selected($event)"></app-month>
+      </mat-card>
+    </div>
   </div>
 </div>

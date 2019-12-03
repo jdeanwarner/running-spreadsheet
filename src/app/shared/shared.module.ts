@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { TimestampDatePipe } from './timestamp-date.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -37,6 +38,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { StravaService } from './services/strava.service';
 import { AngularFireFunctionsModule, FUNCTIONS_REGION, FunctionsRegionToken } from '@angular/fire/functions';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoadingSpinnerDirective } from './loading/loading-spinner.directive';
+import { LoadingComponent } from './loading/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     TimestampDatePickerComponent,
     LocationPickerComponent,
     YearSelectorComponent,
-    RoundPipe
+    RoundPipe,
+    LoadingSpinnerDirective,
+    LoadingComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -70,7 +75,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MatMenuModule,
     MatProgressBarModule,
     AngularFireAuthModule,
-    AngularFireFunctionsModule
+    AngularFireFunctionsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     TimestampDatePipe,
@@ -114,7 +120,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     LocationPickerComponent,
     YearSelectorComponent,
     MatProgressBarModule,
-    RoundPipe
+    RoundPipe,
+    MatProgressSpinnerModule,
+    LoadingSpinnerDirective
+  ],
+  entryComponents: [
+    LoadingComponent
   ]
 })
 export class SharedModule { }

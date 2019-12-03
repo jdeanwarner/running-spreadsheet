@@ -3,6 +3,7 @@
     <mat-card>
       <mat-card-content>
         <app-goals-list
+          *appLoadingSpinner="goalsLoading$ | async"
           [name]="'Active Goals'"
           [list]="activeGoals$ | async"
           [results]="activeGoalResults$ | async">

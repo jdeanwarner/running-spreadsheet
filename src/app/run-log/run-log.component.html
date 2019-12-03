@@ -15,13 +15,16 @@
     [activityTypes]="activityTypes$ | async">
   </app-cross-training-total>
 </div>
+
 <app-year 
+  *appLoadingSpinner="activitiesLoading$ | async"
   [year]="(params$ | async).state.params['year']"
   [activityMonthMap]="activityMonthMap$ | async"
   [activityTypes]="activityTypes$ | async"
   [runTypes]="runTypes$ | async"
   (daySelected)="daySelected($event)"
-  (changeYear)="changeYear($event)"></app-year>
+  (changeYear)="changeYear($event)">
+</app-year>
 
 <button color="primary" mat-fab class="fab-bottom" (click)="addActivity()">
   <i class="material-icons">add</i>

@@ -43,6 +43,7 @@ export function reducer(state: ActivityState = initialState, action: fromActivit
     switch (action.type) {
         case fromActivities.LOAD_ACTIVITIES_BY_YEAR: {
             state.activities.loading = true;
+            state.activities.loaded = false;
             return state;
         }
         case fromActivities.LOAD_ACTIVITIES_BY_YEAR_SUCCESS: {

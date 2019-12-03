@@ -38,6 +38,7 @@ export class GoalsComponent implements OnInit {
   activeGoals$: Observable<Goal[]>;
   futureGoals$: Observable<Goal[]>;
   pastGoals$: Observable<Goal[]>;
+  goalsLoading$: Observable<boolean>;
 
   pinnedGoalResults$: Observable<{[ goalName: string ]: number}>;
   activeGoalResults$: Observable<{[ goalName: string ]: number}>;
@@ -66,6 +67,7 @@ export class GoalsComponent implements OnInit {
     this.activeGoals$ = this.store.select(fromStore.getActiveGoals);
     this.futureGoals$ = this.store.select(fromStore.getFutureGoals);
     this.pastGoals$ = this.store.select(fromStore.getPastGoals);
+    this.goalsLoading$ = this.store.select(fromStore.getGoalsLoading);
 
     this.pinnedGoalResults$ = this.store.select(fromStore.getGoalResultsMap(fromLog.getAllActivities, fromStore.getPinnedGoals));
     this.activeGoalResults$ = this.store.select(fromStore.getGoalResultsMap(fromLog.getAllActivities, fromStore.getActiveGoals));

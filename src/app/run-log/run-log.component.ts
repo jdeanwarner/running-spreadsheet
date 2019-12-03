@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 import { AddActivityComponent } from './add-activity/add-activity.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Activity } from '../shared/activities/activity';
@@ -10,7 +9,6 @@ import { Store } from '@ngrx/store';
 import * as fromStore from './store';
 import * as fromRoot from '../store';
 import { RouterReducerState } from '@ngrx/router-store';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-run-log',
@@ -21,6 +19,8 @@ export class RunLogComponent implements OnInit {
 
   params$: Observable<RouterReducerState<fromRoot.RouterStateUrl>>;
   activityMonthMap$: Observable<{[month: string]: Activity[]}>;
+  activitiesLoading$: Observable<boolean>;
+
   activityTypes$: Observable<ActivityType[]>;
   runTypes$: Observable<RunType[]>;
 
@@ -32,8 +32,10 @@ export class RunLogComponent implements OnInit {
   crossTrainingMap$: Observable<{[type: string]: Activity[]}>;
 
   constructor(public dialog: MatDialog, private store: Store<fromStore.LogState>,
-    private rootStore: Store<fromRoot.State>, private router: Router) {
+    private rootStore: Store<fromRoot.State>) {
     this.activityMonthMap$ = store.select(fromStore.getActivitiesMonthMap);
+    this.activitiesLoading$ = store.select(fromStore.getActivitiesLoading);
+
     this.activityTypes$ = store.select(fromStore.getActivityTypes);
     this.runTypes$ = store.select(fromStore.getRunTypes);
 
@@ -65,7 +67,6 @@ export class RunLogComponent implements OnInit {
   }
 
   openActivity(activity: Activity) {
-    console.log(activity);
     const dialogRef = this.dialog.open(AddActivityComponent, {
       minWidth: '20%',
       maxWidth: '99%',
