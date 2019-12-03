@@ -32,7 +32,7 @@ export class RunLogComponent implements OnInit {
   crossTrainingMap$: Observable<{[type: string]: Activity[]}>;
 
   constructor(public dialog: MatDialog, private store: Store<fromStore.LogState>,
-    private rootStore: Store<fromRoot.State>, private router: Router, private afAuth: AngularFireAuth) {
+    private rootStore: Store<fromRoot.State>, private router: Router) {
     this.activityMonthMap$ = store.select(fromStore.getActivitiesMonthMap);
     this.activityTypes$ = store.select(fromStore.getActivityTypes);
     this.runTypes$ = store.select(fromStore.getRunTypes);
@@ -53,7 +53,7 @@ export class RunLogComponent implements OnInit {
   }
 
   changeYear(year) {
-    this.router.navigate([`/log/${year}` ]);
+    this.store.dispatch(new fromStore.ChangeYear(year));
   }
 
   daySelected(activity: Activity) {

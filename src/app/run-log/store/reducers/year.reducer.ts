@@ -12,8 +12,11 @@ export const initialYear = {
 export function reducer(state: YearState = initialYear, action: YearActions.Actions): YearState {
     switch (action.type) {
         case YearActions.CHANGE_YEAR:
-            state.data += action.playload;
-            console.log(state.data);
+            return state;
+        case YearActions.CHANGE_YEAR_SUCCESS:
+            state.data = action.playload;
+            return state;
+        case YearActions.CHANGE_YEAR_FAIL:
             return state;
         default:
             return state;
