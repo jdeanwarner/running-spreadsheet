@@ -1,3 +1,5 @@
+import { EnduranceActivity } from './../activities/endurance-activity';
+import { Swim } from './../activities/swim';
 import { Kettlebell } from './../activities/kettlebell';
 import { RunTypeEnum } from './../activities/run-type.enum';
 import { StravaActivity } from './../models/strava/strava-activity';
@@ -30,7 +32,9 @@ export class StravaFactoryService {
         take(1)
       )
     ]).subscribe(([ stravaActivities, activities]) => {
-      this.getCombinedActivitiesList(activities, stravaActivities);
+      const combined: Activity[] = this.getCombinedActivitiesList(activities, stravaActivities);
+      this.activityService.updateActivities(combined.filter((activity: Activity) => activity.id ));
+      this.activityService.insertActivities(combined.filter((activity: Activity) => !activity.id ));
     });
   }
 
@@ -81,7 +85,7 @@ export class StravaFactoryService {
     return entities;
   }
 
-  getCombinedActivitiesList(loadedActivities: Activity[], stravaActivities: StravaActivity[]) {
+  getCombinedActivitiesList(loadedActivities: Activity[], stravaActivities: StravaActivity[]): Activity[] {
     const loadedActivitiesEntities: {[date: number]: { [id: string]: Activity}} = this.getActivityDateMap(loadedActivities);
     const stravaActivitiesEntities: {[date: number]: StravaActivity[]} = this.getStravaActivityDateMap(stravaActivities);
 
@@ -93,10 +97,10 @@ export class StravaFactoryService {
         const matchedActivity: Activity[] = loaded
           .filter((activity: Activity) => this.getActivityType(stravaActivity.type) === activity.activityType)
           .filter((activity: Activity) => Math.trunc((stravaActivity.distance / 1609.344) * 10) / 10 ===
-            Math.trunc((<Run>activity).distance * 10) / 10);
+            Math.trunc((<EnduranceActivity>activity).distance * 10) / 10);
 
         if (matchedActivity.length === 1) {
-          loadedActivitiesEntities[dateAsNumber][matchedActivity[0].id] = { ...matchedActivity[0], strava: stravaActivity};
+          loadedActivitiesEntities[dateAsNumber][matchedActivity[0].id] = <Activity>{ ...matchedActivity[0], stravaId: stravaActivity.id };
         } else {
           if (!loadedActivitiesEntities[dateAsNumber]) {
             loadedActivitiesEntities[dateAsNumber] = {};
@@ -106,14 +110,22 @@ export class StravaFactoryService {
       });
     });
 
-    console.log({ loadedActivitiesEntities });
+    // console.log(loadedActivitiesEntities);
+    // console.log(Object.values(loadedActivitiesEntities));
+    let returnArr: Activity[] = [];
+    Object.values(loadedActivitiesEntities).forEach((entity: ({[id: string]: Activity })) => {
+      returnArr = returnArr.concat(Object.values(entity));
+    });
+    // console.log(returnArr);
+
+    return returnArr;
   }
 
   createActivity(stravaActivity: StravaActivity) {
     let activity: Activity = {
       activityType: this.getActivityType(stravaActivity.type),
       date: firestore.Timestamp.fromDate(new Date(stravaActivity.start_date_local)),
-      strava: stravaActivity
+      stravaId: stravaActivity.id
     };
 
     switch (this.getActivityType(stravaActivity.type)) {
@@ -125,11 +137,18 @@ export class StravaFactoryService {
         };
         break;
       case ActivityTypeEnum.BIKE:
-      case ActivityTypeEnum.OTHER:
-      case ActivityTypeEnum.KETTLEBELL:
+        activity = <Bike>{
+          ...activity,
+          distance: Math.trunc((stravaActivity.distance / 1609.344) * 100) / 100,
+        };
+        break;
       case ActivityTypeEnum.SWIM:
-      case ActivityTypeEnum.GYM:
-      case ActivityTypeEnum.YOGA:
+        activity = <Swim>{
+          ...activity,
+          distance: Math.trunc((stravaActivity.distance / 1609.344) * 100) / 100,
+        };
+        break;
+      default:
         activity = {
           ...activity
         };
@@ -140,16 +159,21 @@ export class StravaFactoryService {
   }
 
   getRunType(workoutType: number) {
-    switch (workoutType) {
-      case 1:
-        return RunType[RunTypeEnum.RACE];
-      case 2:
-        return RunType[RunTypeEnum.LONG_RUN];
-      case 3:
-          return RunType[RunTypeEnum.WORKOUT];
-      default:
-        return null;
+    let runType = null;
+    if (workoutType) {
+      switch (workoutType) {
+        case 1:
+          runType = Object.keys(RunTypeEnum)[0];
+          break;
+        case 2:
+          runType = Object.keys(RunTypeEnum)[1];
+          break;
+        case 3:
+          runType = Object.keys(RunTypeEnum)[2];
+          break;
+      }
     }
+    return runType;
   }
 
   getActivityType(type: StravaActivityType): ActivityTypeEnum {

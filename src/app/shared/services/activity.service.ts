@@ -69,22 +69,43 @@ export class ActivityService {
       .then((user: User) => func({ ...userObj, userId: user.uid }));
   }
 
-  /* updateGoals(userId: string): void {
-    this.getGoals().subscribe((goals: Goal[]) => {
+  updateActivities(activities: Activity[]): void {
       let batch = this.db.firestore.batch();
       let commitCount = 1;
-      goals.forEach((goal: Goal, index) => {
+      activities.forEach((activity: Activity, index) => {
         if ( (index / commitCount) > 499) {
           batch.commit();
           batch = this.db.firestore.batch();
           commitCount++;
         }
-        batch.set(this.db.collection('goals').doc(goal.id).ref, { ...goal, userId: userId }, {merge : true});
+        batch.set(this.db.collection('activities').doc(activity.id).ref, activity, {merge : true});
       });
       console.log('committing');
       batch.commit();
-    });
-  } */
+  }
+
+  insertActivities(activities: Activity[]): void {
+    console.log(activities);
+    this.userAuth.user$
+      .subscribe((user: User) => {
+        let batch = this.db.firestore.batch();
+        let commitCount = 1;
+        activities.forEach((activity: Activity, index) => {
+          if ( (index / commitCount) > 499) {
+            batch.commit();
+            batch = this.db.firestore.batch();
+            commitCount++;
+          }
+
+          const act: Activity = { ...activity, userId: user.uid };
+          console.log(act);
+          batch.set(this.db.collection('activities').doc(this.db.createId()).ref, act);
+        });
+        console.log('committing');
+        batch.commit();
+      });
+
+}
 
   getActivityTypes(): Observable<ActivityType[]> {
     return this.db.collection<ActivityType>('activityType').valueChanges();

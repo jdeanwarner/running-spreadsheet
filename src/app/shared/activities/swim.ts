@@ -1,5 +1,5 @@
-import { Activity } from './activity';
+import { EnduranceActivity } from './endurance-activity';
 
-export class Swim extends Activity {
+export class Swim extends EnduranceActivity {
 
 }
