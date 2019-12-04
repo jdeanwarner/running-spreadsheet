@@ -53,9 +53,9 @@ export const getPastGoals = createSelector(
 
 export const getFutureGoals = createSelector(
     getGoalsData,
-    (goals: Goal[]) => goals.filter((goal: Goal) =>
-        new Date().getTime() < goal.startDate.toDate().getTime() &&
-        !goal.pinned)
+    (goals: Goal[]) => goals
+        .filter((goal: Goal) => new Date().getTime() < goal.startDate.toDate().getTime() && !goal.pinned)
+        .sort((a: Goal, b: Goal) => a.startDate.toDate().getTime() - b.startDate.toDate().getTime() )
 );
 
 export const getGoalResultsMap =
