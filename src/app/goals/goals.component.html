@@ -2,7 +2,7 @@
   <div fxFlex="58">
     <mat-card>
       <mat-card-content *appLoadingSpinner="goalsLoading$ | async">
-          <app-goals-list
+        <app-goals-list
           [name]="'Pinned Goals'"
           [list]="pinnedGoals$ | async"
           [results]="pinnedGoalResults$ | async">
@@ -17,15 +17,10 @@
           [list]="futureGoals$ | async"
           [results]="futureGoalResults$ | async">
         </app-goals-list>
-        <app-goals-list
-          [name]="'Past Goals'"
-          [list]="pastGoals$ | async"
+        <app-past-goals
+          [goals]="pastGoals$ | async"
           [results]="pastGoalResults$ | async">
-        </app-goals-list>
-        <div fxLayout="row" fxLayoutAlign="end center" >
-          <span class="fill-space"></span>
-          <button mat-button color="primary" (click)="addGoal()">Add Goal</button>
-        </div>
+        </app-past-goals>
       </mat-card-content>
     </mat-card>
   </div>
@@ -47,4 +42,7 @@
     </div>
   </div>
   <app-fifty-states [completedStates]="completedStates$ | async" fxFlex="20"></app-fifty-states>
+  <button color="primary" mat-fab class="fab-bottom" (click)="addGoal()">
+    <i class="material-icons">add</i>
+  </button>
 </div>

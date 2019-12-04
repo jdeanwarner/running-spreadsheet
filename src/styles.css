@@ -9,3 +9,9 @@ body {
 .fill-space {
     flex: 1 1 auto;
 }
+
+.fab-bottom {
+    position: fixed !important;
+    right: 25px;
+    bottom: 25px;
+}

@@ -1,0 +1,20 @@
+<div *ngIf="goals.length > 5 && !showAll">
+    <app-goals-list
+        [name]="'Past Goals'"
+        [list]="getTop5PastGoals(goals)"
+        [results]="results">
+    </app-goals-list>
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button color="primary" (click)="showAllGoals()">Show All...</button>
+    </div>
+</div>
+<div *ngIf="goals.length <= 5 || showAll">
+    <app-goals-list
+        [name]="'Past Goals'"
+        [list]="goals"
+        [results]="results">
+    </app-goals-list>
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button color="primary" *ngIf="goals.length > 5" (click)="showAllGoals()">Hide...</button>
+    </div>
+</div>
