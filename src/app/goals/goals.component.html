@@ -1,12 +1,26 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-around start">
   <div fxFlex="58">
     <mat-card>
-      <mat-card-content>
+      <mat-card-content *appLoadingSpinner="goalsLoading$ | async">
+          <app-goals-list
+          [name]="'Pinned Goals'"
+          [list]="pinnedGoals$ | async"
+          [results]="pinnedGoalResults$ | async">
+        </app-goals-list>
         <app-goals-list
-          *appLoadingSpinner="goalsLoading$ | async"
           [name]="'Active Goals'"
           [list]="activeGoals$ | async"
           [results]="activeGoalResults$ | async">
+        </app-goals-list>
+        <app-goals-list
+          [name]="'Future Goals'"
+          [list]="futureGoals$ | async"
+          [results]="futureGoalResults$ | async">
+        </app-goals-list>
+        <app-goals-list
+          [name]="'Past Goals'"
+          [list]="pastGoals$ | async"
+          [results]="pastGoalResults$ | async">
         </app-goals-list>
         <div fxLayout="row" fxLayoutAlign="end center" >
           <span class="fill-space"></span>

@@ -22,6 +22,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { TimestampDatePipe } from './timestamp-date.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -76,7 +77,8 @@ import { LoadingComponent } from './loading/loading/loading.component';
     MatProgressBarModule,
     AngularFireAuthModule,
     AngularFireFunctionsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCheckboxModule
   ],
   providers: [
     TimestampDatePipe,
@@ -122,7 +124,8 @@ import { LoadingComponent } from './loading/loading/loading.component';
     MatProgressBarModule,
     RoundPipe,
     MatProgressSpinnerModule,
-    LoadingSpinnerDirective
+    LoadingSpinnerDirective,
+    MatCheckboxModule
   ],
   entryComponents: [
     LoadingComponent

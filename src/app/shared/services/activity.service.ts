@@ -191,7 +191,9 @@ export class ActivityService {
 
   getGoals(): Observable<Goal[]> {
     const request = (user: User) => this.db.collection<Goal>('goals', ref =>
-      ref.where('userId', '==', user.uid))
+      ref.where('userId', '==', user.uid)
+      .orderBy('endDate', 'desc')
+    )
     .snapshotChanges()
     .pipe(
       map((actions: DocumentChangeAction<Goal>[]) => {

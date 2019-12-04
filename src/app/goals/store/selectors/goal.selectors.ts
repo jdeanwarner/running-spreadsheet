@@ -85,7 +85,7 @@ function sumPropertyGoal(goal: SumPropertyGoal, activities: Activity[]): number 
     return getActivitiesInRange(goal, activities)
         .filter((activity: Activity) => activity.activityType === goal.activityType)
         .map((activity: any) => <number>activity[goal.property])
-        .reduce((prev, curr) => prev + curr);
+        .reduce((prev, curr) => prev + curr, 0);
 }
 
 function countActivityGoal(goal: CountActivityGoal, activities: Activity[]): number {
