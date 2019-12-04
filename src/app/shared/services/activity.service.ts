@@ -64,7 +64,9 @@ export class ActivityService {
   }
 
   makeUserOwnedSetRequest<T extends UserOwned>(userObj: T, func: (userObj: T) => Promise<DocumentReference>): Promise<DocumentReference> {
-    return this.userAuth.user$
+    return this.userAuth.user$.pipe(
+        take(1)
+      )
       .toPromise()
       .then((user: User) => func({ ...userObj, userId: user.uid }));
   }
@@ -205,15 +207,15 @@ export class ActivityService {
   }
 
   insertGoal(goal: Goal): Promise<DocumentReference> {
-    const request = (userGoal: Goal) => this.db.collection('activities').add(userGoal);
+    const request = (userGoal: Goal) => this.db.collection('goals').add(userGoal);
     return this.makeUserOwnedSetRequest(goal, request);
   }
 
   updateGoal(goal: Goal): Promise<void> {
-    return this.db.collection('goal').doc(goal.id).set(goal);
+    return this.db.collection('goals').doc(goal.id).set(goal);
   }
 
   deleteGoal(id: string): Promise<void> {
-    return this.db.collection('goal').doc(id).delete();
+    return this.db.collection('goals').doc(id).delete();
   }
 }

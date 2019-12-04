@@ -37,7 +37,8 @@
         <div fxLayout="row wrap" fxLayoutAlign="start center">
           <mat-form-field fxFlex="100">
             <mat-select placeholder="Activity Type" formControlName="activityType">
-                <mat-option *ngFor="let type of ACTIVITY_TYPES | keyvalue" [value]="type.key" (onSelectionChange)="getProperties(type.value)">
+                <mat-option *ngFor="let type of ACTIVITY_TYPES | keyvalue" [value]="type.key" 
+                  (onSelectionChange)="getTrackableProperties(type.value)">
                   {{ type.value }}
                 </mat-option>
             </mat-select>
@@ -46,8 +47,8 @@
         <div fxLayout="row wrap" fxLayoutAlign="start center">
           <mat-form-field fxFlex="100">
             <mat-select placeholder="Property" formControlName="property">
-                <mat-option *ngFor="let prop of activityProperties" [value]="prop">
-                  {{ prop }}
+                <mat-option *ngFor="let prop of activityProperties" [value]="prop.property">
+                  {{ prop.propertyName }} {{ prop.property }}
                 </mat-option>
             </mat-select>
           </mat-form-field>

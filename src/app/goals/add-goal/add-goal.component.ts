@@ -11,6 +11,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { Goal } from '../goal';
+import { TRACKABLE_PROPERTIES } from 'src/app/shared/trackable-properties.const';
 
 @Component({
   selector: 'app-add-goal',
@@ -31,8 +32,9 @@ export class AddGoalComponent implements OnInit {
 
   GOAL_TYPE = GoalType;
   ACTIVITY_TYPES = ActivityTypeEnum;
+  TRACKABLE_PROPERTIES = TRACKABLE_PROPERTIES;
   showMonth = false;
-  activityProperties: string[] = [];
+  activityProperties: { propertyName: string, property: string }[] = [];
 
   constructor(private dialogRef: MatDialogRef<AddGoalComponent>,
     @Inject(MAT_DIALOG_DATA) private data: { goal: Goal }) { }
@@ -60,29 +62,8 @@ export class AddGoalComponent implements OnInit {
     }
   }
 
-  getProperties(activityType: ActivityTypeEnum) {
-    this.activityProperties = [];
-    switch (activityType) {
-      case ActivityTypeEnum.BIKE:
-        this.activityProperties = Object.keys(new Bike());
-        break;
-      case ActivityTypeEnum.KETTLEBELL:
-        this.activityProperties = Object.keys(new Kettlebell());
-        break;
-      case ActivityTypeEnum.RUN:
-        this.activityProperties = Object.keys(new Run());
-        break;
-      case ActivityTypeEnum.SWIM:
-        this.activityProperties = Object.keys(new Swim());
-        break;
-      case ActivityTypeEnum.YOGA:
-        this.activityProperties = Object.keys(new Yoga());
-        break;
-    }
-
-
-    const run = new Run();
-    console.log(Object.keys(run));
+  getTrackableProperties(activityType: ActivityTypeEnum) {
+    this.activityProperties = TRACKABLE_PROPERTIES[activityType];
     console.log(this.activityProperties);
   }
 
@@ -100,8 +81,9 @@ export class AddGoalComponent implements OnInit {
 
   save() {
     if (this.formGroup.valid) {
-      const saveGaol: Goal = this.formGroup.value;
-      this.dialogRef.close(saveGaol);
+      const saveGoal: Goal = this.formGroup.value;
+      console.log(saveGoal);
+      this.dialogRef.close(saveGoal);
     }
   }
 

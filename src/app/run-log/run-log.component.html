@@ -1,31 +1,32 @@
-<div fxLayout="row wrap" fxLayoutAlign="end end" class="margin-top--10px">
-  <app-year-selector [year]="(params$ | async).state.params['year']" (change)="changeYear($event)"></app-year-selector>
-</div>
-<div class="mat-body-1" fxLayout="row wrap" fxLayoutAlign=" stretch" ngClass.gt-xs="margin-bottom-10px">
-  <app-yearly-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"
-    [runningMiles]="totalMiles$ | async"
-    [crossTraining]="countCrossTraining$ | async"
-    [highEffortRuns]="countHighEfforRuns$ | async">
-  </app-yearly-total>
-  <app-run-type-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"
-    [runTypeMap]="runTypeMap$ | async">
-  </app-run-type-total>
-  <app-cross-training-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"
-    [crossTrainingMap]="crossTrainingMap$ | async"
-    [activityTypes]="activityTypes$ | async">
-  </app-cross-training-total>
-</div>
+<div *appLoadingSpinner="activitiesLoading$ | async">
+  <div fxLayout="row wrap" fxLayoutAlign="end end" class="margin-top--10px">
+    <app-year-selector [year]="(params$ | async).state.params['year']" (change)="changeYear($event)"></app-year-selector>
+  </div>
+  <div class="mat-body-1" fxLayout="row wrap" fxLayoutAlign=" stretch" ngClass.gt-xs="margin-bottom-10px">
+    <app-yearly-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"
+      [runningMiles]="totalMiles$ | async"
+      [crossTraining]="countCrossTraining$ | async"
+      [highEffortRuns]="countHighEfforRuns$ | async">
+    </app-yearly-total>
+    <app-run-type-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"
+      [runTypeMap]="runTypeMap$ | async">
+    </app-run-type-total>
+    <app-cross-training-total fxFlex.gt-sm="25" fxFlex.sm="50" fxFlex.lt-sm="100"
+      [crossTrainingMap]="crossTrainingMap$ | async"
+      [activityTypes]="activityTypes$ | async">
+    </app-cross-training-total>
+  </div>
 
-<app-year 
-  *appLoadingSpinner="activitiesLoading$ | async"
-  [year]="(params$ | async).state.params['year']"
-  [activityMonthMap]="activityMonthMap$ | async"
-  [activityTypes]="activityTypes$ | async"
-  [runTypes]="runTypes$ | async"
-  (daySelected)="daySelected($event)"
-  (changeYear)="changeYear($event)">
-</app-year>
+  <app-year 
+    [year]="(params$ | async).state.params['year']"
+    [activityMonthMap]="activityMonthMap$ | async"
+    [activityTypes]="activityTypes$ | async"
+    [runTypes]="runTypes$ | async"
+    (daySelected)="daySelected($event)"
+    (changeYear)="changeYear($event)">
+  </app-year>
 
-<button color="primary" mat-fab class="fab-bottom" (click)="addActivity()">
-  <i class="material-icons">add</i>
-</button>
+  <button color="primary" mat-fab class="fab-bottom" (click)="addActivity()">
+    <i class="material-icons">add</i>
+  </button>
+</div>

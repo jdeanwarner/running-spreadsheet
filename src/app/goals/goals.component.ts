@@ -96,7 +96,7 @@ export class GoalsComponent implements OnInit {
           if (result.id) {
             this.store.dispatch(new fromStore.UpdateGoal(result));
           } else {
-            this.store.dispatch(new fromStore.AddGoal({ ...result, userId: this.loggedInUserId }));
+            this.store.dispatch(new fromStore.AddGoal(result));
           }
         }
       }
