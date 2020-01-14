@@ -97,7 +97,9 @@ export class StravaFactoryService {
         const matchedActivity: Activity[] = loaded
           .filter((activity: Activity) => this.getActivityType(stravaActivity.type) === activity.activityType)
           .filter((activity: Activity) => Math.trunc((stravaActivity.distance / 1609.344) * 10) / 10 ===
-            Math.trunc((<EnduranceActivity>activity).distance * 10) / 10);
+            Math.trunc((<EnduranceActivity>activity).distance * 10) / 10 ||
+            ( activity.stravaId &&
+            activity.stravaId === stravaActivity.id ));
 
         if (matchedActivity.length === 1) {
           loadedActivitiesEntities[dateAsNumber][matchedActivity[0].id] = <Activity>{ ...matchedActivity[0], stravaId: stravaActivity.id };
