@@ -27,6 +27,11 @@ const appRoutes: Routes = [
       loadChildren: () => import('./run-log/run-log.module').then(m => m.RunLogModule),
       canActivate: [ AuthGuard ]
     },
+    {
+      path: 'stats',
+      loadChildren: () => import('./stats/stats.module').then(m => m.StatsModule),
+      canActivate: [ AuthGuard ]
+    },
     { path: '',
       redirectTo : '/welcome',
       pathMatch : 'full'}
