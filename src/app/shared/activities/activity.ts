@@ -6,5 +6,5 @@ export class Activity extends UserOwned {
     id?: string;
     activityType: ActivityTypeEnum;
     date: firestore.Timestamp;
-    stravaId: number;
+    stravaId?: number;
 }
