@@ -1,1 +1,15 @@
-<p>miles-per-year works!</p>
+<div #container style="display: block; width: 100%">
+  <ngx-charts-line-chart *ngIf="view && view[0] > 0"
+    [view]="view"
+    [scheme]="'picnic'"
+    [legend]="legend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [yAxisLabel]="yAxisLabel"
+    [results]="multi"
+    [autoScale]="true"
+    [legendPosition]="'right'">
+  </ngx-charts-line-chart>
+</div>

@@ -1,2 +1,13 @@
-<app-miles-per-year></app-miles-per-year>
+<div fxLayout="row wrap" fxLayoutAlign="space-around start">
+  <div fxFlex="100">
+    <mat-card>
+      <mat-card-title>
+        Miles Per Year
+      </mat-card-title>
+      <mat-card-content style="height:400px">
+        <app-miles-per-year [activitiesYearMap]="activitiesByYear$ | async"></app-miles-per-year>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
 <app-miles-per-month></app-miles-per-month>

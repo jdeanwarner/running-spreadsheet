@@ -53,6 +53,18 @@ export const getActivitiesMonthMap = createSelector(
     }
 );
 
+export const getActivitiesYearMap = createSelector(
+  getAllActivities,
+  (data: Activity[]) => {
+      const entities: {[year: number]: Activity[]} = {};
+
+      data.forEach((activity: Activity) => entities[activity.date.toDate().getFullYear()] ?
+              entities[activity.date.toDate().getFullYear()].push(activity) :
+              entities[activity.date.toDate().getFullYear()] = [activity]);
+      return entities;
+  }
+);
+
 export const getTotalRunningMiles = createSelector(
     getAllActivities,
     (data: Activity[]) => {

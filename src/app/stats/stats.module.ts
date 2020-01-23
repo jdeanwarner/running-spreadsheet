@@ -8,6 +8,8 @@ import { StatsRoutingModule } from './stats-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects } from '../run-log/store';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AngularResizedEventModule } from 'angular-resize-event';
 
 
 
@@ -18,7 +20,9 @@ import { reducers, effects } from '../run-log/store';
     SharedModule,
     StatsRoutingModule,
     StoreModule.forFeature('log', reducers),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
+    NgxChartsModule,
+    AngularResizedEventModule
   ]
 })
 export class StatsModule { }
