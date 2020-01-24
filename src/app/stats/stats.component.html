@@ -9,5 +9,17 @@
       </mat-card-content>
     </mat-card>
   </div>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="space-around start" style="margin-top:15px">
+  <div fxFlex="100">
+    <mat-card>
+      <mat-card-title>
+        Miles Per Month Year over Year
+      </mat-card-title>
+      <mat-card-content style="height:400px">
+        <app-miles-per-month [activitiesByYearMonth]="activitiesByYearMonth$ | async"></app-miles-per-month>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
 
-<app-miles-per-month></app-miles-per-month>

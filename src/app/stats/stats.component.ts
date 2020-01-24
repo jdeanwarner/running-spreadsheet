@@ -13,9 +13,11 @@ import { ResizedEvent } from 'angular-resize-event';
 export class StatsComponent implements OnInit {
 
   activitiesByYear$: Observable<{[year: number]: Activity[]}>;
+  activitiesByYearMonth$: Observable<{[year: number]: {[month: string]: Activity[]}}>;
 
   constructor(private logStore: Store<fromLog.LogState>) {
     this.activitiesByYear$ = this.logStore.select(fromLog.getActivitiesYearMap);
+    this.activitiesByYearMonth$ = this.logStore.select(fromLog.getActivitiesYearMonthMap);
   }
 
   ngOnInit() {
