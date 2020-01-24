@@ -11,7 +11,6 @@ import { ActivityType } from '../activities/activity-type';
 import { RunType } from '../activities/run-type';
 import { Race } from '../race';
 import { Season } from '../season';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -75,12 +74,10 @@ export class ActivityService {
     );
   }
 
-  makeUserOwnedSetRequest<T extends UserOwned>(userObj: T, func: (userObj: T) => Promise<DocumentReference>): Promise<DocumentReference> {
-    return this.userAuth.user$.pipe(
-        take(1)
-      )
-      .toPromise()
-      .then((user: User) => func({ ...userObj, userId: user.uid }));
+  async makeUserOwnedSetRequest<T extends UserOwned>(userObj: T, func: (userObj: T) => Promise<DocumentReference>):
+    Promise<DocumentReference> {
+    const user = await this.userAuth.user$.pipe(take(1)).toPromise();
+    return func({ ...userObj, userId: user.uid });
   }
 
   updateActivities(activities: Activity[]): void {
@@ -165,7 +162,7 @@ export class ActivityService {
   }
 
   insertRace(race: Race): Promise<DocumentReference> {
-    const request = (userRace: Race) => this.db.collection('activities').add(userRace);
+    const request = (userRace: Race) => this.db.collection('races').add(userRace);
     return this.makeUserOwnedSetRequest(race, request);
   }
 
