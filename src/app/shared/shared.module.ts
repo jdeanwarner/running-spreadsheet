@@ -41,6 +41,7 @@ import { AngularFireFunctionsModule, FUNCTIONS_REGION, FunctionsRegionToken } fr
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingSpinnerDirective } from './loading/loading-spinner.directive';
 import { LoadingComponent } from './loading/loading/loading.component';
+import { ActivitiesCountResolver } from './resolvers/activities-count.resolver';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { LoadingComponent } from './loading/loading/loading.component';
     GoalsResolver,
     StravaService,
     StravaAuthService,
+    ActivitiesCountResolver,
     { provide: FunctionsRegionToken, useValue: 'us-central1' },
     { provide: HTTP_INTERCEPTORS, useClass: StravaInterceptor, multi: true }
   ],

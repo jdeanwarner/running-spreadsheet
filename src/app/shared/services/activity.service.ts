@@ -56,6 +56,18 @@ export class ActivityService {
     return this.makeUserOwnedGetRequest(getRequest);
   }
 
+  getActivitiesCount(): Observable<number> {
+    const getRequest = (user: User): Observable<number> =>
+
+     this.db.collection<Activity>('activities', ref =>
+        ref.where('userId', '==', user.uid)).get()
+      .pipe(
+        map((snapshot) => snapshot.size)
+      );
+
+    return this.makeUserOwnedGetRequest(getRequest);
+  }
+
   makeUserOwnedGetRequest(func: (user: User) => Observable<any>): Observable<any> {
     return this.userAuth.user$.pipe(
       take(1),

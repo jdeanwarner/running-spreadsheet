@@ -193,6 +193,10 @@ export const getCountCrossTrainingActivities = createSelector(
     }
 );
 
+export const getActivitiesCountLoading = createSelector(getActivitiesState, fromActivity.getActivitiesCountLoading);
+export const getActivitiesCountLoaded = createSelector(getActivitiesState, fromActivity.getActivitiesCountLoaded);
+export const getActivitiesCount = createSelector(getActivitiesState, fromActivity. getActivitiesCount);
+
 export const getActivitiesLoading = createSelector(getActivitiesState, fromActivity.getActivitiesLoading);
 export const getActivitiesLoaded = createSelector(getActivitiesState, fromActivity.getActivitiesLoaded);
 

@@ -13,6 +13,11 @@ export interface ActivityState {
         loaded: boolean;
         loading: boolean;
     };
+    count: {
+      count: number;
+      loaded: boolean;
+      loading: boolean;
+    };
 }
 
 export const initialState: ActivityState = {
@@ -26,6 +31,11 @@ export const initialState: ActivityState = {
         loaded: false,
         loading: false
     },
+    count: {
+      count: 0,
+      loaded: false,
+      loading: false
+    }
 };
 
 function getActivityEntities(activities: Activity[]) {
@@ -62,6 +72,7 @@ export function reducer(state: ActivityState = initialState, action: fromActivit
             return state;
         }
         case fromActivities.LOAD_ALL_ACTIVITIES: {
+            state.activities.loaded = false;
             state.activities.loading = true;
             return state;
         }
@@ -80,6 +91,26 @@ export function reducer(state: ActivityState = initialState, action: fromActivit
             state.activities.loaded = false;
             return state;
         }
+        case fromActivities.LOAD_ACTIVITIES_COUNT: {
+          state.count.loaded = false;
+          state.count.loading = true;
+          return state;
+      }
+      case fromActivities.LOAD_ACTIVITIES_COUNT_SUCCESS: {
+          return {
+              ... state,
+              count: {
+                  loading: false,
+                  loaded: true,
+                  count : action.playload
+              }
+          };
+      }
+      case fromActivities.LOAD_ACTIVITIES_COUNT_FAIL: {
+          state.count.loading = false;
+          state.count.loaded = false;
+          return state;
+      }
         case fromActivities.LOAD_ACTIVITY_TYPES: {
             state.types.loading = true;
             state.types.loaded = false;
@@ -105,6 +136,10 @@ export function reducer(state: ActivityState = initialState, action: fromActivit
             return state;
     }
 }
+
+export const getActivitiesCountLoading = (state: ActivityState) => state.count.loading;
+export const getActivitiesCountLoaded = (state: ActivityState) => state.count.loaded;
+export const getActivitiesCount = (state: ActivityState) => state.count.count;
 
 export const getActivitiesLoading = (state: ActivityState) => state.activities.loading;
 export const getActivitiesLoaded = (state: ActivityState) => state.activities.loaded;

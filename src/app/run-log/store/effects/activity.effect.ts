@@ -30,6 +30,19 @@ export class ActivityEffects {
     )
   );
 
+  loadActivitiesCount$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(activityActions.LOAD_ACTIVITIES_COUNT),
+    switchMap(() => {
+      return this.activityService.getActivitiesCount()
+        .pipe(
+          map((count: number) => new activityActions.LoadActivitiesCountSuccess(count)),
+          catchError(error => of(new activityActions.LoadAllActivitiesFail(error)))
+        );
+      }
+    )
+  )
+);
+
   loadAllActivities$: Observable<Action> = createEffect(() => this.actions$.pipe(
       ofType(activityActions.LOAD_ALL_ACTIVITIES),
       switchMap(() => {

@@ -2,6 +2,7 @@ import { StatsComponent } from './stats.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllActivitiesResolver } from '../shared/resolvers/all-activities.resolver';
+import { ActivitiesCountResolver } from '../shared/resolvers/activities-count.resolver';
 
 const appRoutes: Routes = [
   {
@@ -9,7 +10,8 @@ const appRoutes: Routes = [
     component: StatsComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: [
-      AllActivitiesResolver
+      AllActivitiesResolver,
+      ActivitiesCountResolver
     ]
   },
   { path: '',

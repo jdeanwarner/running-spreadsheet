@@ -7,6 +7,10 @@ export const LOAD_ACTIVITIES_BY_YEAR = '[Log] Load Activity By Year';
 export const LOAD_ACTIVITIES_BY_YEAR_SUCCESS = '[Log] Load Activity By Year Success';
 export const LOAD_ACTIVITIES_BY_YEAR_FAIL = '[Log] Load Activity By Year Fail';
 
+export const LOAD_ACTIVITIES_COUNT = '[Log] Load Activity Count';
+export const LOAD_ACTIVITIES_COUNT_SUCCESS = '[Log] Load Activity Count Success';
+export const LOAD_ACTIVITIES_COUNT_FAIL = '[Log] Load Activity Count Fail';
+
 export const LOAD_ALL_ACTIVITIES = '[Log] Load All Activity';
 export const LOAD_ALL_ACTIVITIES_SUCCESS = '[Log] Load All Activity Success';
 export const LOAD_ALL_ACTIVITIES_FAIL = '[Log] Load All Activity Fail';
@@ -44,6 +48,23 @@ export class LoadActivitiesByYearFail implements Action {
 
     constructor(public playload: any) {}
 }
+
+export class LoadActivitiesCount implements Action {
+  readonly type = LOAD_ACTIVITIES_COUNT;
+}
+
+export class LoadActivitiesCountSuccess implements Action {
+  readonly type = LOAD_ACTIVITIES_COUNT_SUCCESS;
+
+  constructor(public playload: number) {}
+}
+
+export class LoadActivitiesCountFail implements Action {
+  readonly type = LOAD_ACTIVITIES_COUNT_FAIL;
+
+  constructor(public playload: any) {}
+}
+
 
 export class LoadAllActivities implements Action {
     readonly type = LOAD_ALL_ACTIVITIES;
@@ -131,6 +152,9 @@ export type ActivityActions =
     LoadActivitiesByYear |
     LoadActivitiesByYearSuccess |
     LoadActivitiesByYearFail |
+    LoadActivitiesCount |
+    LoadActivitiesCountSuccess |
+    LoadActivitiesCountFail |
     LoadAllActivities |
     LoadAllActivitiesSuccess |
     LoadAllActivitiesFail |

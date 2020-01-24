@@ -5,7 +5,8 @@
         Miles Per Year
       </mat-card-title>
       <mat-card-content style="height:400px">
-        <app-miles-per-year [activitiesYearMap]="activitiesByYear$ | async"></app-miles-per-year>
+        <app-miles-per-year *appLoadingSpinner="!allActivitiesLoaded(activitiesCount$ | async, activitiesByYear$ | async)"
+          [activitiesYearMap]="activitiesByYear$ | async"></app-miles-per-year>
       </mat-card-content>
     </mat-card>
   </div>
@@ -17,7 +18,8 @@
         Miles Per Month Year over Year
       </mat-card-title>
       <mat-card-content style="height:400px">
-        <app-miles-per-month [activitiesByYearMonth]="activitiesByYearMonth$ | async"></app-miles-per-month>
+        <app-miles-per-month *appLoadingSpinner="!allActivitiesLoaded(activitiesCount$ | async, activitiesByYear$ | async)"
+          [activitiesByYearMonth]="activitiesByYearMonth$ | async"></app-miles-per-month>
       </mat-card-content>
     </mat-card>
   </div>
